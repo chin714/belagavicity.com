@@ -1,0 +1,24 @@
+{
+  "name": "Demo Electricals 6 – Sadashiv Nagar",
+  "category": "electricians",
+  "area": "sadashiv-nagar",
+  "phone": "0000000000",
+  "whatsapp": "0000000000",
+  "address": "Sample address, Sadashiv Nagar, Belagavi, Karnataka",
+  "hours": "All days, 8:00 AM – 9:00 PM",
+  "description": "This is a sample listing used while the site is being built. A real Sadashiv Nagar electrician will replace it.",
+  "services": [
+    "Switchboard and MCB repair",
+    "Inverter and UPS installation",
+    "Earthing and short-circuit fixes",
+    "Shop and office electrical work"
+  ],
+  "languages": [
+    "Kannada",
+    "English"
+  ],
+  "yearsInBusiness": 15,
+  "verified": true,
+  "featured": false,
+  "sample": true
+}

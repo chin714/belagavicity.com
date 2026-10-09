@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import { SITE, getLiveCategories } from '../lib/site';
+
+const live = await getLiveCategories();
+const areas = await getCollection('areas');
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-20 bg-ink text-white/80">
+  <div class="container-page py-10">
+    <p class="text-[13px] text-white/60">Serving every corner of the city</p>
+    <ul class="mt-3 flex flex-wrap gap-x-2.5 gap-y-1 text-sm font-semibold">
+      {areas.map((a, i) => (
+        <li class="flex items-center gap-2.5">
+          {i > 0 && <span class="text-white/35" aria-hidden="true">·</span>}
+          <a href={`/areas/${a.id}/`} class="text-white/90 no-underline hover:text-brand">{a.data.name}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+  <div class="border-t border-white/10">
+    <div class="container-page flex flex-wrap items-center justify-between gap-4 py-8">
+      <span class="font-display text-base font-bold text-white">Belagavi City</span>
+      <nav class="flex flex-wrap items-center gap-x-6 gap-y-2 text-[13px]" aria-label="Footer">
+        {live.map((c) => <a href={`/${c.id}/`} class="text-white/75 no-underline hover:text-white">{c.data.name}</a>)}
+        <a href="/areas/" class="text-white/75 no-underline hover:text-white">Areas</a>
+        <a href="/list-your-business/" class="text-white/75 no-underline hover:text-white">Add your business</a>
+        <span class="text-xs text-white/50">© {year} {SITE.domain}</span>
+      </nav>
+    </div>
+  </div>
+</footer>

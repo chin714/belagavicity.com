@@ -1,0 +1,24 @@
+{
+  "name": "Demo Electricals 8 – Nehru Nagar",
+  "category": "electricians",
+  "area": "nehru-nagar",
+  "phone": "0000000000",
+  "whatsapp": "0000000000",
+  "address": "Sample address, Nehru Nagar, Belagavi, Karnataka",
+  "hours": "All days, 8:00 AM – 9:00 PM",
+  "description": "This is a sample listing used while the site is being built. A real Nehru Nagar electrician will replace it.",
+  "services": [
+    "Fan, light and geyser installation",
+    "Switchboard and MCB repair",
+    "Inverter and UPS installation",
+    "Earthing and short-circuit fixes"
+  ],
+  "languages": [
+    "Kannada",
+    "English"
+  ],
+  "yearsInBusiness": 6,
+  "verified": false,
+  "featured": false,
+  "sample": true
+}

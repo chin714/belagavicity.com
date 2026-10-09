@@ -1,0 +1,66 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BusinessCard from '../../components/BusinessCard.astro';
+import { getArea, getBusinesses, getLiveCategories, breadcrumbJsonLd } from '../../lib/site';
+
+// Only build "service in area" pages that have at least one listing. Empty
+// pages would be thin content and hurt the whole site in search.
+export async function getStaticPaths() {
+  const categories = await getLiveCategories();
+  const paths = [];
+  for (const category of categories) {
+    const businesses = await getBusinesses({ category: category.id });
+    const areaIds = [...new Set(businesses.map((b) => b.data.area.id))];
+    for (const areaId of areaIds) {
+      paths.push({
+        params: { category: category.id, area: areaId },
+        props: { category, area: await getArea(areaId), businesses: businesses.filter((b) => b.data.area.id === areaId) },
+      });
+    }
+  }
+  return paths;
+}
+
+const { category, area, businesses } = Astro.props;
+const c = category.data;
+const others = (await getBusinesses({ category: category.id })).filter((b) => b.data.area.id !== area.id).slice(0, 3);
+const onlySamples = businesses.every((b) => b.data.sample);
+
+const crumbs = [
+  { name: `${c.name} in Belagavi`, href: `/${category.id}/` },
+  { name: area.data.name, href: `/${category.id}/${area.id}/` },
+];
+---
+
+<Layout
+  title={`${c.name} in ${area.data.name}, Belagavi`}
+  description={`${businesses.length} ${c.name.toLowerCase()} in ${area.data.name}, Belagavi. See services, languages spoken and call or WhatsApp directly.`}
+  noindex={onlySamples}
+  jsonLd={[breadcrumbJsonLd(crumbs)]}
+>
+  <section class="page-head">
+    <div class="container-page py-10 sm:py-14">
+      <Breadcrumbs items={crumbs} />
+      <h1 class="mt-6 text-4xl font-bold sm:text-5xl">{c.name} in {area.data.name}</h1>
+      <p class="mt-3 max-w-2xl text-lg text-muted">{area.data.description}</p>
+      <p class="mt-3 text-sm font-semibold">{businesses.length} {businesses.length === 1 ? c.singular.toLowerCase() : c.name.toLowerCase()} listed in {area.data.name}</p>
+    </div>
+  </section>
+
+  <div class="container-page py-10">
+    <div class="max-w-3xl space-y-4">
+      {businesses.map((b) => <BusinessCard business={b} />)}
+    </div>
+
+    {others.length > 0 && (
+      <section class="mt-14 max-w-3xl">
+        <h2 class="text-2xl font-bold">Nearby in Belagavi</h2>
+        <div class="mt-5 space-y-4">
+          {others.map((b) => <BusinessCard business={b} />)}
+        </div>
+        <a href={`/${category.id}/`} class="mt-6 inline-block font-semibold text-brand">See all {c.name.toLowerCase()} in Belagavi →</a>
+      </section>
+    )}
+  </div>
+</Layout>

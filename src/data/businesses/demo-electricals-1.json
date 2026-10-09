@@ -1,0 +1,25 @@
+{
+  "name": "Demo Electricals 1 – Tilakwadi",
+  "category": "electricians",
+  "area": "tilakwadi",
+  "phone": "0000000000",
+  "whatsapp": "0000000000",
+  "address": "Sample address, Tilakwadi, Belagavi, Karnataka",
+  "hours": "Mon–Sat, 9:00 AM – 8:00 PM",
+  "description": "This is a sample listing used while the site is being built. A real Tilakwadi electrician will replace it.",
+  "services": [
+    "House wiring and rewiring",
+    "Fan, light and geyser installation",
+    "Switchboard and MCB repair",
+    "Inverter and UPS installation"
+  ],
+  "languages": [
+    "Kannada",
+    "Marathi",
+    "English"
+  ],
+  "yearsInBusiness": 12,
+  "verified": true,
+  "featured": true,
+  "sample": true
+}

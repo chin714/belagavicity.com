@@ -1,0 +1,37 @@
+---
+import { getLiveCategories } from '../lib/site';
+
+interface Props {
+  /** Transparent header laid over a full-bleed hero photo. */
+  overlay?: boolean;
+}
+
+const { overlay = false } = Astro.props;
+const live = await getLiveCategories();
+
+const link = overlay
+  ? 'text-white/90 hover:text-white'
+  : 'text-ink hover:text-brand';
+---
+
+<header
+  class:list={[
+    'z-20 w-full',
+    overlay
+      ? 'absolute inset-x-0 top-0 bg-gradient-to-b from-ink/60 to-transparent'
+      : 'sticky top-0 border-b border-line bg-paper/95 backdrop-blur',
+  ]}
+>
+  <div class="container-page flex h-[72px] items-center justify-between gap-4 sm:h-[88px]">
+    <a href="/" class:list={['font-display text-[22px] font-bold no-underline', overlay ? 'text-white' : 'text-ink']}>
+      Belagavi City
+    </a>
+    <nav class="flex items-center gap-6 text-sm font-medium sm:gap-8" aria-label="Main">
+      {live.map((c) => (
+        <a href={`/${c.id}/`} class:list={['hidden no-underline md:inline', link]}>{c.data.name}</a>
+      ))}
+      <a href="/areas/" class:list={['hidden no-underline md:inline', link]}>Areas</a>
+      <a href="/list-your-business/" class="btn btn-call !min-h-0 px-5 py-2.5 text-[13px]">List your business</a>
+    </nav>
+  </div>
+</header>

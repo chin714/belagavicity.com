@@ -1,0 +1,25 @@
+{
+  "name": "Demo Electricals 3 – Camp",
+  "category": "electricians",
+  "area": "camp",
+  "phone": "0000000000",
+  "whatsapp": "0000000000",
+  "address": "Sample address, Camp, Belagavi, Karnataka",
+  "hours": "Mon–Sat, 9:00 AM – 8:00 PM",
+  "description": "This is a sample listing used while the site is being built. A real Camp electrician will replace it.",
+  "services": [
+    "Switchboard and MCB repair",
+    "Inverter and UPS installation",
+    "Earthing and short-circuit fixes",
+    "Shop and office electrical work"
+  ],
+  "languages": [
+    "English",
+    "Marathi",
+    "Hindi"
+  ],
+  "yearsInBusiness": 20,
+  "verified": true,
+  "featured": false,
+  "sample": true
+}

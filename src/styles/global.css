@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #12181b;
+  --color-paper: #ffffff;
+  --color-mist: #f5f4f0;
+  --color-card: #ffffff;
+  --color-muted: #5b6266;
+  --color-line: rgb(18 24 27 / 0.12);
+  --color-brand: #e8531f;
+  --color-brand-dark: #c2410f;
+  --color-brand-ink: #7a2e12;
+  --color-brand-soft: #fdeee7;
+  --color-leaf: #2f6b4f;
+  --color-leaf-soft: #e3f1e9;
+  --color-whatsapp: #1f8f4e;
+}
+
+@layer base {
+  html {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-paper);
+    line-height: 1.6;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+  }
+  a {
+    text-underline-offset: 3px;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) {
+    .container-page { padding-inline: 2rem; }
+  }
+  @media (min-width: 1024px) {
+    .container-page { padding-inline: 3rem; }
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-height: 44px;
+    border-radius: 999px;
+    padding: 0.55rem 1.2rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .btn-call { background: var(--color-brand); color: #fff; }
+  .btn-call:hover { background: var(--color-brand-dark); }
+  .btn-wa { background: var(--color-whatsapp); color: #fff; }
+  .btn-wa:hover { filter: brightness(0.92); }
+  .btn-ghost { border: 1.5px solid var(--color-line); background: var(--color-card); color: var(--color-ink); }
+  .btn-ghost:hover { border-color: var(--color-ink); }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 999px;
+    padding: 0.2rem 0.65rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    background: var(--color-mist);
+    padding: 0.4rem 0.9rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+  .pill:hover { color: var(--color-brand); }
+  .field {
+    height: 52px;
+    width: 100%;
+    border: 1.5px solid var(--color-line);
+    border-radius: 12px;
+    background: #fff;
+    padding: 0 1rem;
+    font-size: 0.95rem;
+    color: var(--color-ink);
+  }
+  .field:focus { border-color: var(--color-ink); outline: none; }
+  .eyebrow {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  /* Page header band used by inner pages. */
+  .page-head {
+    background: var(--color-mist);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  /* Homepage hero: three photos crossfade with a slow zoom. Each holds for a third of
+     the cycle; slides are offset by 6s (18s / 3) via animation-delay in index.astro. */
+  .hero-slide {
+    animation: heroFade 18s ease-in-out infinite;
+    opacity: 0;
+  }
+  @keyframes heroFade {
+    0% { opacity: 0; transform: scale(1.06); }
+    4% { opacity: 1; }
+    33.3% { opacity: 1; transform: scale(1.12); }
+    38% { opacity: 0; transform: scale(1.13); }
+    100% { opacity: 0; transform: scale(1.13); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-slide { animation: none; opacity: 0; }
+    .hero-slide:first-child { opacity: 1; }
+  }
+
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+}

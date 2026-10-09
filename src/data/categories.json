@@ -1,0 +1,64 @@
+[
+  {
+    "id": "electricians",
+    "name": "Electricians",
+    "singular": "Electrician",
+    "icon": "bolt",
+    "group": "home",
+    "live": true,
+    "schemaType": "Electrician",
+    "intro": "Find local electricians in Belagavi for house wiring, fan and light fitting, switchboard repairs, inverter installation and emergency fixes. Call or WhatsApp them directly; there's no middleman and no booking fee.",
+    "services": [
+      "House wiring and rewiring",
+      "Fan, light and geyser installation",
+      "Switchboard and MCB repair",
+      "Inverter and UPS installation",
+      "Earthing and short-circuit fixes",
+      "Shop and office electrical work"
+    ],
+    "pricing": [
+      { "job": "Visit / inspection charge", "range": "₹100 – ₹200" },
+      { "job": "Ceiling fan installation", "range": "₹150 – ₹300" },
+      { "job": "Switchboard repair or replacement", "range": "₹150 – ₹400" },
+      { "job": "MCB / DB installation", "range": "₹300 – ₹800" },
+      { "job": "Geyser installation", "range": "₹300 – ₹600" },
+      { "job": "Inverter installation (wiring only)", "range": "₹500 – ₹1,500" },
+      { "job": "Full house wiring (2BHK, labour only)", "range": "₹15,000 – ₹35,000" }
+    ],
+    "faqs": [
+      {
+        "q": "How much does an electrician charge for a home visit in Belagavi?",
+        "a": "Most electricians in Belagavi charge a visit fee of about ₹100 to ₹200. This is often adjusted against the repair cost if you go ahead with the work. Always confirm the visit charge on the phone before they come."
+      },
+      {
+        "q": "Can I get an electrician the same day?",
+        "a": "Yes, for small jobs like a fan, switch or MCB problem, most local electricians can come the same day, especially if you call in the morning. Big jobs like rewiring are usually scheduled a few days ahead."
+      },
+      {
+        "q": "Do electricians bring the materials or should I buy them?",
+        "a": "Either works. Many customers buy switches, wires and fittings themselves from shops in Khade Bazar or Ganpat Galli and pay only for labour. Ask the electrician for a list of what to buy before the visit."
+      },
+      {
+        "q": "Who do I call for a power cut or a problem with the electricity meter?",
+        "a": "Power cuts, meter faults and problems on the street line are handled by HESCOM, the electricity supply company, not by a private electrician. A private electrician handles wiring and fittings inside your home or shop."
+      },
+      {
+        "q": "How do I list my electrical business on belagavicity.com?",
+        "a": "Basic listings are free. Use the 'List your business' option to send your business name, area, phone number and the services you offer."
+      }
+    ]
+  },
+  { "id": "plumbers", "name": "Plumbers", "singular": "Plumber", "icon": "wrench", "group": "home", "schemaType": "Plumber" },
+  { "id": "ac-repair", "name": "AC & Appliance Repair", "singular": "AC & Appliance Repair", "icon": "snowflake", "group": "home", "schemaType": "HVACBusiness" },
+  { "id": "roofing-waterproofing", "name": "Roofing & Waterproofing", "singular": "Roofing & Waterproofing", "icon": "roof", "group": "home", "schemaType": "RoofingContractor" },
+  { "id": "carpenters", "name": "Carpenters", "singular": "Carpenter", "icon": "hammer", "group": "home", "schemaType": "HomeAndConstructionBusiness" },
+  { "id": "painters", "name": "Painters", "singular": "Painter", "icon": "brush", "group": "home", "schemaType": "HousePainter" },
+  { "id": "pest-control", "name": "Pest Control", "singular": "Pest Control", "icon": "bug", "group": "home", "schemaType": "HomeAndConstructionBusiness" },
+  { "id": "packers-movers", "name": "Packers & Movers", "singular": "Packers & Movers", "icon": "truck", "group": "home", "schemaType": "MovingCompany" },
+  { "id": "dentists", "name": "Dentists", "singular": "Dentist", "icon": "tooth", "group": "health", "schemaType": "Dentist" },
+  { "id": "diagnostic-labs", "name": "Diagnostic Labs", "singular": "Diagnostic Lab", "icon": "flask", "group": "health", "schemaType": "MedicalBusiness" },
+  { "id": "wedding-venues", "name": "Wedding Halls", "singular": "Wedding Hall", "icon": "rings", "group": "events", "schemaType": "EventVenue" },
+  { "id": "caterers", "name": "Caterers", "singular": "Caterer", "icon": "utensils", "group": "events", "schemaType": "FoodEstablishment" },
+  { "id": "tax-consultants", "name": "CAs & Tax Consultants", "singular": "Tax Consultant", "icon": "receipt", "group": "professional", "schemaType": "AccountingService" },
+  { "id": "defence-coaching", "name": "Defence Exam Coaching", "singular": "Defence Coaching Centre", "icon": "medal", "group": "local", "schemaType": "EducationalOrganization" }
+]
