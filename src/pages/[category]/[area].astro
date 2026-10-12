@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import BusinessCard from '../../components/BusinessCard.astro';
-import { getArea, getBusinesses, getLiveCategories, breadcrumbJsonLd } from '../../lib/site';
+import { getArea, getBusinesses, getLiveCategories, breadcrumbJsonLd, servesArea, areaIdsOf } from '../../lib/site';
 
 // Only build "service in area" pages that have at least one listing. Empty
 // pages would be thin content and hurt the whole site in search.
@@ -11,11 +11,11 @@ export async function getStaticPaths() {
   const paths = [];
   for (const category of categories) {
     const businesses = await getBusinesses({ category: category.id });
-    const areaIds = [...new Set(businesses.map((b) => b.data.area.id))];
+    const areaIds = [...new Set(businesses.flatMap(areaIdsOf))];
     for (const areaId of areaIds) {
       paths.push({
         params: { category: category.id, area: areaId },
-        props: { category, area: await getArea(areaId), businesses: businesses.filter((b) => b.data.area.id === areaId) },
+        props: { category, area: await getArea(areaId), businesses: businesses.filter((b) => servesArea(b, areaId)) },
       });
     }
   }
@@ -24,7 +24,7 @@ export async function getStaticPaths() {
 
 const { category, area, businesses } = Astro.props;
 const c = category.data;
-const others = (await getBusinesses({ category: category.id })).filter((b) => b.data.area.id !== area.id).slice(0, 3);
+const others = (await getBusinesses({ category: category.id })).filter((b) => !servesArea(b, area.id)).slice(0, 3);
 const onlySamples = businesses.every((b) => b.data.sample);
 
 const crumbs = [

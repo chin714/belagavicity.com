@@ -21,7 +21,7 @@ const categories = defineCollection({
     name: z.string(), // plural, used in headings: "Electricians"
     singular: z.string(), // "Electrician"
     icon: z.string(),
-    group: z.enum(['home', 'health', 'professional', 'events', 'local']),
+    group: z.enum(['home', 'health', 'professional', 'events', 'tech', 'local']),
     live: z.boolean().default(false),
     schemaType: z.string().default('LocalBusiness'), // schema.org type, e.g. Electrician
     intro: z.string().optional(),
@@ -40,6 +40,10 @@ const businesses = defineCollection({
     name: z.string(),
     category: reference('categories'),
     area: reference('areas'),
+    // Adjacent localities the business also covers. It is listed on those area pages too.
+    alsoServes: z.array(reference('areas')).default([]),
+    // Other categories the business also works in. It is listed on those category pages too.
+    alsoListedIn: z.array(reference('categories')).default([]),
     phone: z.string(),
     whatsapp: z.string().optional(),
     address: z.string(),

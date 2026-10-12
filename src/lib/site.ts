@@ -14,6 +14,7 @@ export const GROUPS: Record<CollectionEntry<'categories'>['data']['group'], stri
   health: 'Health',
   events: 'Weddings & events',
   professional: 'Professional services',
+  tech: 'Computers & tech',
   local: 'Only in Belagavi',
 };
 
@@ -29,6 +30,26 @@ export function sortBusinesses(list: Business[]) {
   );
 }
 
+/** True if the business is based in the area or lists it in `alsoServes`. */
+export function servesArea(b: Business, areaId: string) {
+  return b.data.area.id === areaId || b.data.alsoServes.some((a) => a.id === areaId);
+}
+
+/** Home area first, then any `alsoServes` areas. */
+export function areaIdsOf(b: Business) {
+  return [b.data.area.id, ...b.data.alsoServes.map((a) => a.id)];
+}
+
+/** True if the business's main category is this one or it lists it in `alsoListedIn`. */
+export function inCategory(b: Business, categoryId: string) {
+  return b.data.category.id === categoryId || b.data.alsoListedIn.some((c) => c.id === categoryId);
+}
+
+/** Main category first, then any `alsoListedIn` categories. */
+export function categoryIdsOf(b: Business) {
+  return [b.data.category.id, ...b.data.alsoListedIn.map((c) => c.id)];
+}
+
 export async function getLiveCategories() {
   return getCollection('categories', (c) => c.data.live);
 }
@@ -37,8 +58,8 @@ export async function getBusinesses(filter?: { category?: string; area?: string 
   const all = await getCollection(
     'businesses',
     (b) =>
-      (!filter?.category || b.data.category.id === filter.category) &&
-      (!filter?.area || b.data.area.id === filter.area),
+      (!filter?.category || inCategory(b, filter.category)) &&
+      (!filter?.area || servesArea(b, filter.area)),
   );
   return sortBusinesses(all);
 }

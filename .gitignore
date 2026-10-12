@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Working call sheet with real phone numbers - keep out of git
+data-import/businesses.csv

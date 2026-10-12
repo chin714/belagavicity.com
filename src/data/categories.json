@@ -49,12 +49,84 @@
     ]
   },
   { "id": "plumbers", "name": "Plumbers", "singular": "Plumber", "icon": "wrench", "group": "home", "schemaType": "Plumber" },
-  { "id": "ac-repair", "name": "AC & Appliance Repair", "singular": "AC & Appliance Repair", "icon": "snowflake", "group": "home", "schemaType": "HVACBusiness" },
+  {
+    "id": "ac-repair",
+    "name": "AC & Appliance Repair",
+    "singular": "AC & Appliance Repair",
+    "icon": "snowflake",
+    "group": "home",
+    "live": true,
+    "schemaType": "HVACBusiness",
+    "intro": "Find AC and appliance repair technicians in Belagavi for AC servicing, gas refilling, installation, and fridge, washing machine and microwave repairs. Call or WhatsApp them directly; there's no middleman and no booking fee.",
+    "services": [
+      "AC servicing and cleaning",
+      "AC gas refilling",
+      "Split and window AC installation",
+      "AC uninstallation and shifting",
+      "Refrigerator repair",
+      "Washing machine repair",
+      "Microwave and oven repair"
+    ],
+    "pricing": [
+      {
+        "job": "Visit / inspection charge",
+        "range": "₹200 – ₹400"
+      },
+      {
+        "job": "Split AC service (wet cleaning)",
+        "range": "₹500 – ₹800"
+      },
+      {
+        "job": "AC gas refilling (top-up to full)",
+        "range": "₹1,500 – ₹3,500"
+      },
+      {
+        "job": "Split AC installation",
+        "range": "₹1,500 – ₹2,500"
+      },
+      {
+        "job": "AC uninstallation",
+        "range": "₹500 – ₹1,000"
+      },
+      {
+        "job": "Fridge gas refilling",
+        "range": "₹1,200 – ₹2,500"
+      },
+      {
+        "job": "Washing machine repair (labour)",
+        "range": "₹300 – ₹800"
+      }
+    ],
+    "faqs": [
+      {
+        "q": "How often should I get my AC serviced in Belagavi?",
+        "a": "Once a year is enough for most homes, ideally in February or March before the summer rush. If the AC runs most of the day, or the area is dusty, a second service before the monsoon helps it cool better and use less power."
+      },
+      {
+        "q": "How do I know if my AC needs a gas refill?",
+        "a": "If the AC runs but blows only mildly cool air, or ice forms on the indoor pipes, it may be low on gas. A healthy AC should not need a refill every year. If it does, ask the technician to find and fix the leak first instead of only topping up."
+      },
+      {
+        "q": "Do technicians repair all brands?",
+        "a": "Most local technicians repair all common brands like LG, Samsung, Voltas, Daikin, Godrej and Whirlpool. For appliances still under warranty, call the brand's service centre first, because a local repair can void the warranty."
+      },
+      {
+        "q": "Are spare parts included in the repair price?",
+        "a": "No. The prices above are labour charges. Parts like capacitors, compressors, PCBs or thermostats are extra. Ask for the old part back and confirm the part price before the technician replaces it."
+      },
+      {
+        "q": "How do I list my AC or appliance repair business on belagavicity.com?",
+        "a": "Basic listings are free. Use the 'List your business' option to send your business name, area, phone number and the services you offer."
+      }
+    ]
+  },
   { "id": "roofing-waterproofing", "name": "Roofing & Waterproofing", "singular": "Roofing & Waterproofing", "icon": "roof", "group": "home", "schemaType": "RoofingContractor" },
+  { "id": "compound-wall-builders", "name": "Compound Wall Builders", "singular": "Compound Wall Builder", "icon": "wall", "group": "home", "schemaType": "HomeAndConstructionBusiness" },
   { "id": "carpenters", "name": "Carpenters", "singular": "Carpenter", "icon": "hammer", "group": "home", "schemaType": "HomeAndConstructionBusiness" },
   { "id": "painters", "name": "Painters", "singular": "Painter", "icon": "brush", "group": "home", "schemaType": "HousePainter" },
   { "id": "pest-control", "name": "Pest Control", "singular": "Pest Control", "icon": "bug", "group": "home", "schemaType": "HomeAndConstructionBusiness" },
   { "id": "packers-movers", "name": "Packers & Movers", "singular": "Packers & Movers", "icon": "truck", "group": "home", "schemaType": "MovingCompany" },
+  { "id": "computer-sales-repair", "name": "Computer Sales & Repair", "singular": "Computer Sales & Repair", "icon": "laptop", "group": "tech", "schemaType": "ComputerStore" },
   { "id": "dentists", "name": "Dentists", "singular": "Dentist", "icon": "tooth", "group": "health", "schemaType": "Dentist" },
   { "id": "diagnostic-labs", "name": "Diagnostic Labs", "singular": "Diagnostic Lab", "icon": "flask", "group": "health", "schemaType": "MedicalBusiness" },
   { "id": "wedding-venues", "name": "Wedding Halls", "singular": "Wedding Hall", "icon": "rings", "group": "events", "schemaType": "EventVenue" },

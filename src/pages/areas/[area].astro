@@ -4,7 +4,7 @@ import Icon from '../../components/Icon.astro';
 import Layout from '../../layouts/Layout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import BusinessCard from '../../components/BusinessCard.astro';
-import { getBusinesses, getLiveCategories, breadcrumbJsonLd } from '../../lib/site';
+import { getBusinesses, getLiveCategories, breadcrumbJsonLd, inCategory } from '../../lib/site';
 
 export async function getStaticPaths() {
   const areas = await getCollection('areas');
@@ -15,7 +15,7 @@ const { area } = Astro.props;
 const businesses = await getBusinesses({ area: area.id });
 const live = await getLiveCategories();
 const sections = live
-  .map((c) => ({ category: c, items: businesses.filter((b) => b.data.category.id === c.id) }))
+  .map((c) => ({ category: c, items: businesses.filter((b) => inCategory(b, c.id)) }))
   .filter((s) => s.items.length > 0);
 const onlySamples = businesses.every((b) => b.data.sample);
 

@@ -1,0 +1,24 @@
+{
+  "name": "Yeeabu Electrician",
+  "category": "electricians",
+  "area": "hanuman-nagar",
+  "alsoServes": ["sadashiv-nagar"],
+  "phone": "7022617892",
+  "whatsapp": "9448866892",
+  "address": "Near Park, Doordarshan Nagar, Sadashiv Nagar, Belagavi, Karnataka 590019",
+  "hours": "Mon–Sat, 9:00 AM – 8:00 PM",
+  "mapUrl": "https://maps.app.goo.gl/YBbnnA45DtroVh5V7",
+  "description": "Family-run electrical shop doing home wiring and repairs across south Belagavi.",
+  "services": [
+    "House wiring and rewiring",
+    "Inverter and UPS installation"
+  ],
+  "languages": [
+    "Kannada",
+    "Marathi",
+    "English"
+  ],
+  "yearsInBusiness": 10,
+  "verified": true,
+  "featured": false
+}

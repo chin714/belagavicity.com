@@ -4,7 +4,7 @@ import Icon from '../../components/Icon.astro';
 import Layout from '../../layouts/Layout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import BusinessCard from '../../components/BusinessCard.astro';
-import { getBusinesses, getLiveCategories, breadcrumbJsonLd, faqJsonLd } from '../../lib/site';
+import { getBusinesses, getLiveCategories, breadcrumbJsonLd, faqJsonLd, servesArea } from '../../lib/site';
 
 export async function getStaticPaths() {
   const categories = await getLiveCategories();
@@ -15,7 +15,7 @@ const { category } = Astro.props;
 const c = category.data;
 const businesses = await getBusinesses({ category: category.id });
 const areas = await getCollection('areas');
-const areasWithListings = areas.filter((a) => businesses.some((b) => b.data.area.id === a.id));
+const areasWithListings = areas.filter((a) => businesses.some((b) => servesArea(b, a.id)));
 const missingAreas = areas.filter((a) => !areasWithListings.includes(a));
 
 const crumbs = [{ name: `${c.name} in Belagavi`, href: `/${category.id}/` }];

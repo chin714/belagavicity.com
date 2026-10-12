@@ -15,6 +15,9 @@ const { business } = Astro.props;
 const b = business.data;
 const category = await getCategory(b.category.id);
 const area = await getArea(b.area.id);
+const alsoServes = await Promise.all(b.alsoServes.map((a) => getArea(a.id)));
+// Only link to categories that have pages.
+const alsoListedIn = (await Promise.all(b.alsoListedIn.map((c) => getCategory(c.id)))).filter((c) => c.data.live);
 const related = (await getBusinesses({ category: category.id, area: area.id }))
   .filter((r) => r.id !== business.id)
   .slice(0, 3);
@@ -92,6 +95,18 @@ if (!b.sample) {
         )}
         <dl class="space-y-3 pt-2 text-sm">
           <div><dt class="font-semibold">Address</dt><dd class="text-muted">{b.address}</dd></div>
+          {alsoServes.length > 0 && (
+            <div>
+              <dt class="font-semibold">Also serves</dt>
+              <dd class="text-muted">{alsoServes.map((a, i) => <>{i > 0 && ', '}<a href={`/${category.id}/${a.id}/`} class="text-brand">{a.data.name}</a></>)}</dd>
+            </div>
+          )}
+          {alsoListedIn.length > 0 && (
+            <div>
+              <dt class="font-semibold">Also listed in</dt>
+              <dd class="text-muted">{alsoListedIn.map((c, i) => <>{i > 0 && ', '}<a href={`/${c.id}/${area.id}/`} class="text-brand">{c.data.name}</a></>)}</dd>
+            </div>
+          )}
           {b.hours && <div><dt class="font-semibold">Hours</dt><dd class="text-muted">{b.hours}</dd></div>}
           {b.languages.length > 0 && <div><dt class="font-semibold">Languages</dt><dd class="text-muted">{b.languages.join(', ')}</dd></div>}
         </dl>

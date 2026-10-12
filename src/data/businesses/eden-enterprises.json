@@ -1,0 +1,24 @@
+{
+  "name": "Eden Enterprises",
+  "category": "electricians",
+  "area": "sadashiv-nagar",
+  "alsoListedIn": ["ac-repair"],
+  "phone": "7833024547",
+  "whatsapp": "7760356510",
+  "address": "T. V. Centre, Bauxite Road, Doordarshan Nagar, Sadashiv Nagar, Belagavi, Karnataka 590001",
+  "hours": "Mon–Sat, open 24 hours; Sun, 1:00 PM – 8:00 PM",
+  "mapUrl": "https://maps.app.goo.gl/97dX8yBQGXpyevuF7",
+  "description": "Electrical contractor near TV Centre on Bauxite Road with 9 years in the trade. Handles home, shop and industrial wiring, and also services ACs, fridges and CCTV cameras.",
+  "services": [
+    "House wiring and rewiring",
+    "Shop and office electrical work",
+    "Industrial wiring",
+    "Switchboard, MCB and panel repair",
+    "AC installation, service and repair",
+    "Refrigerator repair",
+    "CCTV camera installation"
+  ],
+  "yearsInBusiness": 9,
+  "verified": false,
+  "featured": false
+}

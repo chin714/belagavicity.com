@@ -4,7 +4,7 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import BusinessCard from '../components/BusinessCard.astro';
 import Icon from '../components/Icon.astro';
-import { SITE, getBusinesses } from '../lib/site';
+import { SITE, getBusinesses, areaIdsOf, categoryIdsOf } from '../lib/site';
 
 import soudha from '../assets/hero/suvarna-vidhana-soudha.jpg';
 import kamalBasadi from '../assets/hero/kamal-basadi.jpg';
@@ -61,7 +61,7 @@ const live = categories.filter((c) => c.data.live);
 const showcase = businesses.slice(0, 8);
 
 // Category+area pairs that have listings, so the search box only links to pages that exist.
-const combos = [...new Set(businesses.map((b) => `${b.data.category.id}/${b.data.area.id}`))];
+const combos = [...new Set(businesses.flatMap((b) => categoryIdsOf(b).flatMap((c) => areaIdsOf(b).map((a) => `${c}/${a}`))))];
 const popular = live.flatMap((c) =>
   areas
     .filter((a) => combos.includes(`${c.id}/${a.id}`))
