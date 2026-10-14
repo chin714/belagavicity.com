@@ -121,12 +121,90 @@
     ]
   },
   { "id": "roofing-waterproofing", "name": "Roofing & Waterproofing", "singular": "Roofing & Waterproofing", "icon": "roof", "group": "home", "schemaType": "RoofingContractor" },
-  { "id": "compound-wall-builders", "name": "Compound Wall Builders", "singular": "Compound Wall Builder", "icon": "wall", "group": "home", "schemaType": "HomeAndConstructionBusiness" },
+  {
+    "id": "compound-wall-builders",
+    "name": "Compound Wall Builders",
+    "singular": "Compound Wall Builder",
+    "icon": "wall",
+    "group": "home",
+    "live": true,
+    "schemaType": "HomeAndConstructionBusiness",
+    "intro": "Find compound wall builders in Belagavi for precast walls, brick and block walls and plot fencing. Call or WhatsApp them directly; there's no middleman and no booking fee.",
+    "services": [
+      "Precast compound walls",
+      "Brick and block compound walls",
+      "Plot boundary fencing",
+      "Gate pillars and gate fitting",
+      "Barbed wire and chain-link toppings",
+      "Repair and height extension of old walls"
+    ],
+    "faqs": [
+      {
+        "q": "What is a precast compound wall?",
+        "a": "A precast wall is made of concrete posts and panels cast in a factory yard, then brought to your plot and slotted together. It goes up in a few days instead of weeks, needs no plastering and is usually cheaper than a brick wall of the same length."
+      },
+      {
+        "q": "Precast or brick: which is better for my plot?",
+        "a": "Precast is faster and cheaper, and is the common choice for open plots and farmland. A brick or block wall costs more but can be plastered, painted and built to any shape, so many people prefer it around a finished house."
+      },
+      {
+        "q": "How are compound walls priced?",
+        "a": "Most builders quote per running foot (the length of the wall), with the height and panel thickness set in the quote. Ask whether the price includes the foundation, transport, gate pillars and labour, as these are sometimes extra."
+      },
+      {
+        "q": "Do I need permission to build a compound wall?",
+        "a": "Within Belagavi city limits, check with the Belagavi City Corporation before building, especially on a road-facing side, and make sure the wall stays inside your plot boundary. A survey of the boundary first avoids disputes with neighbours."
+      },
+      {
+        "q": "How do I list my compound wall business on belagavicity.com?",
+        "a": "Basic listings are free. Use the 'List your business' option to send your business name, area, phone number and the services you offer."
+      }
+    ]
+  },
   { "id": "carpenters", "name": "Carpenters", "singular": "Carpenter", "icon": "hammer", "group": "home", "schemaType": "HomeAndConstructionBusiness" },
   { "id": "painters", "name": "Painters", "singular": "Painter", "icon": "brush", "group": "home", "schemaType": "HousePainter" },
   { "id": "pest-control", "name": "Pest Control", "singular": "Pest Control", "icon": "bug", "group": "home", "schemaType": "HomeAndConstructionBusiness" },
   { "id": "packers-movers", "name": "Packers & Movers", "singular": "Packers & Movers", "icon": "truck", "group": "home", "schemaType": "MovingCompany" },
-  { "id": "computer-sales-repair", "name": "Computer Sales & Repair", "singular": "Computer Sales & Repair", "icon": "laptop", "group": "tech", "schemaType": "ComputerStore" },
+  {
+    "id": "computer-sales-repair",
+    "name": "Computer Sales & Repair",
+    "singular": "Computer Sales & Repair",
+    "icon": "laptop",
+    "group": "tech",
+    "live": true,
+    "schemaType": "ComputerStore",
+    "intro": "Find computer shops in Belagavi for new laptops and desktops, and for repairs to laptops, PCs, phones and other electronics. Call or WhatsApp them directly; there's no middleman and no booking fee.",
+    "services": [
+      "Laptop and desktop sales",
+      "Laptop and desktop repair",
+      "Screen, keyboard and battery replacement",
+      "Hard disk, SSD and RAM upgrades",
+      "Windows and software installation",
+      "Smartphone repair"
+    ],
+    "faqs": [
+      {
+        "q": "Should I repair my old laptop or buy a new one?",
+        "a": "If the fault is a battery, keyboard, screen, charger or a slow hard disk, a repair or upgrade usually costs far less than a new laptop. If the motherboard has failed on an old machine, the repair can cost close to a new one, so ask for a quote first and compare."
+      },
+      {
+        "q": "Can a slow laptop be made faster without replacing it?",
+        "a": "Often, yes. Replacing an old hard disk with an SSD and adding RAM are the two upgrades that make the biggest difference, and most computer shops can do both the same day if the parts are in stock."
+      },
+      {
+        "q": "Will I lose my data during a repair?",
+        "a": "Most repairs don't touch your files, but a software reinstall or a disk replacement can. Back up important files before handing the machine over, or ask the shop to take a backup for you."
+      },
+      {
+        "q": "Is my laptop still under warranty?",
+        "a": "Check the brand's support website with the serial number on the bottom of the laptop. Under warranty, the repair should go through the brand's authorised service centre; opening it at another shop may void the warranty."
+      },
+      {
+        "q": "How do I list my computer shop on belagavicity.com?",
+        "a": "Basic listings are free. Use the 'List your business' option to send your business name, area, phone number and the services you offer."
+      }
+    ]
+  },
   { "id": "dentists", "name": "Dentists", "singular": "Dentist", "icon": "tooth", "group": "health", "schemaType": "Dentist" },
   { "id": "diagnostic-labs", "name": "Diagnostic Labs", "singular": "Diagnostic Lab", "icon": "flask", "group": "health", "schemaType": "MedicalBusiness" },
   { "id": "wedding-venues", "name": "Wedding Halls", "singular": "Wedding Hall", "icon": "rings", "group": "events", "schemaType": "EventVenue" },

@@ -11,5 +11,6 @@
   { "id": "udyambag", "name": "Udyambag", "description": "Belagavi's main industrial estate, home to many foundries, engineering units and workshops." },
   { "id": "mache", "name": "Mache", "description": "A locality on the southern side of the city near the industrial belt, with growing residential layouts." },
   { "id": "nehru-nagar", "name": "Nehru Nagar", "description": "A central locality with major hospitals, offices and commercial establishments." },
-  { "id": "shivaji-nagar", "name": "Shivaji Nagar", "description": "A central residential and commercial area with shops, schools and housing colonies." }
+  { "id": "shivaji-nagar", "name": "Shivaji Nagar", "description": "A central residential and commercial area with shops, schools and housing colonies." },
+  { "id": "college-road", "name": "College Road", "description": "A central road in Belagavi lined with shops, offices and commercial complexes." }
 ]

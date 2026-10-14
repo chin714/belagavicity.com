@@ -1,0 +1,27 @@
+{
+  "name": "Tech Pro Solutions",
+  "category": "computer-sales-repair",
+  "area": "college-road",
+  "phone": "8884447129",
+  "whatsapp": "8884447129",
+  "address": "Ground Floor, Bilgi Plaza, 10, Lingaraj College Road, Belagavi, Karnataka 590001",
+  "hours": "Mon–Sat, 9:00 AM – 8:00 PM",
+  "mapUrl": "https://maps.app.goo.gl/fBUFt9ou2GtGvRcW9",
+  "description": "Apple service point selling and repairing laptops, desktops, smartphones, projectors and LED smart TVs, with 18 years in the trade. Run by Aman Nadaf.",
+  "services": [
+    "Laptop sales and repair",
+    "Desktop sales and repair",
+    "Smartphone repair",
+    "Apple device service",
+    "Projector repair",
+    "LED smart TV repair"
+  ],
+  "languages": [
+    "Kannada",
+    "Marathi",
+    "English"
+  ],
+  "yearsInBusiness": 18,
+  "verified": true,
+  "featured": false
+}
