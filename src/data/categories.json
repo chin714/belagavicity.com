@@ -205,7 +205,47 @@
       }
     ]
   },
-  { "id": "dentists", "name": "Dentists", "singular": "Dentist", "icon": "tooth", "group": "health", "schemaType": "Dentist" },
+  {
+    "id": "dentists",
+    "name": "Dentists",
+    "singular": "Dentist",
+    "icon": "tooth",
+    "group": "health",
+    "live": true,
+    "schemaType": "Dentist",
+    "intro": "Find dentists and dental clinics in Belagavi for check-ups, cleaning, fillings, root canals, extractions and other dental care. Call or WhatsApp the clinic directly to book; there's no middleman and no booking fee.",
+    "services": [
+      "Dental check-ups and consultation",
+      "Teeth cleaning and scaling",
+      "Fillings",
+      "Root canal treatment",
+      "Tooth extraction",
+      "Crowns, bridges and dentures",
+      "Braces and aligners"
+    ],
+    "faqs": [
+      {
+        "q": "Do I need an appointment to see a dentist in Belagavi?",
+        "a": "Many clinics take walk-ins, but timings vary and some dentists only sit in the evenings. Call the clinic before you go to check the dentist is in and to avoid a long wait."
+      },
+      {
+        "q": "How often should I get a dental check-up?",
+        "a": "Once every six months to a year is a good rule for most adults and children. Regular check-ups catch cavities and gum problems early, when treatment is quicker and cheaper."
+      },
+      {
+        "q": "What should I do in a dental emergency?",
+        "a": "For severe tooth pain, swelling, a broken tooth or a knocked-out tooth, call a clinic straight away and explain the problem. If a tooth is knocked out, keep it in milk and see a dentist within the hour if you can."
+      },
+      {
+        "q": "Is a root canal painful?",
+        "a": "The procedure is done under local anaesthesia, so most people feel little more than they would with a filling. It often relieves the pain caused by the infected tooth. Ask the dentist how many sittings it will need."
+      },
+      {
+        "q": "How do I list my dental clinic on belagavicity.com?",
+        "a": "Basic listings are free. Use the 'List your business' option to send your clinic name, area, phone number and the treatments you offer."
+      }
+    ]
+  },
   { "id": "diagnostic-labs", "name": "Diagnostic Labs", "singular": "Diagnostic Lab", "icon": "flask", "group": "health", "schemaType": "MedicalBusiness" },
   { "id": "wedding-venues", "name": "Wedding Halls", "singular": "Wedding Hall", "icon": "rings", "group": "events", "schemaType": "EventVenue" },
   { "id": "caterers", "name": "Caterers", "singular": "Caterer", "icon": "utensils", "group": "events", "schemaType": "FoodEstablishment" },

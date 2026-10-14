@@ -1,0 +1,22 @@
+{
+  "name": "Preeti Speciality Dental Clinic",
+  "category": "dentists",
+  "area": "college-road",
+  "phone": "9480717575",
+  "whatsapp": "9480717575",
+  "address": "Opposite Ram Krishna Kamal, Sardar Ground, Kaktives Road, Khade Bazar, Raviwar Peth, Belagavi, Karnataka 590001",
+  "hours": "Mon–Sat, 6:00 PM – 9:00 PM",
+  "mapUrl": "https://maps.app.goo.gl/oW1iyabb5tLHR2TC6",
+  "description": "Evening dental clinic near Sardar Ground run by Dr Shivayogi Hugar, with 18 years of practice.",
+  "services": [
+    "General dental treatment"
+  ],
+  "languages": [
+    "Kannada",
+    "Marathi",
+    "English"
+  ],
+  "yearsInBusiness": 18,
+  "verified": true,
+  "featured": false
+}
