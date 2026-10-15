@@ -129,6 +129,7 @@
      the cycle; slides are offset by 6s (18s / 3) via animation-delay in index.astro. */
   .hero-slide {
     animation: heroFade 18s ease-in-out infinite;
+    transform-origin: var(--origin, center);
     opacity: 0;
   }
   @keyframes heroFade {
@@ -138,9 +139,28 @@
     38% { opacity: 0; transform: scale(1.13); }
     100% { opacity: 0; transform: scale(1.13); }
   }
+  /* Phones: the photo band is already tightly framed, so zoom less and crop less. */
+  @media (max-width: 639px) {
+    .hero-slide { animation-name: heroFadeSmall; transform-origin: var(--origin-small, center); }
+  }
+  @keyframes heroFadeSmall {
+    0% { opacity: 0; transform: scale(1); }
+    4% { opacity: 1; }
+    33.3% { opacity: 1; transform: scale(1.04); }
+    38% { opacity: 0; transform: scale(1.045); }
+    100% { opacity: 0; transform: scale(1.045); }
+  }
+  /* Devices set to reduce motion (often via battery saver) still rotate the photos,
+     but with a plain crossfade and no zoom. */
   @media (prefers-reduced-motion: reduce) {
-    .hero-slide { animation: none; opacity: 0; }
-    .hero-slide:first-child { opacity: 1; }
+    .hero-slide { animation-name: heroCrossfade; }
+  }
+  @keyframes heroCrossfade {
+    0% { opacity: 0; }
+    4% { opacity: 1; }
+    33.3% { opacity: 1; }
+    38% { opacity: 0; }
+    100% { opacity: 0; }
   }
 
   .no-scrollbar { scrollbar-width: none; }

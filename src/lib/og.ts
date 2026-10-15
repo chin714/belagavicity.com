@@ -29,8 +29,8 @@ const PHOTOS: {
     file: 'src/assets/hero/chennamma-circle.jpg',
     place: 'Chennamma Circle',
     credit: 'Djsourabh.bwd, CC BY-SA 4.0',
-    // Statue only: cut just below the hooves to drop the pedestal and lights.
-    crop: { left: 710, top: 58, width: 1983, height: 2083 },
+    // Statue only. The file itself is already cut just below the hooves (no slab).
+    crop: { left: 710, top: 58, width: 1983, height: 2064 },
   },
   {
     file: 'src/assets/hero/suvarna-vidhana-soudha.jpg',
