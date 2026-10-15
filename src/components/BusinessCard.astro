@@ -19,11 +19,11 @@ const tel = `tel:+${intlPhone(b.phone)}`;
 
 // Tile header colours, cycled so neighbouring cards differ.
 const tileBgs = [
-  'from-brand to-brand-ink',
-  'from-brand-ink to-ink',
-  'from-[#5c6e4f] to-ink',
-  'from-[#c9962c] to-brand-ink',
-  'from-ink to-brand',
+  'from-brand to-brand-deep',
+  'from-brand-deep to-night',
+  'from-[#5c6e4f] to-night',
+  'from-[#c9962c] to-brand-deep',
+  'from-night to-brand',
 ];
 ---
 
@@ -32,8 +32,8 @@ const tileBgs = [
     <a href={href} class:list={['relative flex h-[150px] items-center justify-center bg-gradient-to-br text-white', tileBgs[index % tileBgs.length]]} tabindex="-1" aria-hidden="true">
       <Icon name={category.data.icon} size={44} strokeWidth={1.6} />
       {b.verified && (
-        <span class="absolute top-2.5 right-2.5 inline-flex items-center gap-1 rounded-full bg-white px-2.5 py-1 text-xs font-bold text-ink shadow-sm">
-          <Icon name="badge" size={14} class="text-leaf" /> Verified
+        <span class="absolute top-2.5 right-2.5 inline-flex items-center gap-1 rounded-full bg-white px-2.5 py-1 text-xs font-bold text-night shadow-sm">
+          <Icon name="badge" size={14} class="text-[#2f6b4f]" /> Verified
         </span>
       )}
     </a>

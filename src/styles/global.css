@@ -17,6 +17,58 @@
   --color-leaf: #2f6b4f;
   --color-leaf-soft: #e3f1e9;
   --color-whatsapp: #1f8f4e;
+  /* Links in body text. */
+  --color-link: #c2410f;
+  /* Dark surfaces (footer, hero, CTA band) that stay dark in both themes.
+     `ink` and `brand-ink` are text colours and flip in dark mode. */
+  --color-night: #12181b;
+  --color-brand-deep: #7a2e12;
+}
+
+/* Dark mode follows the device setting. `data-theme="light|dark"` on <html> overrides it. */
+@custom-variant dark {
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme="light"]), :root:not([data-theme="light"]) *) {
+      @slot;
+    }
+  }
+  &:where([data-theme="dark"], [data-theme="dark"] *) {
+    @slot;
+  }
+}
+
+:root { color-scheme: light; }
+
+/* The dark palette, declared twice: once for the device setting, once for the override. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --color-ink: #ecebe6;
+    --color-paper: #101517;
+    --color-mist: #171e21;
+    --color-card: #1a2225;
+    --color-muted: #a3aaad;
+    --color-line: rgb(236 235 230 / 0.14);
+    --color-brand-ink: #ffb595;
+    --color-brand-soft: #3a2017;
+    --color-leaf: #7fcfa3;
+    --color-leaf-soft: #1b3326;
+    --color-link: #ff8a5c;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-ink: #ecebe6;
+  --color-paper: #101517;
+  --color-mist: #171e21;
+  --color-card: #1a2225;
+  --color-muted: #a3aaad;
+  --color-line: rgb(236 235 230 / 0.14);
+  --color-brand-ink: #ffb595;
+  --color-brand-soft: #3a2017;
+  --color-leaf: #7fcfa3;
+  --color-leaf-soft: #1b3326;
+  --color-link: #ff8a5c;
 }
 
 @layer base {
@@ -107,7 +159,7 @@
     width: 100%;
     border: 1.5px solid var(--color-line);
     border-radius: 12px;
-    background: #fff;
+    background: var(--color-card);
     padding: 0 1rem;
     font-size: 0.95rem;
     color: var(--color-ink);
@@ -174,8 +226,8 @@
   .text-page ul { list-style: disc; padding-left: 1.25rem; }
   .text-page ol { list-style: decimal; padding-left: 1.25rem; }
   .text-page li + li { margin-top: 0.4rem; }
-  .text-page a { color: var(--color-brand-dark); font-weight: 600; }
-  .text-page a:hover { color: var(--color-brand-ink); }
+  .text-page a { color: var(--color-link); font-weight: 600; }
+  .text-page a:hover { color: var(--color-brand); }
 
   .no-scrollbar { scrollbar-width: none; }
   .no-scrollbar::-webkit-scrollbar { display: none; }

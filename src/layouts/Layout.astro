@@ -48,6 +48,13 @@ function clip(text: string, max: number) {
     <meta name="description" content={metaDescription} />
     <!-- Noindex pages get no canonical: on 404.html it would point at /404/, which isn't a real URL. -->
     {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    <!-- Applies a saved light/dark choice before the page paints, so it doesn't flash. -->
+    <script is:inline>
+      try {
+        const t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      } catch {}
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="sitemap" href="/sitemap-index.xml" />

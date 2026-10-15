@@ -21,13 +21,18 @@ const link = overlay
   class:list={[
     'z-20 w-full',
     overlay
-      ? 'absolute inset-x-0 top-0 bg-gradient-to-b from-ink/60 to-transparent'
+      ? 'absolute inset-x-0 top-0 bg-gradient-to-b from-night/60 to-transparent'
       : 'sticky top-0 border-b border-line bg-paper/95 backdrop-blur',
   ]}
 >
   <div class="container-page flex h-[58px] items-center justify-between gap-3 sm:h-[88px] sm:gap-4">
     <a href="/" class="shrink-0 no-underline">
-      {overlay ? <LogoWhite class="h-[29px] w-auto sm:h-[37px]" /> : <Logo class="h-[29px] w-auto sm:h-[37px]" />}
+      {overlay ? <LogoWhite class="h-[29px] w-auto sm:h-[37px]" /> : (
+        <>
+          <Logo class="h-[29px] w-auto sm:h-[37px] dark:hidden" />
+          <LogoWhite class="hidden h-[29px] w-auto sm:h-[37px] dark:block" />
+        </>
+      )}
     </a>
     <!-- Desktop: a short nav at the right, so the hero photo stays clear. Every category is in the dropdown. -->
     <nav class="flex items-center gap-2 text-sm font-medium sm:gap-4 lg:gap-7" aria-label="Main">
@@ -48,6 +53,18 @@ const link = overlay
         </details>
       )}
       <a href="/areas/" class:list={['hidden whitespace-nowrap no-underline lg:inline', link]}>Areas</a>
+      <button
+        type="button"
+        data-theme-toggle
+        class:list={[
+          'grid size-8 cursor-pointer place-items-center rounded-full border sm:size-10',
+          overlay ? 'border-white/40 text-white hover:border-white' : 'border-line text-ink hover:border-ink',
+        ]}
+        aria-label="Switch to dark mode"
+      >
+        <Icon name="moon" size={20} class="size-4 sm:size-5 dark:hidden" />
+        <Icon name="sun" size={20} class="hidden size-4 sm:size-5 dark:block" />
+      </button>
       <!-- Hidden on phones to keep the hero clear; it's in the menu, the homepage and the footer. -->
       <a href="/list-your-business/" class="btn btn-call !min-h-0 hidden whitespace-nowrap px-5 py-2.5 text-[13px] sm:inline-flex">List your business</a>
 
@@ -89,6 +106,24 @@ const link = overlay
 </header>
 
 <script>
+  // Light/dark toggle. The choice is saved; until then the site follows the device setting.
+  const root = document.documentElement;
+  const toggles = document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]');
+  const current = () => root.dataset.theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  const label = () => toggles.forEach((b) => (b.ariaLabel = `Switch to ${current() === 'dark' ? 'light' : 'dark'} mode`));
+  label();
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', label);
+  toggles.forEach((b) =>
+    b.addEventListener('click', () => {
+      const next = current() === 'dark' ? 'light' : 'dark';
+      root.dataset.theme = next;
+      try {
+        localStorage.setItem('theme', next);
+      } catch {}
+      label();
+    }),
+  );
+
   // Close the menus on a click outside them or on Escape.
   const menus = [...document.querySelectorAll<HTMLDetailsElement>('[data-menu]')];
   document.addEventListener('click', (e) => {
