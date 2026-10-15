@@ -1,0 +1,39 @@
+---
+import TextPage from '../components/TextPage.astro';
+import Icon from '../components/Icon.astro';
+import { SITE } from '../lib/site';
+
+const mail = (subject: string) => `mailto:${SITE.contactEmail}?subject=${encodeURIComponent(subject)}`;
+
+const reasons = [
+  { icon: 'store', title: 'Add your business', text: 'Free basic listing, usually live within 2 working days.', href: '/list-your-business/', cta: 'List your business' },
+  { icon: 'check', title: 'Fix or remove a listing', text: 'Wrong number, moved, closed, or want your listing taken down? Tell us the business name and what to change.', href: mail('Listing correction'), cta: 'Email a correction' },
+  { icon: 'badge', title: 'Featured listings', text: 'Appear at the top of your category and area pages.', href: mail('Featured listing enquiry'), cta: 'Ask about featured' },
+  { icon: 'chat', title: 'Anything else', text: 'Feedback, a service we should add, or a question about the site.', href: mail(`Message for ${SITE.domain}`), cta: 'Send us an email' },
+];
+---
+
+<TextPage
+  title="Contact Us"
+  description="Questions, corrections or a business to add? Email us and we'll reply within 2 working days."
+  path="/contact/"
+>
+  <ul class="grid gap-4 sm:grid-cols-2">
+    {reasons.map((r) => (
+      <li class="flex flex-col rounded-[14px] border border-line bg-card p-5">
+        <span class="grid size-10 place-items-center rounded-lg bg-brand-soft text-brand"><Icon name={r.icon} size={20} /></span>
+        <h2 class="!mt-4 !text-xl">{r.title}</h2>
+        <p class="!mt-1 flex-1 text-[15px] text-muted">{r.text}</p>
+        <a href={r.href} class="btn btn-soft mt-4 self-start !font-semibold !text-brand-ink">{r.cta}</a>
+      </li>
+    ))}
+  </ul>
+
+  <p class="!mt-8">
+    Or write to us directly at <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.
+  </p>
+  <p class="text-[15px] text-muted">
+    We are a directory, not the businesses listed here. For a booking, a price or a complaint about work done, please
+    contact the business directly using the number on its listing.
+  </p>
+</TextPage>

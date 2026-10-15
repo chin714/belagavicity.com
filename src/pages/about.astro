@@ -1,0 +1,39 @@
+---
+import TextPage from '../components/TextPage.astro';
+import { SITE } from '../lib/site';
+---
+
+<TextPage
+  title="About Us"
+  heading="About Belagavi City"
+  description="A free local directory that helps people in Belagavi (Belgaum) find trusted electricians, dentists, plumbers and other services near them."
+  path="/about/"
+>
+  <h2>Why we built this</h2>
+  <p>
+    Finding a good electrician in Tilakwadi or a dentist near Camp usually means asking around, scrolling through
+    national apps that know little about Belagavi, or calling numbers that no longer work. {SITE.domain} lists
+    local businesses area by area, with their phone and WhatsApp numbers, so you can call the right person directly.
+  </p>
+
+  <h2>How it works</h2>
+  <ul>
+    <li><strong>Browse by service or by area.</strong> Every listing shows the locality it is based in and the nearby areas it covers.</li>
+    <li><strong>Contact the business directly.</strong> Call or WhatsApp them from the listing. We don't take bookings and charge no commission to you or to them.</li>
+    <li><strong>Verified listings.</strong> A "Verified" badge means we have spoken to the business and confirmed its details. Other listings are compiled from public sources and may be out of date.</li>
+    <li><strong>Featured listings.</strong> Businesses can pay to appear at the top of their category. These are always marked "Featured".</li>
+  </ul>
+
+  <h2>For businesses</h2>
+  <p>
+    A basic listing is free. If you run a business in Belagavi, <a href="/list-your-business/">send us your details</a>
+    and we'll add you, usually within 2 working days. If your business is listed and something is wrong, or you'd like
+    it removed, <a href="/contact/">contact us</a>.
+  </p>
+
+  <h2>Photos</h2>
+  <p>
+    The photos of Belagavi landmarks on our homepage are from <a href="https://commons.wikimedia.org/">Wikimedia Commons</a>
+    and are used under their Creative Commons licences.
+  </p>
+</TextPage>

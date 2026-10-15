@@ -165,6 +165,18 @@
     100% { opacity: 0; }
   }
 
+  /* Long-form text on the about and policy pages. */
+  .text-page { font-size: 1.0625rem; }
+  .text-page h2 { margin-top: 2.5rem; font-size: 1.625rem; }
+  .text-page h2:first-child { margin-top: 0; }
+  .text-page h3 { margin-top: 1.75rem; font-size: 1.2rem; }
+  .text-page p, .text-page ul, .text-page ol { margin-top: 0.9rem; }
+  .text-page ul { list-style: disc; padding-left: 1.25rem; }
+  .text-page ol { list-style: decimal; padding-left: 1.25rem; }
+  .text-page li + li { margin-top: 0.4rem; }
+  .text-page a { color: var(--color-brand-dark); font-weight: 600; }
+  .text-page a:hover { color: var(--color-brand-ink); }
+
   .no-scrollbar { scrollbar-width: none; }
   .no-scrollbar::-webkit-scrollbar { display: none; }
 }

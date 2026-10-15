@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import { breadcrumbJsonLd } from '../lib/site';
+
+interface Props {
+  title: string;
+  /** Shown as the H1 when it differs from the <title>. */
+  heading?: string;
+  description: string;
+  path: string;
+  /** "15 October 2026". Shown under the heading on policy pages. */
+  updated?: string;
+}
+
+const { title, heading = title, description, path, updated } = Astro.props;
+const crumbs = [{ name: title, href: path }];
+---
+
+<!-- About, contact and policy pages: a heading band and one readable column of text. -->
+<Layout {title} {description} jsonLd={[breadcrumbJsonLd(crumbs)]}>
+  <div class="page-head">
+    <div class="container-page py-10">
+      <Breadcrumbs items={crumbs} />
+      <h1 class="mt-6 text-4xl font-bold sm:text-5xl">{heading}</h1>
+      <p class="mt-3 max-w-2xl text-lg text-muted">{description}</p>
+      {updated && <p class="mt-4 text-sm text-muted">Last updated: {updated}</p>}
+    </div>
+  </div>
+  <div class="container-page py-10">
+    <div class="text-page max-w-3xl">
+      <slot />
+    </div>
+  </div>
+</Layout>

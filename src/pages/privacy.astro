@@ -1,0 +1,68 @@
+---
+import TextPage from '../components/TextPage.astro';
+import { SITE } from '../lib/site';
+---
+
+<TextPage
+  title="Privacy Policy"
+  description={`What information ${SITE.domain} collects, how we use it, and how to ask us to change or remove it.`}
+  path="/privacy/"
+  updated="15 October 2026"
+>
+  <h2>The short version</h2>
+  <ul>
+    <li>You don't need an account to use this site, and we don't ask for your personal details to browse it.</li>
+    <li>We don't use advertising trackers or analytics cookies.</li>
+    <li>When you call or WhatsApp a business from a listing, you are contacting them directly. We don't see or record that conversation.</li>
+    <li>Business owners can ask us to correct or remove their listing at any time.</li>
+  </ul>
+
+  <h2>Information we collect</h2>
+  <h3>When you visit the site</h3>
+  <p>
+    The site is hosted on Cloudflare, which processes basic technical information such as your IP address, browser
+    type and the pages requested, to deliver the site and protect it from abuse. Our fonts are loaded from Google Fonts,
+    so Google also receives your IP address and browser details when a page loads. See
+    <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare's privacy policy</a> and
+    <a href="https://policies.google.com/privacy">Google's privacy policy</a>.
+  </p>
+
+  <h3>When you email us or submit a listing</h3>
+  <p>
+    The "List your business" form opens your own email app; nothing is stored on our site. When you email us we receive
+    what you send, such as your name, business name, phone number and email address. We use it only to reply to you
+    and to create or update your listing.
+  </p>
+
+  <h3>Business listings</h3>
+  <p>
+    Listings contain business information: name, phone and WhatsApp number, address, opening hours, services and a short
+    description. We compile this from information businesses publish themselves (for example on their signboards,
+    websites and map listings) and from what owners tell us. Listings marked "Verified" have been confirmed with the
+    business. We don't list home addresses or personal details that a business hasn't made public.
+  </p>
+
+  <h2>How we use information</h2>
+  <ul>
+    <li>To show business listings so people in Belagavi can contact them.</li>
+    <li>To reply to messages, process listing requests and arrange featured listings.</li>
+    <li>To keep the site secure and working.</li>
+  </ul>
+  <p>We don't sell or rent personal information, and we don't share it with anyone except the service providers above.</p>
+
+  <h2>Your choices</h2>
+  <p>
+    If your business is listed and you want to correct, update or remove it, or you want us to delete emails you've sent
+    us, write to <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>. We'll act on the request within 7
+    working days. Pages can take a few more days to drop out of search engines after we remove them.
+  </p>
+
+  <h2>Grievance contact</h2>
+  <p>
+    For any concern about how we handle personal data, including under India's Digital Personal Data Protection Act, 2023,
+    contact us at <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.
+  </p>
+
+  <h2>Changes to this policy</h2>
+  <p>If we change how we handle information, we'll update this page and the date at the top.</p>
+</TextPage>

@@ -1,0 +1,75 @@
+---
+import TextPage from '../components/TextPage.astro';
+import { SITE } from '../lib/site';
+---
+
+<TextPage
+  title="Terms of Use"
+  description={`The terms for using ${SITE.domain} and for listing a business on it.`}
+  path="/terms/"
+  updated="15 October 2026"
+>
+  <p>
+    By using {SITE.domain} ("the site", "we", "us") you agree to these terms. If you don't agree, please don't use the site.
+  </p>
+
+  <h2>What the site is</h2>
+  <p>
+    {SITE.domain} is a directory of local businesses in Belagavi (Belgaum), Karnataka. We help you find and contact
+    businesses. We are not a party to any arrangement you make with them: we don't provide the services listed, take
+    bookings, handle payments or charge commission.
+  </p>
+
+  <h2>Listings and accuracy</h2>
+  <ul>
+    <li>We try to keep listings accurate, but details such as phone numbers, hours and services can change. Listings are provided "as is", without any guarantee.</li>
+    <li>A "Verified" badge means we confirmed the business's details with them at the time. It is not an endorsement of the quality of their work.</li>
+    <li>Prices shown on category pages are rough local guides, not quotes. Always confirm the price with the business before work starts.</li>
+    <li>"Featured" listings are paid placements and are always labelled.</li>
+  </ul>
+
+  <h2>Dealing with businesses</h2>
+  <p>
+    Any work, purchase or appointment is between you and the business. Check credentials, agree on the price and scope in
+    advance, and keep receipts. We are not responsible for the services, products, conduct or pricing of any business
+    listed on the site.
+  </p>
+
+  <h2>Listing your business</h2>
+  <ul>
+    <li>Information you send us must be accurate, and you must be the owner of the business or authorised to list it.</li>
+    <li>You give us permission to publish the details you send, including your business name, phone numbers, address and description.</li>
+    <li>We may edit listings for clarity and consistency, and may refuse or remove any listing, for example if it is misleading, unlawful or the number no longer works.</li>
+    <li>Basic listings are free. Featured listings are offered on terms we agree with you separately.</li>
+    <li>You can ask us to update or remove your listing at any time through our <a href="/contact/">contact page</a>.</li>
+  </ul>
+
+  <h2>Acceptable use</h2>
+  <p>Please don't:</p>
+  <ul>
+    <li>copy the directory in bulk, or scrape listings to send spam or unsolicited calls;</li>
+    <li>submit false listings or impersonate a business;</li>
+    <li>try to disrupt the site or get around its security.</li>
+  </ul>
+
+  <h2>Content and trademarks</h2>
+  <p>
+    The design, text and arrangement of the site belong to us. Business names, logos and descriptions belong to their
+    owners. Photos credited to Wikimedia Commons are used under their own licences.
+  </p>
+
+  <h2>Limitation of liability</h2>
+  <p>
+    To the extent permitted by law, we are not liable for any loss or damage arising from your use of the site or from
+    dealings with any business you find on it.
+  </p>
+
+  <h2>Changes and governing law</h2>
+  <p>
+    We may update these terms; the date at the top shows when they last changed. These terms are governed by the laws of
+    India, and the courts at Belagavi, Karnataka have jurisdiction over any dispute.
+  </p>
+
+  <h2>Contact</h2>
+  <p>Questions about these terms? Email <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.</p>
+</TextPage>
