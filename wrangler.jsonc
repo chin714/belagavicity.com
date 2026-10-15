@@ -1,0 +1,12 @@
+// Cloudflare Workers config. The site is fully static: Workers serves ./dist as assets.
+// https://docs.astro.build/en/guides/deploy/cloudflare/
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "belagavicity",
+  "compatibility_date": "2026-10-15",
+  "assets": {
+    "directory": "./dist",
+    // Unknown URLs get dist/404.html with a 404 status.
+    "not_found_handling": "404-page"
+  }
+}

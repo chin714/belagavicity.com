@@ -25,3 +25,7 @@ pnpm-debug.log*
 
 # Working call sheet with real phone numbers - keep out of git
 data-import/businesses.csv
+
+# Cloudflare Wrangler
+.wrangler/
+.dev.vars*
