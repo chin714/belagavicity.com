@@ -118,6 +118,7 @@ const jsonLd = [
          landscape photos aren't cut to a narrow slice. From sm up, text overlays the photo. -->
     <div class="relative overflow-hidden bg-night sm:h-[clamp(440px,calc(100svh_-_136px),612px)]">
       <div class="relative h-[280px] overflow-hidden min-[480px]:h-[340px] sm:absolute sm:inset-0 sm:h-auto">
+        <!-- Phones: each photo is 2% wider and starts 2% left of the frame, shifting it left without a gap on the right. -->
         {slides.map((s, i) => (
           <Image
             src={s.src}
@@ -126,7 +127,7 @@ const jsonLd = [
             sizes="100vw"
             loading={i === 0 ? 'eager' : 'lazy'}
             fetchpriority={i === 0 ? 'high' : 'auto'}
-            class="hero-slide absolute inset-0 size-full object-cover"
+            class="hero-slide absolute inset-0 size-full object-cover max-sm:-left-[2%] max-sm:w-[102%]"
             style={`object-position:${s.position};--origin:${s.origin ?? 'center'};--origin-small:${s.originSmall ?? s.origin ?? 'center'};--i:${i}`}
           />
         ))}
