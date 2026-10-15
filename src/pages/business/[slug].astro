@@ -143,4 +143,15 @@ if (!b.sample) {
       </section>
     )}
   </div>
+
+  <!-- Phones: the contact card is far down the page, so keep Call and WhatsApp in reach.
+       Sticky (not fixed) so it stops above the footer instead of covering it. -->
+  <div class="sticky bottom-0 z-10 mt-10 border-t border-line bg-paper/95 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur lg:hidden">
+    <div class:list={['mx-auto grid max-w-md gap-3', b.whatsapp && 'grid-cols-2']}>
+      <a href={`tel:+${intlPhone(b.phone)}`} class="btn btn-call"><Icon name="phone" size={18} /> Call</a>
+      {b.whatsapp && (
+        <a href={`https://wa.me/${intlPhone(b.whatsapp)}`} class="btn btn-wa" rel="nofollow noopener" target="_blank"><Icon name="chat" size={18} /> WhatsApp</a>
+      )}
+    </div>
+  </div>
 </Layout>

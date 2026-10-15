@@ -14,8 +14,9 @@ const year = new Date().getFullYear();
     <ul class="mt-3 flex flex-wrap gap-x-2.5 gap-y-1 text-sm font-semibold">
       {areas.map((a, i) => (
         <li class="flex items-center gap-2.5">
-          {i > 0 && <span class="text-white/35" aria-hidden="true">·</span>}
-          <a href={`/areas/${a.id}/`} class="text-white/90 no-underline hover:text-brand">{a.data.name}</a>
+          <a href={`/areas/${a.id}/`} class="whitespace-nowrap text-white/90 no-underline hover:text-brand">{a.data.name}</a>
+          {/* Dot after each name, so a wrapped line never starts with one. */}
+          {i < areas.length - 1 && <span class="text-white/35" aria-hidden="true">·</span>}
         </li>
       ))}
     </ul>
