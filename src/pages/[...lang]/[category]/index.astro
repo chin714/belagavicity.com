@@ -1,55 +1,59 @@
 ---
 import { getCollection } from 'astro:content';
-import Icon from '../../components/Icon.astro';
-import Layout from '../../layouts/Layout.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import BusinessCard from '../../components/BusinessCard.astro';
-import { getBusinesses, getLiveCategories, breadcrumbJsonLd, faqJsonLd, itemListJsonLd, listNames, servesArea } from '../../lib/site';
+import Icon from '../../../components/Icon.astro';
+import Layout from '../../../layouts/Layout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import BusinessCard from '../../../components/BusinessCard.astro';
+import { getBusinesses, getLiveCategories, breadcrumbJsonLd, faqJsonLd, itemListJsonLd, listNames, servesArea } from '../../../lib/site';
+import { areaText, categoryText, href, ui, withLangs, type Lang } from '../../../lib/i18n';
 
 export async function getStaticPaths() {
   const categories = await getLiveCategories();
-  return categories.map((category) => ({ params: { category: category.id }, props: { category } }));
+  return withLangs(categories.map((category) => ({ params: { category: category.id }, props: { category } })));
 }
 
-const { category } = Astro.props;
+const { category, lang } = Astro.props as { category: Awaited<ReturnType<typeof getLiveCategories>>[number]; lang: Lang };
+const t = ui(lang);
 const c = category.data;
+const ct = categoryText(category, lang);
 const businesses = await getBusinesses({ category: category.id });
 const areas = await getCollection('areas');
 const areasWithListings = areas.filter((a) => businesses.some((b) => servesArea(b, a.id)));
 const missingAreas = areas.filter((a) => !areasWithListings.includes(a));
 
-const crumbs = [{ name: `${c.name} in Belagavi`, href: `/${category.id}/` }];
-const jsonLd = [breadcrumbJsonLd(crumbs), itemListJsonLd(businesses), ...(c.faqs.length ? [faqJsonLd(c.faqs)] : [])];
+const crumbs = [{ name: t.inBelagavi(ct.name), href: href(lang, `/${category.id}/`) }];
+const jsonLd = [breadcrumbJsonLd(crumbs, lang), itemListJsonLd(businesses, lang), ...(ct.faqs.length ? [faqJsonLd(ct.faqs)] : [])];
 
-const areaNames = areasWithListings.map((a) => a.data.name);
-const where = areaNames.length > 3 ? `${areaNames.slice(0, 3).join(', ')} and more` : listNames(areaNames);
+const areaNames = areasWithListings.map((a) => areaText(a, lang).name);
+const where = areaNames.length > 3 ? t.andMore(areaNames.slice(0, 3)) : listNames(areaNames, lang);
 ---
 
 <Layout
-  title={`${c.name} in Belagavi – Call or WhatsApp`}
-  description={`${c.name} in Belagavi (Belgaum)${where ? `, listed by area: ${where}` : ''}. See typical prices and services, then call or WhatsApp directly.`}
+  title={t.categoryTitle(ct.name)}
+  description={t.categoryDescription(ct.name, where)}
   image={`/og/${category.id}.jpg`}
   jsonLd={jsonLd}
+  {lang}
 >
   <section class="page-head">
     <div class="container-page py-10 sm:py-14">
-      <Breadcrumbs items={crumbs} />
+      <Breadcrumbs items={crumbs} {lang} />
       <div class="mt-6 flex items-start gap-4">
         <span class="hidden size-16 shrink-0 place-items-center rounded-2xl bg-brand text-white sm:grid"><Icon name={c.icon} size={32} /></span>
         <div>
-          <h1 class="text-4xl font-bold sm:text-5xl">{c.name} in Belagavi</h1>
-          {c.intro && <p class="mt-3 max-w-2xl text-lg text-muted">{c.intro}</p>}
-          <p class="mt-3 text-sm font-semibold">{businesses.length} listed · {areasWithListings.length} areas covered</p>
-          <p class="mt-1 text-sm text-muted">Serving all of Belagavi (Belgaum), from Camp to Vadgaon.</p>
+          <h1 class="text-4xl font-bold sm:text-5xl">{t.inBelagavi(ct.name)}</h1>
+          {ct.intro && <p class="mt-3 max-w-2xl text-lg text-muted">{ct.intro}</p>}
+          <p class="mt-3 text-sm font-semibold">{t.listedCovered(businesses.length, areasWithListings.length)}</p>
+          <p class="mt-1 text-sm text-muted">{t.servingAll}</p>
         </div>
       </div>
 
       {areasWithListings.length > 0 && (
         <div class="mt-8">
-          <p class="text-xs font-bold uppercase tracking-wider text-muted">By area</p>
+          <p class="text-xs font-bold uppercase tracking-wider text-muted">{t.byArea}</p>
           <ul class="mt-2 flex flex-wrap gap-2">
             {areasWithListings.map((a) => (
-              <li><a href={`/${category.id}/${a.id}/`} class="pill !bg-card border border-line">{a.data.name}</a></li>
+              <li><a href={href(lang, `/${category.id}/${a.id}/`)} class="pill !bg-card border border-line">{areaText(a, lang).name}</a></li>
             ))}
           </ul>
         </div>
@@ -60,19 +64,19 @@ const where = areaNames.length > 3 ? `${areaNames.slice(0, 3).join(', ')} and mo
   <div class="container-page grid gap-12 py-10 lg:grid-cols-[1fr_20rem]">
     <section id="listings">
       <p id="area-note" hidden class="mb-4 rounded-xl border border-line bg-brand-soft/50 p-4 text-sm"></p>
-      <h2 class="text-2xl font-bold">All {c.name.toLowerCase()} in Belagavi</h2>
+      <h2 class="text-2xl font-bold">{t.allInBelagavi(ct)}</h2>
       <div class="mt-5 space-y-4">
-        {businesses.map((b) => <BusinessCard business={b} />)}
+        {businesses.map((b) => <BusinessCard business={b} {lang} />)}
       </div>
     </section>
 
     <aside class="space-y-8">
-      {c.pricing.length > 0 && (
+      {ct.pricing.length > 0 && (
         <section class="rounded-[14px] border border-line bg-card p-5">
-          <h2 class="text-xl font-bold">Typical prices in Belagavi</h2>
+          <h2 class="text-xl font-bold">{t.typicalPrices}</h2>
           <table class="mt-3 w-full text-sm">
             <tbody>
-              {c.pricing.map((p) => (
+              {ct.pricing.map((p) => (
                 <tr class="border-b border-line last:border-0">
                   <td class="py-2 pr-3">{p.job}</td>
                   <td class="py-2 text-right font-semibold whitespace-nowrap">{p.range}</td>
@@ -80,26 +84,26 @@ const where = areaNames.length > 3 ? `${areaNames.slice(0, 3).join(', ')} and mo
               ))}
             </tbody>
           </table>
-          <p class="mt-3 text-xs text-muted">Indicative labour charges. Materials are extra. Always confirm the price before work starts.</p>
+          <p class="mt-3 text-xs text-muted">{t.pricesNote}</p>
         </section>
       )}
 
-      {c.services.length > 0 && (
+      {ct.services.length > 0 && (
         <section>
-          <h2 class="text-xl font-bold">Common jobs</h2>
+          <h2 class="text-xl font-bold">{t.commonJobs}</h2>
           <ul class="mt-3 space-y-1.5 text-sm">
-            {c.services.map((s) => <li class="flex gap-2"><Icon name="check" size={18} class="mt-0.5 shrink-0 text-brand" />{s}</li>)}
+            {ct.services.map((s) => <li class="flex gap-2"><Icon name="check" size={18} class="mt-0.5 shrink-0 text-brand" />{s}</li>)}
           </ul>
         </section>
       )}
     </aside>
   </div>
 
-  {c.faqs.length > 0 && (
+  {ct.faqs.length > 0 && (
     <section class="container-page py-6">
-      <h2 class="text-3xl font-bold">Frequently asked questions</h2>
+      <h2 class="text-3xl font-bold">{t.faqs}</h2>
       <div class="mt-6 max-w-3xl divide-y divide-line rounded-[14px] border border-line bg-card">
-        {c.faqs.map((f) => (
+        {ct.faqs.map((f) => (
           <details class="group p-5">
             <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold">
               {f.q}
@@ -113,12 +117,12 @@ const where = areaNames.length > 3 ? `${areaNames.slice(0, 3).join(', ')} and mo
   )}
 </Layout>
 
-<script is:inline define:vars={{ missing: Object.fromEntries(missingAreas.map((a) => [a.id, a.data.name])), plural: c.name.toLowerCase() }}>
+<script is:inline define:vars={{ notes: Object.fromEntries(missingAreas.map((a) => [a.id, t.noneInArea(ct, areaText(a, lang))])) }}>
   // Arrived from the home page search for an area with no listings yet.
   const area = new URLSearchParams(location.search).get('area');
   const note = document.getElementById('area-note');
-  if (area && missing[area] && note) {
-    note.textContent = `No ${plural} are listed in ${missing[area]} yet. Here are ${plural} from across Belagavi.`;
+  if (area && notes[area] && note) {
+    note.textContent = notes[area];
     note.hidden = false;
   }
 </script>

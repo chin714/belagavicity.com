@@ -1,32 +1,41 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import { getBusinesses, breadcrumbJsonLd, servesArea } from '../../lib/site';
+import Layout from '../../../layouts/Layout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import { getBusinesses, breadcrumbJsonLd, servesArea } from '../../../lib/site';
+import { areaText, getLang, href, ui, withLangs } from '../../../lib/i18n';
 
+export function getStaticPaths() {
+  return withLangs([{ params: {} }]);
+}
+
+const lang = getLang(Astro.params.lang);
+const t = ui(lang);
 const areas = await getCollection('areas');
 const businesses = await getBusinesses();
-const crumbs = [{ name: 'Areas', href: '/areas/' }];
+const crumbs = [{ name: t.areas, href: href(lang, '/areas/') }];
 ---
 
 <Layout
-  title="Areas of Belagavi – Local Services by Locality"
-  description="Browse local businesses and services in every area of Belagavi: Tilakwadi, Camp, Shahapur, Vadgaon, Udyambag and more."
-  jsonLd={[breadcrumbJsonLd(crumbs)]}
+  title={t.areasTitle}
+  description={t.areasDescription}
+  jsonLd={[breadcrumbJsonLd(crumbs, lang)]}
+  {lang}
 >
   <div class="container-page py-10">
-    <Breadcrumbs items={crumbs} />
-    <h1 class="mt-6 text-4xl font-bold sm:text-5xl">Areas of Belagavi</h1>
-    <p class="mt-3 max-w-2xl text-lg text-muted">Pick your locality to see services near you.</p>
+    <Breadcrumbs items={crumbs} {lang} />
+    <h1 class="mt-6 text-4xl font-bold sm:text-5xl">{t.areasHeading}</h1>
+    <p class="mt-3 max-w-2xl text-lg text-muted">{t.areasLede}</p>
     <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {areas.map((a) => {
         const count = businesses.filter((b) => servesArea(b, a.id)).length;
+        const at = areaText(a, lang);
         return (
           <li>
-            <a href={`/areas/${a.id}/`} class="block h-full rounded-[14px] border border-line bg-card p-5 no-underline transition hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgb(18_24_27/0.08)]">
-              <span class="block font-display text-xl font-bold text-ink">{a.data.name}</span>
-              <span class="mt-1 block text-sm text-muted">{a.data.description}</span>
-              <span class="mt-3 block text-xs font-semibold text-brand">{count ? `${count} listings →` : 'Listings coming soon'}</span>
+            <a href={href(lang, `/areas/${a.id}/`)} class="block h-full rounded-[14px] border border-line bg-card p-5 no-underline transition hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgb(18_24_27/0.08)]">
+              <span class="block font-display text-xl font-bold text-ink">{at.name}</span>
+              <span class="mt-1 block text-sm text-muted">{at.description}</span>
+              <span class="mt-3 block text-xs font-semibold text-brand">{count ? t.listingsCount(count) : t.listingsSoon}</span>
             </a>
           </li>
         );

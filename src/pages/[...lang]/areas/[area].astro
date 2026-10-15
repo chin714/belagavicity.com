@@ -1,17 +1,23 @@
 ---
-import { getCollection } from 'astro:content';
-import Icon from '../../components/Icon.astro';
-import Layout from '../../layouts/Layout.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import BusinessCard from '../../components/BusinessCard.astro';
-import { getBusinesses, getLiveCategories, breadcrumbJsonLd, inCategory } from '../../lib/site';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Icon from '../../../components/Icon.astro';
+import Layout from '../../../layouts/Layout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import BusinessCard from '../../../components/BusinessCard.astro';
+import { getBusinesses, getLiveCategories, breadcrumbJsonLd, inCategory } from '../../../lib/site';
+import { LOCALES, areaText, categoryText, href, ui, withLangs, type Lang } from '../../../lib/i18n';
 
 export async function getStaticPaths() {
   const areas = await getCollection('areas');
-  return areas.map((area) => ({ params: { area: area.id }, props: { area } }));
+  return withLangs(areas.map((area) => ({ params: { area: area.id }, props: { area } })));
 }
 
-const { area } = Astro.props;
+const { area, lang } = Astro.props as { area: CollectionEntry<'areas'>; lang: Lang };
+const t = ui(lang);
+const at = areaText(area, lang);
+// The name in the other language, shown under the heading.
+const otherLang: Lang = lang === 'en' ? 'kn' : 'en';
+const otherName = areaText(area, otherLang).name;
 const businesses = await getBusinesses({ area: area.id });
 const live = await getLiveCategories();
 const sections = live
@@ -20,38 +26,39 @@ const sections = live
 const onlySamples = businesses.every((b) => b.data.sample);
 
 const crumbs = [
-  { name: 'Areas', href: '/areas/' },
-  { name: area.data.name, href: `/areas/${area.id}/` },
+  { name: t.areas, href: href(lang, '/areas/') },
+  { name: at.name, href: href(lang, `/areas/${area.id}/`) },
 ];
 ---
 
 <Layout
-  title={`${area.data.name}${area.data.nameKn ? ` (${area.data.nameKn})` : ''}, Belagavi – Local Services`}
-  description={`Local services in ${area.data.name}, Belagavi (Belgaum). ${area.data.description}`}
+  title={t.areaTitle(at, otherName)}
+  description={t.areaDescription(at)}
   noindex={onlySamples}
-  jsonLd={[breadcrumbJsonLd(crumbs)]}
+  jsonLd={[breadcrumbJsonLd(crumbs, lang)]}
+  {lang}
 >
   <div class="container-page py-10">
-    <Breadcrumbs items={crumbs} />
-    <h1 class="mt-6 text-4xl font-bold sm:text-5xl">{area.data.name}</h1>
-    {area.data.nameKn && <p lang="kn" class="mt-1 text-xl font-semibold text-muted">{area.data.nameKn}</p>}
-    <p class="mt-3 max-w-2xl text-lg text-muted">{area.data.description}</p>
+    <Breadcrumbs items={crumbs} {lang} />
+    <h1 class="mt-6 text-4xl font-bold sm:text-5xl">{at.name}</h1>
+    <p lang={LOCALES[otherLang]} class="mt-1 text-xl font-semibold text-muted">{otherName}</p>
+    <p class="mt-3 max-w-2xl text-lg text-muted">{at.description}</p>
 
     {sections.length === 0 ? (
       <div class="mt-10 max-w-2xl rounded-2xl border border-dashed border-line p-8">
-        <p class="font-semibold">No businesses are listed in {area.data.name} yet.</p>
-        <p class="mt-1 text-muted">Run a business here? Be the first to get listed. It's free.</p>
-        <a href="/list-your-business/" class="btn btn-call mt-4">List your business</a>
+        <p class="font-semibold">{t.noneYet(at)}</p>
+        <p class="mt-1 text-muted">{t.beFirst}</p>
+        <a href={href(lang, '/list-your-business/')} class="btn btn-call mt-4">{t.listYourBusiness}</a>
       </div>
     ) : (
       sections.map((s) => (
         <section class="mt-12 max-w-3xl">
           <div class="flex items-baseline justify-between gap-4">
-            <h2 class="text-2xl font-bold"><span class="inline-flex items-center gap-2"><Icon name={s.category.data.icon} size={24} class="text-brand" /> {s.category.data.name}</span></h2>
-            <a href={`/${s.category.id}/${area.id}/`} class="shrink-0 whitespace-nowrap text-sm font-semibold text-brand">View all →</a>
+            <h2 class="text-2xl font-bold"><span class="inline-flex items-center gap-2"><Icon name={s.category.data.icon} size={24} class="text-brand" /> {categoryText(s.category, lang).name}</span></h2>
+            <a href={href(lang, `/${s.category.id}/${area.id}/`)} class="shrink-0 whitespace-nowrap text-sm font-semibold text-brand">{t.viewAll}</a>
           </div>
           <div class="mt-5 space-y-4">
-            {s.items.slice(0, 5).map((b) => <BusinessCard business={b} />)}
+            {s.items.slice(0, 5).map((b) => <BusinessCard business={b} {lang} />)}
           </div>
         </section>
       ))

@@ -1,23 +1,57 @@
 ---
-import TextPage from '../components/TextPage.astro';
-import Icon from '../components/Icon.astro';
-import { SITE } from '../lib/site';
+import TextPage from '../../components/TextPage.astro';
+import Icon from '../../components/Icon.astro';
+import { SITE } from '../../lib/site';
+import { getLang, href, withLangs } from '../../lib/i18n';
 
+export function getStaticPaths() {
+  return withLangs([{ params: {} }]);
+}
+
+const lang = getLang(Astro.params.lang);
+
+// Email subjects stay in English: they're read in our inbox, not by the visitor.
 const mail = (subject: string) => `mailto:${SITE.contactEmail}?subject=${encodeURIComponent(subject)}`;
 
-const reasons = [
-  { icon: 'store', title: 'Add your business', text: 'Free basic listing, usually live within 2 working days.', href: '/list-your-business/', cta: 'List your business' },
-  { icon: 'check', title: 'Fix or remove a listing', text: 'Wrong number, moved, closed, or want your listing taken down? Tell us the business name and what to change.', href: mail('Listing correction'), cta: 'Email a correction' },
-  { icon: 'badge', title: 'Featured listings', text: 'Appear at the top of your category and area pages.', href: mail('Featured listing enquiry'), cta: 'Ask about featured' },
-  { icon: 'chat', title: 'Anything else', text: 'Feedback, a service we should add, or a question about the site.', href: mail(`Message for ${SITE.domain}`), cta: 'Send us an email' },
+const text = {
+  en: {
+    title: 'Contact Us',
+    description: "Questions, corrections or a business to add? Email us and we'll reply within 2 working days.",
+    reasons: [
+      { title: 'Add your business', text: 'Free basic listing, usually live within 2 working days.', cta: 'List your business' },
+      { title: 'Fix or remove a listing', text: 'Wrong number, moved, closed, or want your listing taken down? Tell us the business name and what to change.', cta: 'Email a correction' },
+      { title: 'Featured listings', text: 'Appear at the top of your category and area pages.', cta: 'Ask about featured' },
+      { title: 'Anything else', text: 'Feedback, a service we should add, or a question about the site.', cta: 'Send us an email' },
+    ],
+    direct: ['Or write to us directly at ', '.'],
+    directory:
+      'We are a directory, not the businesses listed here. For a booking, a price or a complaint about work done, please contact the business directly using the number on its listing.',
+  },
+  kn: {
+    title: 'ಸಂಪರ್ಕಿಸಿ',
+    description: 'ಪ್ರಶ್ನೆಗಳಿವೆಯೇ, ತಿದ್ದುಪಡಿ ಬೇಕೇ ಅಥವಾ ಸೇರಿಸಬೇಕಾದ ವ್ಯವಹಾರವಿದೆಯೇ? ನಮಗೆ ಇಮೇಲ್ ಮಾಡಿ; 2 ಕೆಲಸದ ದಿನಗಳಲ್ಲಿ ಉತ್ತರಿಸುತ್ತೇವೆ.',
+    reasons: [
+      { title: 'ನಿಮ್ಮ ವ್ಯವಹಾರ ಸೇರಿಸಿ', text: 'ಉಚಿತ ಮೂಲ ಪಟ್ಟಿ; ಸಾಮಾನ್ಯವಾಗಿ 2 ಕೆಲಸದ ದಿನಗಳಲ್ಲಿ ಪ್ರಕಟವಾಗುತ್ತದೆ.', cta: 'ನಿಮ್ಮ ವ್ಯವಹಾರ ಸೇರಿಸಿ' },
+      { title: 'ಪಟ್ಟಿಯನ್ನು ತಿದ್ದಿ ಅಥವಾ ತೆಗೆದುಹಾಕಿ', text: 'ತಪ್ಪು ನಂಬರ್, ಸ್ಥಳ ಬದಲಾಗಿದೆ, ಮುಚ್ಚಿದೆ, ಅಥವಾ ನಿಮ್ಮ ಪಟ್ಟಿಯನ್ನು ತೆಗೆದುಹಾಕಬೇಕೇ? ವ್ಯವಹಾರದ ಹೆಸರು ಮತ್ತು ಏನು ಬದಲಾಯಿಸಬೇಕು ಎಂದು ತಿಳಿಸಿ.', cta: 'ತಿದ್ದುಪಡಿ ಇಮೇಲ್ ಮಾಡಿ' },
+      { title: 'ವಿಶೇಷ ಪಟ್ಟಿಗಳು', text: 'ನಿಮ್ಮ ವರ್ಗ ಮತ್ತು ಪ್ರದೇಶದ ಪುಟಗಳ ಮೇಲ್ಭಾಗದಲ್ಲಿ ಕಾಣಿಸಿಕೊಳ್ಳಿ.', cta: 'ವಿಶೇಷ ಪಟ್ಟಿಯ ಬಗ್ಗೆ ಕೇಳಿ' },
+      { title: 'ಬೇರೆ ಏನಾದರೂ', text: 'ಅಭಿಪ್ರಾಯ, ನಾವು ಸೇರಿಸಬೇಕಾದ ಸೇವೆ, ಅಥವಾ ಸೈಟ್ ಬಗ್ಗೆ ಪ್ರಶ್ನೆ.', cta: 'ನಮಗೆ ಇಮೇಲ್ ಮಾಡಿ' },
+    ],
+    direct: ['ಅಥವಾ ನೇರವಾಗಿ ', ' ಗೆ ಬರೆಯಿರಿ.'],
+    directory:
+      'ನಾವು ಒಂದು ಡೈರೆಕ್ಟರಿ; ಇಲ್ಲಿ ಪಟ್ಟಿಯಾಗಿರುವ ವ್ಯವಹಾರಗಳಲ್ಲ. ಬುಕಿಂಗ್, ದರ ಅಥವಾ ಮಾಡಿದ ಕೆಲಸದ ಬಗ್ಗೆ ದೂರುಗಳಿಗೆ, ದಯವಿಟ್ಟು ಆ ವ್ಯವಹಾರದ ಪಟ್ಟಿಯಲ್ಲಿರುವ ಸಂಖ್ಯೆಯ ಮೂಲಕ ಅವರನ್ನು ನೇರವಾಗಿ ಸಂಪರ್ಕಿಸಿ.',
+  },
+}[lang];
+
+const links = [
+  { icon: 'store', href: href(lang, '/list-your-business/') },
+  { icon: 'check', href: mail('Listing correction') },
+  { icon: 'badge', href: mail('Featured listing enquiry') },
+  { icon: 'chat', href: mail(`Message for ${SITE.domain}`) },
 ];
+const reasons = text.reasons.map((r, i) => ({ ...r, ...links[i] }));
 ---
 
-<TextPage
-  title="Contact Us"
-  description="Questions, corrections or a business to add? Email us and we'll reply within 2 working days."
-  path="/contact/"
->
+<TextPage title={text.title} description={text.description} path="/contact/" {lang}>
   <ul class="grid gap-4 sm:grid-cols-2">
     {reasons.map((r) => (
       <li class="flex flex-col rounded-[14px] border border-line bg-card p-5">
@@ -30,10 +64,7 @@ const reasons = [
   </ul>
 
   <p class="!mt-8">
-    Or write to us directly at <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.
+    {text.direct[0]}<a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>{text.direct[1]}
   </p>
-  <p class="text-[15px] text-muted">
-    We are a directory, not the businesses listed here. For a booking, a price or a complaint about work done, please
-    contact the business directly using the number on its listing.
-  </p>
+  <p class="text-[15px] text-muted">{text.directory}</p>
 </TextPage>

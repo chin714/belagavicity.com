@@ -1,11 +1,15 @@
 ---
 import type { Crumb } from '../lib/site';
+import { href, ui, type Lang } from '../lib/i18n';
 
 interface Props {
+  /** hrefs already carry the language prefix. */
   items: Crumb[];
+  lang: Lang;
 }
 
-const items = [{ name: 'Home', href: '/' }, ...Astro.props.items];
+const { lang } = Astro.props;
+const items = [{ name: ui(lang).home, href: href(lang, '/') }, ...Astro.props.items];
 ---
 
 <nav aria-label="Breadcrumb" class="text-sm text-muted">

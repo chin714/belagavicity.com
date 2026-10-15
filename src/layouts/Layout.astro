@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE } from '../lib/site';
+import { LANGS, LOCALES, swapLang, ui, type Lang } from '../lib/i18n';
 
 interface Props {
   title: string;
@@ -13,6 +14,7 @@ interface Props {
   jsonLd?: object[];
   /** Homepage only: header floats over the hero photo. */
   overlayHeader?: boolean;
+  lang?: Lang;
 }
 
 const {
@@ -22,14 +24,22 @@ const {
   noindex = false,
   jsonLd = [],
   overlayHeader = false,
+  lang = 'en',
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
 const ogImage = new URL(image, SITE.url).href;
 // Google shows about 60 characters of a title and 160 of a description.
 const branded = `${title} | ${SITE.name}`;
 const fullTitle =
-  title === SITE.name ? `${SITE.name} – ${SITE.tagline}` : branded.length <= 60 ? branded : title;
+  title === SITE.name ? `${SITE.name} – ${ui(lang).tagline}` : branded.length <= 60 ? branded : title;
 const metaDescription = clip(description, 160);
+// Every indexable page exists in both languages; tell search engines about each version.
+const alternates = noindex
+  ? []
+  : [
+      ...LANGS.map((l) => ({ hreflang: LOCALES[l], url: new URL(swapLang(Astro.url.pathname, l), SITE.url).href })),
+      { hreflang: 'x-default', url: new URL(swapLang(Astro.url.pathname, 'en'), SITE.url).href },
+    ];
 
 /** Cuts at the last whole word that fits and adds an ellipsis. */
 function clip(text: string, max: number) {
@@ -40,7 +50,7 @@ function clip(text: string, max: number) {
 ---
 
 <!doctype html>
-<html lang="en-IN">
+<html lang={LOCALES[lang]}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -48,6 +58,7 @@ function clip(text: string, max: number) {
     <meta name="description" content={metaDescription} />
     <!-- Noindex pages get no canonical: on 404.html it would point at /404/, which isn't a real URL. -->
     {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.url} />)}
     <!-- Applies a saved light/dark choice before the page paints, so it doesn't flash. -->
     <script is:inline>
       try {
@@ -64,7 +75,7 @@ function clip(text: string, max: number) {
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={metaDescription} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:locale" content="en_IN" />
+    <meta property="og:locale" content={LOCALES[lang].replace('-', '_')} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -81,14 +92,18 @@ function clip(text: string, max: number) {
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
     />
+    <!-- The Latin fonts have no Kannada letters; Kannada pages add a matching Kannada face. -->
+    {lang === 'kn' && (
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;500;600;700;800&display=swap" />
+    )}
 
     {jsonLd.map((data) => <script type="application/ld+json" set:html={JSON.stringify(data)} />)}
   </head>
   <body class="relative flex min-h-screen flex-col">
-    <Header overlay={overlayHeader} />
+    <Header overlay={overlayHeader} {lang} />
     <main class="flex-1">
       <slot />
     </main>
-    <Footer />
+    <Footer {lang} />
   </body>
 </html>

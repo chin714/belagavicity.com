@@ -1,4 +1,5 @@
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
+import { href, ui, type Lang } from './i18n';
 
 export const SITE = {
   name: 'Belagavi City',
@@ -108,11 +109,12 @@ export function formatPhone(phone: string) {
 
 export type Crumb = { name: string; href: string };
 
-export function breadcrumbJsonLd(items: Crumb[]) {
+/** `items` hrefs already carry the language prefix. */
+export function breadcrumbJsonLd(items: Crumb[], lang: Lang = 'en') {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: [{ name: 'Home', href: '/' }, ...items].map((item, i) => ({
+    itemListElement: [{ name: ui(lang).home, href: href(lang, '/') }, ...items].map((item, i) => ({
       '@type': 'ListItem',
       position: i + 1,
       name: item.name,
@@ -151,20 +153,26 @@ export function lowerFirst(text: string) {
 
 /**
  * "3 electricians", "1 dentist". Categories without a plural noun name
- * ("AC & Appliance Repair") fall back to "1 business" / "3 businesses".
+ * ("AC & Appliance Repair") fall back to "1 business" / "3 businesses"
+ * (in Kannada, "… ಸೇವಾದಾರರು", service providers).
  */
-export function countLabel(category: CollectionEntry<'categories'>['data'], n: number) {
-  if (category.singular === category.name) return `${n} ${n === 1 ? 'business' : 'businesses'}`;
-  return `${n} ${lower(n === 1 ? category.singular : category.name)}`;
+export function countLabel(category: CollectionEntry<'categories'>, n: number, lang: Lang = 'en') {
+  const { name, singular, kn } = category.data;
+  if (lang === 'kn') {
+    if (singular === name) return `${n} ${kn.name} ಸೇವಾದಾರರು`;
+    return `${n} ${n === 1 ? kn.singular : kn.name}`;
+  }
+  if (singular === name) return `${n} ${n === 1 ? 'business' : 'businesses'}`;
+  return `${n} ${lower(n === 1 ? singular : name)}`;
 }
 
 /** ["Camp", "Vadgaon", "Angol"] -> "Camp, Vadgaon and Angol". */
-export function listNames(names: string[]) {
-  return names.length > 1 ? `${names.slice(0, -1).join(', ')} and ${names.at(-1)}` : (names[0] ?? '');
+export function listNames(names: string[], lang: Lang = 'en') {
+  return names.length > 1 ? `${names.slice(0, -1).join(', ')} ${ui(lang).and} ${names.at(-1)}` : (names[0] ?? '');
 }
 
 /** Lists the businesses shown on a page. Sample listings are left out. */
-export function itemListJsonLd(businesses: Business[]) {
+export function itemListJsonLd(businesses: Business[], lang: Lang = 'en') {
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
@@ -174,7 +182,7 @@ export function itemListJsonLd(businesses: Business[]) {
         '@type': 'ListItem',
         position: i + 1,
         name: b.data.name,
-        url: new URL(`/business/${b.id}/`, SITE.url).href,
+        url: new URL(href(lang, `/business/${b.id}/`), SITE.url).href,
       })),
   };
 }

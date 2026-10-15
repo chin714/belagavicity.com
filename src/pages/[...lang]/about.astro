@@ -1,39 +1,86 @@
 ---
-import TextPage from '../components/TextPage.astro';
-import { SITE } from '../lib/site';
+import TextPage from '../../components/TextPage.astro';
+import { SITE } from '../../lib/site';
+import { getLang, href, withLangs } from '../../lib/i18n';
+
+export function getStaticPaths() {
+  return withLangs([{ params: {} }]);
+}
+
+const lang = getLang(Astro.params.lang);
 ---
 
-<TextPage
-  title="About Us"
-  heading="About Belagavi City"
-  description="A free local directory that helps people in Belagavi (Belgaum) find trusted electricians, dentists, plumbers and other services near them."
-  path="/about/"
->
-  <h2>Why we built this</h2>
-  <p>
-    Finding a good electrician in Tilakwadi or a dentist near Camp usually means asking around, scrolling through
-    national apps that know little about Belagavi, or calling numbers that no longer work. {SITE.domain} lists
-    local businesses area by area, with their phone and WhatsApp numbers, so you can call the right person directly.
-  </p>
+{lang === 'kn' ? (
+  <TextPage
+    title="ನಮ್ಮ ಬಗ್ಗೆ"
+    heading="Belagavi City ಬಗ್ಗೆ"
+    description="ಬೆಳಗಾವಿಯ (ಬೆಳಗಾಂ) ಜನರಿಗೆ ಹತ್ತಿರದ ನಂಬಿಕಸ್ಥ ಎಲೆಕ್ಟ್ರಿಷಿಯನ್‌ಗಳು, ದಂತವೈದ್ಯರು, ಪ್ಲಂಬರ್‌ಗಳು ಮತ್ತು ಇತರ ಸೇವೆಗಳನ್ನು ಹುಡುಕಲು ನೆರವಾಗುವ ಉಚಿತ ಸ್ಥಳೀಯ ಡೈರೆಕ್ಟರಿ."
+    path="/about/"
+    {lang}
+  >
+    <h2>ಇದನ್ನು ಏಕೆ ಮಾಡಿದೆವು</h2>
+    <p>
+      ತಿಲಕವಾಡಿಯಲ್ಲಿ ಒಳ್ಳೆಯ ಎಲೆಕ್ಟ್ರಿಷಿಯನ್ ಅಥವಾ ಕ್ಯಾಂಪ್ ಬಳಿ ದಂತವೈದ್ಯರನ್ನು ಹುಡುಕುವುದು ಎಂದರೆ ಸಾಮಾನ್ಯವಾಗಿ ಪರಿಚಯದವರನ್ನು
+      ಕೇಳುವುದು, ಬೆಳಗಾವಿಯ ಬಗ್ಗೆ ಹೆಚ್ಚು ತಿಳಿಯದ ರಾಷ್ಟ್ರೀಯ ಆ್ಯಪ್‌ಗಳಲ್ಲಿ ಹುಡುಕುವುದು, ಅಥವಾ ಕೆಲಸ ಮಾಡದ ನಂಬರ್‌ಗಳಿಗೆ ಕರೆ
+      ಮಾಡುವುದು. {SITE.domain} ಸ್ಥಳೀಯ ವ್ಯವಹಾರಗಳನ್ನು ಅವರ ಫೋನ್ ಮತ್ತು ವಾಟ್ಸಾಪ್ ಸಂಖ್ಯೆಗಳೊಂದಿಗೆ ಪ್ರದೇಶವಾರು ಪಟ್ಟಿ
+      ಮಾಡುತ್ತದೆ; ಹೀಗಾಗಿ ನೀವು ಸರಿಯಾದ ವ್ಯಕ್ತಿಗೆ ನೇರವಾಗಿ ಕರೆ ಮಾಡಬಹುದು.
+    </p>
 
-  <h2>How it works</h2>
-  <ul>
-    <li><strong>Browse by service or by area.</strong> Every listing shows the locality it is based in and the nearby areas it covers.</li>
-    <li><strong>Contact the business directly.</strong> Call or WhatsApp them from the listing. We don't take bookings and charge no commission to you or to them.</li>
-    <li><strong>Verified listings.</strong> A "Verified" badge means we have spoken to the business and confirmed its details. Other listings are compiled from public sources and may be out of date.</li>
-    <li><strong>Featured listings.</strong> Businesses can pay to appear at the top of their category. These are always marked "Featured".</li>
-  </ul>
+    <h2>ಇದು ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ</h2>
+    <ul>
+      <li><strong>ಸೇವೆ ಅಥವಾ ಪ್ರದೇಶದ ಪ್ರಕಾರ ನೋಡಿ.</strong> ಪ್ರತಿ ಪಟ್ಟಿಯಲ್ಲಿ ವ್ಯವಹಾರ ಇರುವ ಪ್ರದೇಶ ಮತ್ತು ಅದು ಸೇವೆ ನೀಡುವ ಹತ್ತಿರದ ಪ್ರದೇಶಗಳನ್ನು ತೋರಿಸಲಾಗುತ್ತದೆ.</li>
+      <li><strong>ವ್ಯವಹಾರವನ್ನು ನೇರವಾಗಿ ಸಂಪರ್ಕಿಸಿ.</strong> ಪಟ್ಟಿಯಿಂದಲೇ ಅವರಿಗೆ ಕರೆ ಅಥವಾ ವಾಟ್ಸಾಪ್ ಮಾಡಿ. ನಾವು ಬುಕಿಂಗ್ ತೆಗೆದುಕೊಳ್ಳುವುದಿಲ್ಲ; ನಿಮ್ಮಿಂದಾಗಲಿ ಅವರಿಂದಾಗಲಿ ಯಾವುದೇ ಕಮಿಷನ್ ಪಡೆಯುವುದಿಲ್ಲ.</li>
+      <li><strong>ಪರಿಶೀಲಿತ ಪಟ್ಟಿಗಳು.</strong> "ಪರಿಶೀಲಿತ" ಬ್ಯಾಡ್ಜ್ ಎಂದರೆ ನಾವು ಆ ವ್ಯವಹಾರದೊಂದಿಗೆ ಮಾತನಾಡಿ ಅವರ ವಿವರಗಳನ್ನು ಖಚಿತಪಡಿಸಿದ್ದೇವೆ. ಇತರ ಪಟ್ಟಿಗಳನ್ನು ಸಾರ್ವಜನಿಕ ಮೂಲಗಳಿಂದ ಸಂಗ್ರಹಿಸಲಾಗಿದೆ; ಅವು ಹಳೆಯದಾಗಿರಬಹುದು.</li>
+      <li><strong>ವಿಶೇಷ ಪಟ್ಟಿಗಳು.</strong> ವ್ಯವಹಾರಗಳು ಶುಲ್ಕ ಪಾವತಿಸಿ ತಮ್ಮ ವರ್ಗದ ಮೇಲ್ಭಾಗದಲ್ಲಿ ಕಾಣಿಸಿಕೊಳ್ಳಬಹುದು. ಇವುಗಳಿಗೆ ಯಾವಾಗಲೂ "ವಿಶೇಷ" ಎಂಬ ಗುರುತು ಇರುತ್ತದೆ.</li>
+    </ul>
 
-  <h2>For businesses</h2>
-  <p>
-    A basic listing is free. If you run a business in Belagavi, <a href="/list-your-business/">send us your details</a>
-    and we'll add you, usually within 2 working days. If your business is listed and something is wrong, or you'd like
-    it removed, <a href="/contact/">contact us</a>.
-  </p>
+    <h2>ವ್ಯವಹಾರಗಳಿಗೆ</h2>
+    <p>
+      ಮೂಲ ಪಟ್ಟಿ ಉಚಿತ. ನೀವು ಬೆಳಗಾವಿಯಲ್ಲಿ ವ್ಯವಹಾರ ನಡೆಸುತ್ತಿದ್ದರೆ, <a href={href(lang, '/list-your-business/')}>ನಿಮ್ಮ ವಿವರಗಳನ್ನು ಕಳುಹಿಸಿ</a>;
+      ಸಾಮಾನ್ಯವಾಗಿ 2 ಕೆಲಸದ ದಿನಗಳಲ್ಲಿ ನಿಮ್ಮನ್ನು ಸೇರಿಸುತ್ತೇವೆ. ನಿಮ್ಮ ವ್ಯವಹಾರದ ಪಟ್ಟಿಯಲ್ಲಿ ಏನಾದರೂ ತಪ್ಪಿದ್ದರೆ ಅಥವಾ ಅದನ್ನು
+      ತೆಗೆದುಹಾಕಬೇಕಿದ್ದರೆ, <a href={href(lang, '/contact/')}>ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ</a>.
+    </p>
 
-  <h2>Photos</h2>
-  <p>
-    The photos of Belagavi landmarks on our homepage are from <a href="https://commons.wikimedia.org/">Wikimedia Commons</a>
-    and are used under their Creative Commons licences.
-  </p>
-</TextPage>
+    <h2>ಚಿತ್ರಗಳು</h2>
+    <p>
+      ನಮ್ಮ ಮುಖಪುಟದಲ್ಲಿರುವ ಬೆಳಗಾವಿಯ ಹೆಗ್ಗುರುತುಗಳ ಚಿತ್ರಗಳನ್ನು <a href="https://commons.wikimedia.org/">ವಿಕಿಮೀಡಿಯ ಕಾಮನ್ಸ್</a>‌ನಿಂದ
+      ಪಡೆಯಲಾಗಿದ್ದು, ಅವುಗಳ ಕ್ರಿಯೇಟಿವ್ ಕಾಮನ್ಸ್ ಪರವಾನಗಿಯಡಿ ಬಳಸಲಾಗಿದೆ.
+    </p>
+  </TextPage>
+) : (
+  <TextPage
+    title="About Us"
+    heading="About Belagavi City"
+    description="A free local directory that helps people in Belagavi (Belgaum) find trusted electricians, dentists, plumbers and other services near them."
+    path="/about/"
+    {lang}
+  >
+    <h2>Why we built this</h2>
+    <p>
+      Finding a good electrician in Tilakwadi or a dentist near Camp usually means asking around, scrolling through
+      national apps that know little about Belagavi, or calling numbers that no longer work. {SITE.domain} lists
+      local businesses area by area, with their phone and WhatsApp numbers, so you can call the right person directly.
+    </p>
+
+    <h2>How it works</h2>
+    <ul>
+      <li><strong>Browse by service or by area.</strong> Every listing shows the locality it is based in and the nearby areas it covers.</li>
+      <li><strong>Contact the business directly.</strong> Call or WhatsApp them from the listing. We don't take bookings and charge no commission to you or to them.</li>
+      <li><strong>Verified listings.</strong> A "Verified" badge means we have spoken to the business and confirmed its details. Other listings are compiled from public sources and may be out of date.</li>
+      <li><strong>Featured listings.</strong> Businesses can pay to appear at the top of their category. These are always marked "Featured".</li>
+    </ul>
+
+    <h2>For businesses</h2>
+    <p>
+      A basic listing is free. If you run a business in Belagavi, <a href="/list-your-business/">send us your details</a>
+      and we'll add you, usually within 2 working days. If your business is listed and something is wrong, or you'd like
+      it removed, <a href="/contact/">contact us</a>.
+    </p>
+
+    <h2>Photos</h2>
+    <p>
+      The photos of Belagavi landmarks on our homepage are from <a href="https://commons.wikimedia.org/">Wikimedia Commons</a>
+      and are used under their Creative Commons licences.
+    </p>
+  </TextPage>
+)}

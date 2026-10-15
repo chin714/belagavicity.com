@@ -26,6 +26,8 @@ function noindexPaths() {
   for (const a of areas) {
     if (!hasReal((r) => r.area === a.id)) paths.add(`/areas/${a.id}/`);
   }
+  // Kannada copies of the same pages, under /kn/.
+  for (const p of [...paths]) paths.add(`/kn${p}`);
   return paths;
 }
 
@@ -38,5 +40,11 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  integrations: [sitemap({ filter: (page) => !excluded.has(new URL(page).pathname) })],
+  integrations: [
+    sitemap({
+      filter: (page) => !excluded.has(new URL(page).pathname),
+      // Lists each page's English and Kannada versions as alternates of each other.
+      i18n: { defaultLocale: 'en', locales: { en: 'en-IN', kn: 'kn-IN' } },
+    }),
+  ],
 });

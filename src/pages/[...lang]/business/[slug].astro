@@ -1,20 +1,25 @@
 ---
-import { getCollection } from 'astro:content';
-import Icon from '../../components/Icon.astro';
-import Layout from '../../layouts/Layout.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import BusinessCard from '../../components/BusinessCard.astro';
-import { SITE, getArea, getBusinesses, getCategory, intlPhone, formatPhone, breadcrumbJsonLd, lower, CITY } from '../../lib/site';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Icon from '../../../components/Icon.astro';
+import Layout from '../../../layouts/Layout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import BusinessCard from '../../../components/BusinessCard.astro';
+import { SITE, getArea, getBusinesses, getCategory, intlPhone, formatPhone, breadcrumbJsonLd, lower, CITY } from '../../../lib/site';
+import { areaText, businessText, categoryText, href, ui, withLangs, type Lang } from '../../../lib/i18n';
 
 export async function getStaticPaths() {
   const businesses = await getCollection('businesses');
-  return businesses.map((business) => ({ params: { slug: business.id }, props: { business } }));
+  return withLangs(businesses.map((business) => ({ params: { slug: business.id }, props: { business } })));
 }
 
-const { business } = Astro.props;
+const { business, lang } = Astro.props as { business: CollectionEntry<'businesses'>; lang: Lang };
+const t = ui(lang);
 const b = business.data;
+const bt = businessText(business, lang);
 const category = await getCategory(b.category.id);
+const ct = categoryText(category, lang);
 const area = await getArea(b.area.id);
+const at = areaText(area, lang);
 const alsoServes = await Promise.all(b.alsoServes.map((a) => getArea(a.id)));
 // Only link to categories that have pages.
 const alsoListedIn = (await Promise.all(b.alsoListedIn.map((c) => getCategory(c.id)))).filter((c) => c.data.live);
@@ -23,39 +28,36 @@ const related = (await getBusinesses({ category: category.id, area: area.id }))
   .slice(0, 3);
 
 const crumbs = [
-  { name: `${category.data.name} in Belagavi`, href: `/${category.id}/` },
-  { name: area.data.name, href: `/${category.id}/${area.id}/` },
-  { name: b.name, href: `/business/${business.id}/` },
+  { name: t.inBelagavi(ct.name), href: href(lang, `/${category.id}/`) },
+  { name: at.name, href: href(lang, `/${category.id}/${area.id}/`) },
+  { name: b.name, href: href(lang, `/business/${business.id}/`) },
 ];
 
 // Keep the title within ~60 characters: drop the area, then the category, if needed.
-const singular = category.data.singular;
-const title = [
-  `${b.name} – ${singular} in ${area.data.name}, Belagavi`,
-  `${b.name} – ${singular}, Belagavi`,
-].find((t) => t.length <= 60) ?? `${b.name}, Belagavi`;
+const titles = t.businessTitles(b.name, ct.singular, at);
+const title = titles.find((x) => x.length <= 60) ?? titles.at(-1)!;
 
 // Add services while the description stays within 160 characters.
-const intro = `${b.name}, ${lower(singular)} in ${area.data.name}, Belagavi.`;
-const outro = ' Call or WhatsApp directly.';
+const intro = t.businessIntro(b.name, lower(ct.singular), at);
+const outro = t.businessOutro;
 let services = '';
-for (const s of b.services.slice(0, 3)) {
+for (const s of bt.services.slice(0, 3)) {
   const next = services ? `${services}, ${s}` : ` ${s}`;
   if ((intro + next + '.' + outro).length > 160) break;
   services = next;
 }
 const description = intro + (services && `${services}.`) + outro;
 
-const jsonLd: object[] = [breadcrumbJsonLd(crumbs)];
+const jsonLd: object[] = [breadcrumbJsonLd(crumbs, lang)];
 // Never publish structured data for placeholder listings.
 if (!b.sample) {
   jsonLd.push({
     '@context': 'https://schema.org',
     '@type': category.data.schemaType,
     name: b.name,
-    description: b.description,
+    description: bt.description,
     telephone: `+${intlPhone(b.phone)}`,
-    url: new URL(`/business/${business.id}/`, SITE.url).href,
+    url: new URL(href(lang, `/business/${business.id}/`), SITE.url).href,
     address: {
       '@type': 'PostalAddress',
       streetAddress: b.address,
@@ -76,69 +78,70 @@ if (!b.sample) {
   image={`/og/business/${business.id}.jpg`}
   noindex={b.sample}
   jsonLd={jsonLd}
+  {lang}
 >
   <div class="container-page py-10">
-    <Breadcrumbs items={crumbs} />
+    <Breadcrumbs items={crumbs} {lang} />
 
     {b.sample && (
       <p class="mt-6 rounded-xl border border-dashed border-muted bg-card p-4 text-sm text-muted">
-        <strong class="text-ink">Sample listing.</strong> This is placeholder data used while the site is being built. It is not a real business.
+        <strong class="text-ink">{t.sampleListing}.</strong> {t.sampleNotice}
       </p>
     )}
 
     <div class="mt-6 grid gap-10 lg:grid-cols-[1fr_22rem]">
       <div>
         <div class="flex flex-wrap gap-2">
-          <span class="chip bg-ink text-paper"><Icon name={category.data.icon} size={13} /> {category.data.singular}</span>
-          {b.featured && <span class="chip bg-brand-soft text-brand-ink">Featured</span>}
-          {b.verified && <span class="chip bg-leaf-soft text-leaf"><Icon name="badge" size={13} /> Verified</span>}
+          <span class="chip bg-ink text-paper"><Icon name={category.data.icon} size={13} /> {ct.singular}</span>
+          {b.featured && <span class="chip bg-brand-soft text-brand-ink">{t.featured}</span>}
+          {b.verified && <span class="chip bg-leaf-soft text-leaf"><Icon name="badge" size={13} /> {t.verified}</span>}
         </div>
         <h1 class="mt-3 text-4xl font-bold sm:text-5xl">{b.name}</h1>
-        <p class="mt-2 text-muted"><Icon name="pin" size={16} class="inline -mt-0.5" /> {area.data.name}, Belagavi{b.yearsInBusiness && <> · {b.yearsInBusiness} years in business</>}</p>
-        <p class="mt-6 max-w-2xl text-lg">{b.description}</p>
+        <p class="mt-2 text-muted"><Icon name="pin" size={16} class="inline -mt-0.5" /> {at.name}, {t.belagavi}{b.yearsInBusiness && <> · {t.yearsInBusiness(b.yearsInBusiness)}</>}</p>
+        <p class="mt-6 max-w-2xl text-lg">{bt.description}</p>
 
-        {b.services.length > 0 && (
+        {bt.services.length > 0 && (
           <section class="mt-10">
-            <h2 class="text-2xl font-bold">Services</h2>
+            <h2 class="text-2xl font-bold">{t.services}</h2>
             <ul class="mt-4 grid gap-2 sm:grid-cols-2">
-              {b.services.map((s) => <li class="flex gap-2 rounded-lg border border-line bg-card p-3"><Icon name="check" size={18} class="mt-0.5 shrink-0 text-brand" />{s}</li>)}
+              {bt.services.map((s) => <li class="flex gap-2 rounded-lg border border-line bg-card p-3"><Icon name="check" size={18} class="mt-0.5 shrink-0 text-brand" />{s}</li>)}
             </ul>
           </section>
         )}
       </div>
 
       <aside class="h-fit space-y-4 rounded-[20px] border border-line bg-card p-6 shadow-[0_24px_48px_rgb(18_24_27/0.08)] lg:sticky lg:top-24">
-        <a href={`tel:+${intlPhone(b.phone)}`} class="btn btn-call w-full py-3 text-base"><Icon name="phone" size={18} /> Call {formatPhone(b.phone)}</a>
+        <a href={`tel:+${intlPhone(b.phone)}`} class="btn btn-call w-full py-3 text-base"><Icon name="phone" size={18} /> {t.callNumber(formatPhone(b.phone))}</a>
         {b.whatsapp && (
-          <a href={`https://wa.me/${intlPhone(b.whatsapp)}`} class="btn btn-wa w-full py-3 text-base" rel="nofollow noopener" target="_blank"><Icon name="chat" size={18} /> Message on WhatsApp</a>
+          <a href={`https://wa.me/${intlPhone(b.whatsapp)}`} class="btn btn-wa w-full py-3 text-base" rel="nofollow noopener" target="_blank"><Icon name="chat" size={18} /> {t.messageWhatsApp}</a>
         )}
         <dl class="space-y-3 pt-2 text-sm">
-          <div><dt class="font-semibold">Address</dt><dd class="text-muted">{b.address}</dd></div>
+          <div><dt class="font-semibold">{t.address}</dt><dd class="text-muted">{b.address}</dd></div>
           {alsoServes.length > 0 && (
             <div>
-              <dt class="font-semibold">Also serves</dt>
-              <dd class="text-muted">{alsoServes.map((a, i) => <>{i > 0 && ', '}<a href={`/${category.id}/${a.id}/`} class="text-brand">{a.data.name}</a></>)}</dd>
+              <dt class="font-semibold">{t.alsoServes}</dt>
+              <dd class="text-muted">{alsoServes.map((a, i) => <>{i > 0 && ', '}<a href={href(lang, `/${category.id}/${a.id}/`)} class="text-brand">{areaText(a, lang).name}</a></>)}</dd>
             </div>
           )}
           {alsoListedIn.length > 0 && (
             <div>
-              <dt class="font-semibold">Also listed in</dt>
-              <dd class="text-muted">{alsoListedIn.map((c, i) => <>{i > 0 && ', '}<a href={`/${c.id}/${area.id}/`} class="text-brand">{c.data.name}</a></>)}</dd>
+              <dt class="font-semibold">{t.alsoListedIn}</dt>
+              <dd class="text-muted">{alsoListedIn.map((c, i) => <>{i > 0 && ', '}<a href={href(lang, `/${c.id}/${area.id}/`)} class="text-brand">{categoryText(c, lang).name}</a></>)}</dd>
             </div>
           )}
-          {b.hours && <div><dt class="font-semibold">Hours</dt><dd class="text-muted">{b.hours}</dd></div>}
-          {b.languages.length > 0 && <div><dt class="font-semibold">Languages</dt><dd class="text-muted">{b.languages.join(', ')}</dd></div>}
+          {bt.hours && <div><dt class="font-semibold">{t.hours}</dt><dd class="text-muted">{bt.hours}</dd></div>}
+          {b.languages.length > 0 && <div><dt class="font-semibold">{t.languages}</dt><dd class="text-muted">{b.languages.map((l) => t.languageNames[l]).join(', ')}</dd></div>}
         </dl>
-        {b.mapUrl && <a href={b.mapUrl} class="btn btn-soft w-full" rel="noopener" target="_blank"><Icon name="pin" size={18} class="text-brand" /> Open in Google Maps</a>}
-        <p class="border-t border-line pt-4 text-xs text-muted">Mention belagavicity.com when you call. Is this information wrong? <a href="/list-your-business/" class="text-brand">Tell us</a>.</p>
+        {b.mapUrl && <a href={b.mapUrl} class="btn btn-soft w-full" rel="noopener" target="_blank"><Icon name="pin" size={18} class="text-brand" /> {t.openMaps}</a>}
+        <p class="border-t border-line pt-4 text-xs text-muted">{t.mentionUs} <a href={href(lang, '/list-your-business/')} class="text-brand">{t.tellUs}</a>.</p>
       </aside>
     </div>
 
     {related.length > 0 && (
       <section class="mt-16 max-w-3xl">
-        <h2 class="text-2xl font-bold">Other {category.data.name.toLowerCase()} in {area.data.name}</h2>
+        <h2 class="text-2xl font-bold">{t.otherInArea(ct, at)}</h2>
         <div class="mt-5 space-y-4">
-          {related.map((r) => <BusinessCard business={r} />)}
+          {related.map((r) => <BusinessCard business={r} {lang} />)}
         </div>
       </section>
     )}
@@ -148,9 +151,9 @@ if (!b.sample) {
        Sticky (not fixed) so it stops above the footer instead of covering it. -->
   <div class="sticky bottom-0 z-10 mt-10 border-t border-line bg-paper/95 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur lg:hidden">
     <div class:list={['mx-auto grid max-w-md gap-3', b.whatsapp && 'grid-cols-2']}>
-      <a href={`tel:+${intlPhone(b.phone)}`} class="btn btn-call"><Icon name="phone" size={18} /> Call</a>
+      <a href={`tel:+${intlPhone(b.phone)}`} class="btn btn-call"><Icon name="phone" size={18} /> {t.call}</a>
       {b.whatsapp && (
-        <a href={`https://wa.me/${intlPhone(b.whatsapp)}`} class="btn btn-wa" rel="nofollow noopener" target="_blank"><Icon name="chat" size={18} /> WhatsApp</a>
+        <a href={`https://wa.me/${intlPhone(b.whatsapp)}`} class="btn btn-wa" rel="nofollow noopener" target="_blank"><Icon name="chat" size={18} /> {t.whatsapp}</a>
       )}
     </div>
   </div>

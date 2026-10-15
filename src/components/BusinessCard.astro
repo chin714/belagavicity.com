@@ -2,19 +2,25 @@
 import Icon from './Icon.astro';
 import type { Business } from '../lib/site';
 import { getArea, getCategory, intlPhone } from '../lib/site';
+import { areaText, businessText, categoryText, href, ui, type Lang } from '../lib/i18n';
 
 interface Props {
   business: Business;
   /** "row" for listing pages, "tile" for the homepage carousel. */
   variant?: 'row' | 'tile';
   index?: number;
+  lang: Lang;
 }
 
-const { business, variant = 'row', index = 0 } = Astro.props;
+const { business, variant = 'row', index = 0, lang } = Astro.props;
+const t = ui(lang);
 const b = business.data;
 const area = await getArea(b.area.id);
 const category = await getCategory(b.category.id);
-const href = `/business/${business.id}/`;
+const areaName = areaText(area, lang).name;
+const singular = categoryText(category, lang).singular;
+const services = businessText(business, lang).services;
+const link = href(lang, `/business/${business.id}/`);
 const tel = `tel:+${intlPhone(b.phone)}`;
 
 // Tile header colours, cycled so neighbouring cards differ.
@@ -29,22 +35,22 @@ const tileBgs = [
 
 {variant === 'tile' ? (
   <article class="flex w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-[14px] border border-line bg-card">
-    <a href={href} class:list={['relative flex h-[150px] items-center justify-center bg-gradient-to-br text-white', tileBgs[index % tileBgs.length]]} tabindex="-1" aria-hidden="true">
+    <a href={link} class:list={['relative flex h-[150px] items-center justify-center bg-gradient-to-br text-white', tileBgs[index % tileBgs.length]]} tabindex="-1" aria-hidden="true">
       <Icon name={category.data.icon} size={44} strokeWidth={1.6} />
       {b.verified && (
         <span class="absolute top-2.5 right-2.5 inline-flex items-center gap-1 rounded-full bg-white px-2.5 py-1 text-xs font-bold text-night shadow-sm">
-          <Icon name="badge" size={14} class="text-[#2f6b4f]" /> Verified
+          <Icon name="badge" size={14} class="text-[#2f6b4f]" /> {t.verified}
         </span>
       )}
     </a>
     <div class="flex flex-1 flex-col p-4">
       <h3 class="text-[17px] leading-snug">
-        <a href={href} class="text-ink no-underline hover:text-brand">{b.name}</a>
+        <a href={link} class="text-ink no-underline hover:text-brand">{b.name}</a>
       </h3>
-      <p class="mt-1 text-[13px] text-muted">{category.data.singular} · {area.data.name}</p>
+      <p class="mt-1 text-[13px] text-muted">{singular} · {areaName}</p>
       <div class="mt-auto flex items-center justify-between pt-3">
-        <span class="pill !py-1 !text-xs !font-medium text-muted">{b.sample ? 'Sample listing' : area.data.name}</span>
-        <a href={tel} class="text-[13px] font-semibold text-brand underline">Call</a>
+        <span class="pill !py-1 !text-xs !font-medium text-muted">{b.sample ? t.sampleListing : areaName}</span>
+        <a href={tel} class="text-[13px] font-semibold text-brand underline">{t.call}</a>
       </div>
     </div>
   </article>
@@ -56,23 +62,23 @@ const tileBgs = [
     <div class="min-w-0 flex-1">
       <div class="flex flex-wrap items-center gap-2">
         <h3 class="text-lg leading-snug">
-          <a href={href} class="text-ink no-underline hover:text-brand">{b.name}</a>
+          <a href={link} class="text-ink no-underline hover:text-brand">{b.name}</a>
         </h3>
-        {b.verified && <span class="chip bg-leaf-soft text-leaf"><Icon name="badge" size={13} /> Verified</span>}
-        {b.featured && <span class="chip bg-brand-soft text-brand-ink">Featured</span>}
-        {b.sample && <span class="chip border border-dashed border-muted/50 text-muted">Sample</span>}
+        {b.verified && <span class="chip bg-leaf-soft text-leaf"><Icon name="badge" size={13} /> {t.verified}</span>}
+        {b.featured && <span class="chip bg-brand-soft text-brand-ink">{t.featured}</span>}
+        {b.sample && <span class="chip border border-dashed border-muted/50 text-muted">{t.sample}</span>}
       </div>
       <p class="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] text-muted">
-        <span class="inline-flex items-center gap-1"><Icon name="pin" size={14} /> {area.data.name}</span>
-        {b.yearsInBusiness && <span>{b.yearsInBusiness} yrs in business</span>}
-        {b.languages.length > 0 && <span class="inline-flex items-center gap-1"><Icon name="language" size={14} /> {b.languages.join(', ')}</span>}
+        <span class="inline-flex items-center gap-1"><Icon name="pin" size={14} /> {areaName}</span>
+        {b.yearsInBusiness && <span>{t.yrsInBusiness(b.yearsInBusiness)}</span>}
+        {b.languages.length > 0 && <span class="inline-flex items-center gap-1"><Icon name="language" size={14} /> {b.languages.map((l) => t.languageNames[l]).join(', ')}</span>}
       </p>
-      {b.services.length > 0 && <p class="mt-2 text-sm">{b.services.slice(0, 3).join(' · ')}</p>}
+      {services.length > 0 && <p class="mt-2 text-sm">{services.slice(0, 3).join(' · ')}</p>}
     </div>
     <div class="flex shrink-0 gap-2">
-      <a href={tel} class="btn btn-call flex-1"><Icon name="phone" size={16} /> Call</a>
+      <a href={tel} class="btn btn-call flex-1"><Icon name="phone" size={16} /> {t.call}</a>
       {b.whatsapp && (
-        <a href={`https://wa.me/${intlPhone(b.whatsapp)}`} class="btn btn-wa flex-1" rel="nofollow noopener" target="_blank"><Icon name="chat" size={16} /> WhatsApp</a>
+        <a href={`https://wa.me/${intlPhone(b.whatsapp)}`} class="btn btn-wa flex-1" rel="nofollow noopener" target="_blank"><Icon name="chat" size={16} /> {t.whatsapp}</a>
       )}
     </div>
   </article>

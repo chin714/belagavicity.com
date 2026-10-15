@@ -1,68 +1,148 @@
 ---
-import TextPage from '../components/TextPage.astro';
-import { SITE } from '../lib/site';
+import TextPage from '../../components/TextPage.astro';
+import { SITE } from '../../lib/site';
+import { getLang, withLangs } from '../../lib/i18n';
+
+export function getStaticPaths() {
+  return withLangs([{ params: {} }]);
+}
+
+const lang = getLang(Astro.params.lang);
+const email = SITE.contactEmail;
 ---
 
-<TextPage
-  title="Privacy Policy"
-  description={`What information ${SITE.domain} collects, how we use it, and how to ask us to change or remove it.`}
-  path="/privacy/"
-  updated="15 October 2026"
->
-  <h2>The short version</h2>
-  <ul>
-    <li>You don't need an account to use this site, and we don't ask for your personal details to browse it.</li>
-    <li>We don't use advertising trackers or analytics cookies.</li>
-    <li>When you call or WhatsApp a business from a listing, you are contacting them directly. We don't see or record that conversation.</li>
-    <li>Business owners can ask us to correct or remove their listing at any time.</li>
-  </ul>
+{lang === 'kn' ? (
+  <TextPage
+    title="ಗೌಪ್ಯತಾ ನೀತಿ"
+    description={`${SITE.domain} ಯಾವ ಮಾಹಿತಿಯನ್ನು ಸಂಗ್ರಹಿಸುತ್ತದೆ, ಅದನ್ನು ಹೇಗೆ ಬಳಸುತ್ತೇವೆ, ಮತ್ತು ಅದನ್ನು ಬದಲಿಸಲು ಅಥವಾ ತೆಗೆದುಹಾಕಲು ಹೇಗೆ ಕೇಳಬಹುದು.`}
+    path="/privacy/"
+    updated="15 ಅಕ್ಟೋಬರ್ 2026"
+    {lang}
+  >
+    <h2>ಸಂಕ್ಷಿಪ್ತವಾಗಿ</h2>
+    <ul>
+      <li>ಈ ಸೈಟ್ ಬಳಸಲು ಖಾತೆ ಬೇಕಾಗಿಲ್ಲ, ಮತ್ತು ಸೈಟ್ ನೋಡಲು ನಾವು ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ವಿವರಗಳನ್ನು ಕೇಳುವುದಿಲ್ಲ.</li>
+      <li>ನಾವು ಜಾಹೀರಾತು ಟ್ರ್ಯಾಕರ್‌ಗಳು ಅಥವಾ ಅನಾಲಿಟಿಕ್ಸ್ ಕುಕೀಗಳನ್ನು ಬಳಸುವುದಿಲ್ಲ.</li>
+      <li>ಪಟ್ಟಿಯಿಂದ ನೀವು ವ್ಯವಹಾರಕ್ಕೆ ಕರೆ ಅಥವಾ ವಾಟ್ಸಾಪ್ ಮಾಡಿದಾಗ, ನೀವು ಅವರನ್ನು ನೇರವಾಗಿ ಸಂಪರ್ಕಿಸುತ್ತೀರಿ. ಆ ಸಂಭಾಷಣೆಯನ್ನು ನಾವು ನೋಡುವುದಿಲ್ಲ ಅಥವಾ ದಾಖಲಿಸುವುದಿಲ್ಲ.</li>
+      <li>ವ್ಯವಹಾರದ ಮಾಲೀಕರು ಯಾವಾಗ ಬೇಕಾದರೂ ತಮ್ಮ ಪಟ್ಟಿಯನ್ನು ತಿದ್ದಲು ಅಥವಾ ತೆಗೆದುಹಾಕಲು ಕೇಳಬಹುದು.</li>
+    </ul>
 
-  <h2>Information we collect</h2>
-  <h3>When you visit the site</h3>
-  <p>
-    The site is hosted on Cloudflare, which processes basic technical information such as your IP address, browser
-    type and the pages requested, to deliver the site and protect it from abuse. Our fonts are loaded from Google Fonts,
-    so Google also receives your IP address and browser details when a page loads. See
-    <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare's privacy policy</a> and
-    <a href="https://policies.google.com/privacy">Google's privacy policy</a>.
-  </p>
+    <h2>ನಾವು ಸಂಗ್ರಹಿಸುವ ಮಾಹಿತಿ</h2>
+    <h3>ನೀವು ಸೈಟ್‌ಗೆ ಭೇಟಿ ನೀಡಿದಾಗ</h3>
+    <p>
+      ಈ ಸೈಟ್ Cloudflare ನಲ್ಲಿ ಹೋಸ್ಟ್ ಆಗಿದೆ. ಸೈಟ್ ಅನ್ನು ತಲುಪಿಸಲು ಮತ್ತು ದುರುಪಯೋಗದಿಂದ ರಕ್ಷಿಸಲು Cloudflare ನಿಮ್ಮ IP ವಿಳಾಸ,
+      ಬ್ರೌಸರ್ ಪ್ರಕಾರ ಮತ್ತು ಕೇಳಿದ ಪುಟಗಳಂತಹ ಮೂಲ ತಾಂತ್ರಿಕ ಮಾಹಿತಿಯನ್ನು ಸಂಸ್ಕರಿಸುತ್ತದೆ. ನಮ್ಮ ಅಕ್ಷರಶೈಲಿಗಳು (ಫಾಂಟ್‌ಗಳು) Google
+      Fonts ನಿಂದ ಲೋಡ್ ಆಗುತ್ತವೆ, ಆದ್ದರಿಂದ ಪುಟ ತೆರೆದಾಗ Google ಕೂಡ ನಿಮ್ಮ IP ವಿಳಾಸ ಮತ್ತು ಬ್ರೌಸರ್ ವಿವರಗಳನ್ನು ಪಡೆಯುತ್ತದೆ.
+      <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare ನ ಗೌಪ್ಯತಾ ನೀತಿ</a> ಮತ್ತು
+      <a href="https://policies.google.com/privacy">Google ನ ಗೌಪ್ಯತಾ ನೀತಿ</a> ನೋಡಿ.
+    </p>
 
-  <h3>When you email us or submit a listing</h3>
-  <p>
-    The "List your business" form opens your own email app; nothing is stored on our site. When you email us we receive
-    what you send, such as your name, business name, phone number and email address. We use it only to reply to you
-    and to create or update your listing.
-  </p>
+    <h3>ನೀವು ನಮಗೆ ಇಮೇಲ್ ಮಾಡಿದಾಗ ಅಥವಾ ಪಟ್ಟಿ ಕಳುಹಿಸಿದಾಗ</h3>
+    <p>
+      "ನಿಮ್ಮ ವ್ಯವಹಾರ ಸೇರಿಸಿ" ಫಾರ್ಮ್ ನಿಮ್ಮದೇ ಇಮೇಲ್ ಆ್ಯಪ್ ಅನ್ನು ತೆರೆಯುತ್ತದೆ; ನಮ್ಮ ಸೈಟ್‌ನಲ್ಲಿ ಏನನ್ನೂ ಸಂಗ್ರಹಿಸಲಾಗುವುದಿಲ್ಲ. ನೀವು
+      ಇಮೇಲ್ ಮಾಡಿದಾಗ, ನಿಮ್ಮ ಹೆಸರು, ವ್ಯವಹಾರದ ಹೆಸರು, ಫೋನ್ ಸಂಖ್ಯೆ ಮತ್ತು ಇಮೇಲ್ ವಿಳಾಸದಂತಹ ನೀವು ಕಳುಹಿಸಿದ ಮಾಹಿತಿ ನಮಗೆ
+      ತಲುಪುತ್ತದೆ. ಅದನ್ನು ನಿಮಗೆ ಉತ್ತರಿಸಲು ಮತ್ತು ನಿಮ್ಮ ಪಟ್ಟಿಯನ್ನು ರಚಿಸಲು ಅಥವಾ ನವೀಕರಿಸಲು ಮಾತ್ರ ಬಳಸುತ್ತೇವೆ.
+    </p>
 
-  <h3>Business listings</h3>
-  <p>
-    Listings contain business information: name, phone and WhatsApp number, address, opening hours, services and a short
-    description. We compile this from information businesses publish themselves (for example on their signboards,
-    websites and map listings) and from what owners tell us. Listings marked "Verified" have been confirmed with the
-    business. We don't list home addresses or personal details that a business hasn't made public.
-  </p>
+    <h3>ವ್ಯವಹಾರ ಪಟ್ಟಿಗಳು</h3>
+    <p>
+      ಪಟ್ಟಿಗಳಲ್ಲಿ ವ್ಯವಹಾರದ ಮಾಹಿತಿ ಇರುತ್ತದೆ: ಹೆಸರು, ಫೋನ್ ಮತ್ತು ವಾಟ್ಸಾಪ್ ಸಂಖ್ಯೆ, ವಿಳಾಸ, ಕೆಲಸದ ಸಮಯ, ಸೇವೆಗಳು ಮತ್ತು
+      ಸಂಕ್ಷಿಪ್ತ ವಿವರಣೆ. ವ್ಯವಹಾರಗಳು ತಾವೇ ಪ್ರಕಟಿಸಿದ ಮಾಹಿತಿಯಿಂದ (ಉದಾಹರಣೆಗೆ ಅವರ ನಾಮಫಲಕಗಳು, ವೆಬ್‌ಸೈಟ್‌ಗಳು ಮತ್ತು ನಕ್ಷೆ
+      ಪಟ್ಟಿಗಳು) ಮತ್ತು ಮಾಲೀಕರು ನಮಗೆ ತಿಳಿಸಿದ್ದರಿಂದ ಇದನ್ನು ಸಂಗ್ರಹಿಸುತ್ತೇವೆ. "ಪರಿಶೀಲಿತ" ಎಂದು ಗುರುತಿಸಿದ ಪಟ್ಟಿಗಳನ್ನು
+      ವ್ಯವಹಾರದೊಂದಿಗೆ ಖಚಿತಪಡಿಸಲಾಗಿದೆ. ವ್ಯವಹಾರ ಸಾರ್ವಜನಿಕಗೊಳಿಸದ ಮನೆ ವಿಳಾಸ ಅಥವಾ ವೈಯಕ್ತಿಕ ವಿವರಗಳನ್ನು ನಾವು ಪಟ್ಟಿ
+      ಮಾಡುವುದಿಲ್ಲ.
+    </p>
 
-  <h2>How we use information</h2>
-  <ul>
-    <li>To show business listings so people in Belagavi can contact them.</li>
-    <li>To reply to messages, process listing requests and arrange featured listings.</li>
-    <li>To keep the site secure and working.</li>
-  </ul>
-  <p>We don't sell or rent personal information, and we don't share it with anyone except the service providers above.</p>
+    <h2>ನಾವು ಮಾಹಿತಿಯನ್ನು ಹೇಗೆ ಬಳಸುತ್ತೇವೆ</h2>
+    <ul>
+      <li>ಬೆಳಗಾವಿಯ ಜನರು ಸಂಪರ್ಕಿಸಲು ಸಾಧ್ಯವಾಗುವಂತೆ ವ್ಯವಹಾರ ಪಟ್ಟಿಗಳನ್ನು ತೋರಿಸಲು.</li>
+      <li>ಸಂದೇಶಗಳಿಗೆ ಉತ್ತರಿಸಲು, ಪಟ್ಟಿ ವಿನಂತಿಗಳನ್ನು ನಿರ್ವಹಿಸಲು ಮತ್ತು ವಿಶೇಷ ಪಟ್ಟಿಗಳನ್ನು ಏರ್ಪಡಿಸಲು.</li>
+      <li>ಸೈಟ್ ಅನ್ನು ಸುರಕ್ಷಿತವಾಗಿ ಮತ್ತು ಸರಿಯಾಗಿ ಕೆಲಸ ಮಾಡುವಂತೆ ಇಡಲು.</li>
+    </ul>
+    <p>ನಾವು ವೈಯಕ್ತಿಕ ಮಾಹಿತಿಯನ್ನು ಮಾರುವುದಿಲ್ಲ ಅಥವಾ ಬಾಡಿಗೆಗೆ ಕೊಡುವುದಿಲ್ಲ, ಮತ್ತು ಮೇಲೆ ಹೇಳಿದ ಸೇವಾ ಪೂರೈಕೆದಾರರನ್ನು ಹೊರತುಪಡಿಸಿ ಯಾರೊಂದಿಗೂ ಹಂಚಿಕೊಳ್ಳುವುದಿಲ್ಲ.</p>
 
-  <h2>Your choices</h2>
-  <p>
-    If your business is listed and you want to correct, update or remove it, or you want us to delete emails you've sent
-    us, write to <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>. We'll act on the request within 7
-    working days. Pages can take a few more days to drop out of search engines after we remove them.
-  </p>
+    <h2>ನಿಮ್ಮ ಆಯ್ಕೆಗಳು</h2>
+    <p>
+      ನಿಮ್ಮ ವ್ಯವಹಾರ ಪಟ್ಟಿಯಲ್ಲಿದ್ದು ಅದನ್ನು ತಿದ್ದಲು, ನವೀಕರಿಸಲು ಅಥವಾ ತೆಗೆದುಹಾಕಲು ಬಯಸಿದರೆ, ಅಥವಾ ನೀವು ಕಳುಹಿಸಿದ ಇಮೇಲ್‌ಗಳನ್ನು
+      ಅಳಿಸಬೇಕೆಂದರೆ, <a href={`mailto:${email}`}>{email}</a> ಗೆ ಬರೆಯಿರಿ. 7 ಕೆಲಸದ ದಿನಗಳೊಳಗೆ ಕ್ರಮ ಕೈಗೊಳ್ಳುತ್ತೇವೆ. ನಾವು
+      ತೆಗೆದುಹಾಕಿದ ನಂತರ ಪುಟಗಳು ಸರ್ಚ್ ಎಂಜಿನ್‌ಗಳಿಂದ ಮರೆಯಾಗಲು ಇನ್ನೂ ಕೆಲವು ದಿನಗಳು ಬೇಕಾಗಬಹುದು.
+    </p>
 
-  <h2>Grievance contact</h2>
-  <p>
-    For any concern about how we handle personal data, including under India's Digital Personal Data Protection Act, 2023,
-    contact us at <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.
-  </p>
+    <h2>ಕುಂದುಕೊರತೆ ಸಂಪರ್ಕ</h2>
+    <p>
+      ಭಾರತದ ಡಿಜಿಟಲ್ ವೈಯಕ್ತಿಕ ದತ್ತಾಂಶ ಸಂರಕ್ಷಣಾ ಕಾಯ್ದೆ, 2023 ರ ಅಡಿಯಲ್ಲಿನ ವಿಷಯಗಳು ಸೇರಿದಂತೆ, ನಾವು ವೈಯಕ್ತಿಕ ದತ್ತಾಂಶವನ್ನು
+      ನಿರ್ವಹಿಸುವ ರೀತಿಯ ಬಗ್ಗೆ ಯಾವುದೇ ಕಳವಳವಿದ್ದರೆ <a href={`mailto:${email}`}>{email}</a> ನಲ್ಲಿ ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ.
+    </p>
 
-  <h2>Changes to this policy</h2>
-  <p>If we change how we handle information, we'll update this page and the date at the top.</p>
-</TextPage>
+    <h2>ಈ ನೀತಿಯಲ್ಲಿ ಬದಲಾವಣೆಗಳು</h2>
+    <p>ಮಾಹಿತಿಯನ್ನು ನಿರ್ವಹಿಸುವ ರೀತಿಯನ್ನು ಬದಲಿಸಿದರೆ, ಈ ಪುಟವನ್ನು ಮತ್ತು ಮೇಲಿನ ದಿನಾಂಕವನ್ನು ನವೀಕರಿಸುತ್ತೇವೆ.</p>
+    <p class="text-[15px] text-muted">
+      ಇದು <a href="/privacy/" hreflang="en-IN">ಇಂಗ್ಲಿಷ್ ಗೌಪ್ಯತಾ ನೀತಿಯ</a> ಅನುವಾದ. ಎರಡರ ನಡುವೆ ವ್ಯತ್ಯಾಸವಿದ್ದರೆ ಇಂಗ್ಲಿಷ್ ಆವೃತ್ತಿಯೇ ಅನ್ವಯಿಸುತ್ತದೆ.
+    </p>
+  </TextPage>
+) : (
+  <TextPage
+    title="Privacy Policy"
+    description={`What information ${SITE.domain} collects, how we use it, and how to ask us to change or remove it.`}
+    path="/privacy/"
+    updated="15 October 2026"
+    {lang}
+  >
+    <h2>The short version</h2>
+    <ul>
+      <li>You don't need an account to use this site, and we don't ask for your personal details to browse it.</li>
+      <li>We don't use advertising trackers or analytics cookies.</li>
+      <li>When you call or WhatsApp a business from a listing, you are contacting them directly. We don't see or record that conversation.</li>
+      <li>Business owners can ask us to correct or remove their listing at any time.</li>
+    </ul>
+
+    <h2>Information we collect</h2>
+    <h3>When you visit the site</h3>
+    <p>
+      The site is hosted on Cloudflare, which processes basic technical information such as your IP address, browser
+      type and the pages requested, to deliver the site and protect it from abuse. Our fonts are loaded from Google Fonts,
+      so Google also receives your IP address and browser details when a page loads. See
+      <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare's privacy policy</a> and
+      <a href="https://policies.google.com/privacy">Google's privacy policy</a>.
+    </p>
+
+    <h3>When you email us or submit a listing</h3>
+    <p>
+      The "List your business" form opens your own email app; nothing is stored on our site. When you email us we receive
+      what you send, such as your name, business name, phone number and email address. We use it only to reply to you
+      and to create or update your listing.
+    </p>
+
+    <h3>Business listings</h3>
+    <p>
+      Listings contain business information: name, phone and WhatsApp number, address, opening hours, services and a short
+      description. We compile this from information businesses publish themselves (for example on their signboards,
+      websites and map listings) and from what owners tell us. Listings marked "Verified" have been confirmed with the
+      business. We don't list home addresses or personal details that a business hasn't made public.
+    </p>
+
+    <h2>How we use information</h2>
+    <ul>
+      <li>To show business listings so people in Belagavi can contact them.</li>
+      <li>To reply to messages, process listing requests and arrange featured listings.</li>
+      <li>To keep the site secure and working.</li>
+    </ul>
+    <p>We don't sell or rent personal information, and we don't share it with anyone except the service providers above.</p>
+
+    <h2>Your choices</h2>
+    <p>
+      If your business is listed and you want to correct, update or remove it, or you want us to delete emails you've sent
+      us, write to <a href={`mailto:${email}`}>{email}</a>. We'll act on the request within 7
+      working days. Pages can take a few more days to drop out of search engines after we remove them.
+    </p>
+
+    <h2>Grievance contact</h2>
+    <p>
+      For any concern about how we handle personal data, including under India's Digital Personal Data Protection Act, 2023,
+      contact us at <a href={`mailto:${email}`}>{email}</a>.
+    </p>
+
+    <h2>Changes to this policy</h2>
+    <p>If we change how we handle information, we'll update this page and the date at the top.</p>
+  </TextPage>
+)}

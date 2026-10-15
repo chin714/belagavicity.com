@@ -1,75 +1,161 @@
 ---
-import TextPage from '../components/TextPage.astro';
-import { SITE } from '../lib/site';
+import TextPage from '../../components/TextPage.astro';
+import { SITE } from '../../lib/site';
+import { getLang, href, withLangs } from '../../lib/i18n';
+
+export function getStaticPaths() {
+  return withLangs([{ params: {} }]);
+}
+
+const lang = getLang(Astro.params.lang);
+const email = SITE.contactEmail;
 ---
 
-<TextPage
-  title="Terms of Use"
-  description={`The terms for using ${SITE.domain} and for listing a business on it.`}
-  path="/terms/"
-  updated="15 October 2026"
->
-  <p>
-    By using {SITE.domain} ("the site", "we", "us") you agree to these terms. If you don't agree, please don't use the site.
-  </p>
+{lang === 'kn' ? (
+  <TextPage
+    title="ಬಳಕೆಯ ನಿಯಮಗಳು"
+    description={`${SITE.domain} ಬಳಸಲು ಮತ್ತು ಅದರಲ್ಲಿ ವ್ಯವಹಾರವನ್ನು ಪಟ್ಟಿ ಮಾಡಲು ಇರುವ ನಿಯಮಗಳು.`}
+    path="/terms/"
+    updated="15 ಅಕ್ಟೋಬರ್ 2026"
+    {lang}
+  >
+    <p>
+      {SITE.domain} ("ಸೈಟ್", "ನಾವು") ಬಳಸುವ ಮೂಲಕ ನೀವು ಈ ನಿಯಮಗಳಿಗೆ ಒಪ್ಪುತ್ತೀರಿ. ನೀವು ಒಪ್ಪದಿದ್ದರೆ, ದಯವಿಟ್ಟು ಸೈಟ್ ಬಳಸಬೇಡಿ.
+    </p>
 
-  <h2>What the site is</h2>
-  <p>
-    {SITE.domain} is a directory of local businesses in Belagavi (Belgaum), Karnataka. We help you find and contact
-    businesses. We are not a party to any arrangement you make with them: we don't provide the services listed, take
-    bookings, handle payments or charge commission.
-  </p>
+    <h2>ಈ ಸೈಟ್ ಏನು</h2>
+    <p>
+      {SITE.domain} ಕರ್ನಾಟಕದ ಬೆಳಗಾವಿಯ (ಬೆಳಗಾಂ) ಸ್ಥಳೀಯ ವ್ಯವಹಾರಗಳ ಡೈರೆಕ್ಟರಿ. ವ್ಯವಹಾರಗಳನ್ನು ಹುಡುಕಲು ಮತ್ತು ಸಂಪರ್ಕಿಸಲು ನಾವು
+      ನೆರವಾಗುತ್ತೇವೆ. ನೀವು ಅವರೊಂದಿಗೆ ಮಾಡಿಕೊಳ್ಳುವ ಯಾವುದೇ ಒಪ್ಪಂದದಲ್ಲಿ ನಾವು ಪಾಲುದಾರರಲ್ಲ: ಪಟ್ಟಿಯಲ್ಲಿರುವ ಸೇವೆಗಳನ್ನು ನಾವು
+      ಒದಗಿಸುವುದಿಲ್ಲ, ಬುಕಿಂಗ್ ತೆಗೆದುಕೊಳ್ಳುವುದಿಲ್ಲ, ಪಾವತಿಗಳನ್ನು ನಿರ್ವಹಿಸುವುದಿಲ್ಲ ಅಥವಾ ಕಮಿಷನ್ ಪಡೆಯುವುದಿಲ್ಲ.
+    </p>
 
-  <h2>Listings and accuracy</h2>
-  <ul>
-    <li>We try to keep listings accurate, but details such as phone numbers, hours and services can change. Listings are provided "as is", without any guarantee.</li>
-    <li>A "Verified" badge means we confirmed the business's details with them at the time. It is not an endorsement of the quality of their work.</li>
-    <li>Prices shown on category pages are rough local guides, not quotes. Always confirm the price with the business before work starts.</li>
-    <li>"Featured" listings are paid placements and are always labelled.</li>
-  </ul>
+    <h2>ಪಟ್ಟಿಗಳು ಮತ್ತು ನಿಖರತೆ</h2>
+    <ul>
+      <li>ಪಟ್ಟಿಗಳನ್ನು ನಿಖರವಾಗಿಡಲು ಪ್ರಯತ್ನಿಸುತ್ತೇವೆ, ಆದರೆ ಫೋನ್ ಸಂಖ್ಯೆ, ಸಮಯ ಮತ್ತು ಸೇವೆಗಳಂತಹ ವಿವರಗಳು ಬದಲಾಗಬಹುದು. ಪಟ್ಟಿಗಳನ್ನು ಯಾವುದೇ ಖಾತರಿಯಿಲ್ಲದೆ "ಇದ್ದಂತೆಯೇ" ಒದಗಿಸಲಾಗಿದೆ.</li>
+      <li>"ಪರಿಶೀಲಿತ" ಬ್ಯಾಡ್ಜ್ ಎಂದರೆ ಆ ಸಮಯದಲ್ಲಿ ವ್ಯವಹಾರದ ವಿವರಗಳನ್ನು ಅವರೊಂದಿಗೆ ಖಚಿತಪಡಿಸಿದ್ದೇವೆ ಎಂದರ್ಥ. ಇದು ಅವರ ಕೆಲಸದ ಗುಣಮಟ್ಟಕ್ಕೆ ನೀಡುವ ಶಿಫಾರಸು ಅಲ್ಲ.</li>
+      <li>ವರ್ಗದ ಪುಟಗಳಲ್ಲಿ ತೋರಿಸಿರುವ ದರಗಳು ಸ್ಥೂಲ ಸ್ಥಳೀಯ ಮಾರ್ಗದರ್ಶಿ ಮಾತ್ರ, ಕೊಟೇಶನ್ ಅಲ್ಲ. ಕೆಲಸ ಆರಂಭಿಸುವ ಮೊದಲು ವ್ಯವಹಾರದೊಂದಿಗೆ ದರವನ್ನು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ.</li>
+      <li>"ವಿಶೇಷ" ಪಟ್ಟಿಗಳು ಶುಲ್ಕ ಪಾವತಿಸಿದ ಸ್ಥಾನಗಳು; ಅವುಗಳಿಗೆ ಯಾವಾಗಲೂ ಗುರುತು ಇರುತ್ತದೆ.</li>
+    </ul>
 
-  <h2>Dealing with businesses</h2>
-  <p>
-    Any work, purchase or appointment is between you and the business. Check credentials, agree on the price and scope in
-    advance, and keep receipts. We are not responsible for the services, products, conduct or pricing of any business
-    listed on the site.
-  </p>
+    <h2>ವ್ಯವಹಾರಗಳೊಂದಿಗೆ ವ್ಯವಹರಿಸುವುದು</h2>
+    <p>
+      ಯಾವುದೇ ಕೆಲಸ, ಖರೀದಿ ಅಥವಾ ಅಪಾಯಿಂಟ್‌ಮೆಂಟ್ ನಿಮ್ಮ ಮತ್ತು ಆ ವ್ಯವಹಾರದ ನಡುವಿನದು. ಅರ್ಹತೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ, ದರ ಮತ್ತು ಕೆಲಸದ
+      ವ್ಯಾಪ್ತಿಯನ್ನು ಮುಂಚಿತವಾಗಿ ಒಪ್ಪಿಕೊಳ್ಳಿ, ಮತ್ತು ರಸೀದಿಗಳನ್ನು ಇಟ್ಟುಕೊಳ್ಳಿ. ಸೈಟ್‌ನಲ್ಲಿ ಪಟ್ಟಿಯಾಗಿರುವ ಯಾವುದೇ ವ್ಯವಹಾರದ ಸೇವೆಗಳು,
+      ಉತ್ಪನ್ನಗಳು, ನಡವಳಿಕೆ ಅಥವಾ ದರಗಳಿಗೆ ನಾವು ಜವಾಬ್ದಾರರಲ್ಲ.
+    </p>
 
-  <h2>Listing your business</h2>
-  <ul>
-    <li>Information you send us must be accurate, and you must be the owner of the business or authorised to list it.</li>
-    <li>You give us permission to publish the details you send, including your business name, phone numbers, address and description.</li>
-    <li>We may edit listings for clarity and consistency, and may refuse or remove any listing, for example if it is misleading, unlawful or the number no longer works.</li>
-    <li>Basic listings are free. Featured listings are offered on terms we agree with you separately.</li>
-    <li>You can ask us to update or remove your listing at any time through our <a href="/contact/">contact page</a>.</li>
-  </ul>
+    <h2>ನಿಮ್ಮ ವ್ಯವಹಾರವನ್ನು ಪಟ್ಟಿ ಮಾಡುವುದು</h2>
+    <ul>
+      <li>ನೀವು ಕಳುಹಿಸುವ ಮಾಹಿತಿ ನಿಖರವಾಗಿರಬೇಕು, ಮತ್ತು ನೀವು ಆ ವ್ಯವಹಾರದ ಮಾಲೀಕರಾಗಿರಬೇಕು ಅಥವಾ ಅದನ್ನು ಪಟ್ಟಿ ಮಾಡಲು ಅಧಿಕಾರ ಹೊಂದಿರಬೇಕು.</li>
+      <li>ನಿಮ್ಮ ವ್ಯವಹಾರದ ಹೆಸರು, ಫೋನ್ ಸಂಖ್ಯೆಗಳು, ವಿಳಾಸ ಮತ್ತು ವಿವರಣೆ ಸೇರಿದಂತೆ ನೀವು ಕಳುಹಿಸುವ ವಿವರಗಳನ್ನು ಪ್ರಕಟಿಸಲು ನೀವು ನಮಗೆ ಅನುಮತಿ ನೀಡುತ್ತೀರಿ.</li>
+      <li>ಸ್ಪಷ್ಟತೆ ಮತ್ತು ಏಕರೂಪತೆಗಾಗಿ ನಾವು ಪಟ್ಟಿಗಳನ್ನು ತಿದ್ದಬಹುದು; ಉದಾಹರಣೆಗೆ ದಾರಿತಪ್ಪಿಸುವ, ಕಾನೂನುಬಾಹಿರವಾದ ಅಥವಾ ನಂಬರ್ ಕೆಲಸ ಮಾಡದ ಸಂದರ್ಭಗಳಲ್ಲಿ ಯಾವುದೇ ಪಟ್ಟಿಯನ್ನು ನಿರಾಕರಿಸಬಹುದು ಅಥವಾ ತೆಗೆದುಹಾಕಬಹುದು.</li>
+      <li>ಮೂಲ ಪಟ್ಟಿಗಳು ಉಚಿತ. ವಿಶೇಷ ಪಟ್ಟಿಗಳನ್ನು ನಿಮ್ಮೊಂದಿಗೆ ಪ್ರತ್ಯೇಕವಾಗಿ ಒಪ್ಪಿಕೊಂಡ ನಿಯಮಗಳ ಮೇಲೆ ನೀಡಲಾಗುತ್ತದೆ.</li>
+      <li>ನಮ್ಮ <a href={href(lang, '/contact/')}>ಸಂಪರ್ಕ ಪುಟದ</a> ಮೂಲಕ ಯಾವಾಗ ಬೇಕಾದರೂ ನಿಮ್ಮ ಪಟ್ಟಿಯನ್ನು ನವೀಕರಿಸಲು ಅಥವಾ ತೆಗೆದುಹಾಕಲು ಕೇಳಬಹುದು.</li>
+    </ul>
 
-  <h2>Acceptable use</h2>
-  <p>Please don't:</p>
-  <ul>
-    <li>copy the directory in bulk, or scrape listings to send spam or unsolicited calls;</li>
-    <li>submit false listings or impersonate a business;</li>
-    <li>try to disrupt the site or get around its security.</li>
-  </ul>
+    <h2>ಸ್ವೀಕಾರಾರ್ಹ ಬಳಕೆ</h2>
+    <p>ದಯವಿಟ್ಟು ಇವುಗಳನ್ನು ಮಾಡಬೇಡಿ:</p>
+    <ul>
+      <li>ಡೈರೆಕ್ಟರಿಯನ್ನು ದೊಡ್ಡ ಪ್ರಮಾಣದಲ್ಲಿ ನಕಲಿಸುವುದು, ಅಥವಾ ಸ್ಪ್ಯಾಮ್ ಅಥವಾ ಬೇಡದ ಕರೆಗಳಿಗಾಗಿ ಪಟ್ಟಿಗಳನ್ನು ಸ್ಕ್ರೇಪ್ ಮಾಡುವುದು;</li>
+      <li>ಸುಳ್ಳು ಪಟ್ಟಿಗಳನ್ನು ಕಳುಹಿಸುವುದು ಅಥವಾ ಬೇರೆ ವ್ಯವಹಾರದಂತೆ ನಟಿಸುವುದು;</li>
+      <li>ಸೈಟ್‌ಗೆ ಅಡ್ಡಿಪಡಿಸಲು ಅಥವಾ ಅದರ ಭದ್ರತೆಯನ್ನು ತಪ್ಪಿಸಲು ಪ್ರಯತ್ನಿಸುವುದು.</li>
+    </ul>
 
-  <h2>Content and trademarks</h2>
-  <p>
-    The design, text and arrangement of the site belong to us. Business names, logos and descriptions belong to their
-    owners. Photos credited to Wikimedia Commons are used under their own licences.
-  </p>
+    <h2>ವಿಷಯ ಮತ್ತು ಟ್ರೇಡ್‌ಮಾರ್ಕ್‌ಗಳು</h2>
+    <p>
+      ಸೈಟ್‌ನ ವಿನ್ಯಾಸ, ಪಠ್ಯ ಮತ್ತು ಜೋಡಣೆ ನಮಗೆ ಸೇರಿದ್ದು. ವ್ಯವಹಾರಗಳ ಹೆಸರುಗಳು, ಲೋಗೋಗಳು ಮತ್ತು ವಿವರಣೆಗಳು ಅವುಗಳ ಮಾಲೀಕರಿಗೆ
+      ಸೇರಿದ್ದು. ವಿಕಿಮೀಡಿಯ ಕಾಮನ್ಸ್‌ಗೆ ಶ್ರೇಯ ನೀಡಿರುವ ಚಿತ್ರಗಳನ್ನು ಅವುಗಳದೇ ಪರವಾನಗಿಯಡಿ ಬಳಸಲಾಗಿದೆ.
+    </p>
 
-  <h2>Limitation of liability</h2>
-  <p>
-    To the extent permitted by law, we are not liable for any loss or damage arising from your use of the site or from
-    dealings with any business you find on it.
-  </p>
+    <h2>ಹೊಣೆಗಾರಿಕೆಯ ಮಿತಿ</h2>
+    <p>
+      ಕಾನೂನು ಅನುಮತಿಸುವ ಮಟ್ಟಿಗೆ, ಸೈಟ್‌ನ ಬಳಕೆಯಿಂದ ಅಥವಾ ಇಲ್ಲಿ ಕಂಡುಕೊಂಡ ಯಾವುದೇ ವ್ಯವಹಾರದೊಂದಿಗಿನ ವ್ಯವಹಾರದಿಂದ ಉಂಟಾಗುವ
+      ಯಾವುದೇ ನಷ್ಟ ಅಥವಾ ಹಾನಿಗೆ ನಾವು ಹೊಣೆಗಾರರಲ್ಲ.
+    </p>
 
-  <h2>Changes and governing law</h2>
-  <p>
-    We may update these terms; the date at the top shows when they last changed. These terms are governed by the laws of
-    India, and the courts at Belagavi, Karnataka have jurisdiction over any dispute.
-  </p>
+    <h2>ಬದಲಾವಣೆಗಳು ಮತ್ತು ಅನ್ವಯವಾಗುವ ಕಾನೂನು</h2>
+    <p>
+      ನಾವು ಈ ನಿಯಮಗಳನ್ನು ನವೀಕರಿಸಬಹುದು; ಮೇಲಿನ ದಿನಾಂಕ ಅವು ಕೊನೆಯ ಬಾರಿ ಬದಲಾದ ದಿನವನ್ನು ತೋರಿಸುತ್ತದೆ. ಈ ನಿಯಮಗಳು ಭಾರತದ
+      ಕಾನೂನುಗಳಿಗೆ ಒಳಪಟ್ಟಿವೆ, ಮತ್ತು ಯಾವುದೇ ವಿವಾದದ ಮೇಲೆ ಕರ್ನಾಟಕದ ಬೆಳಗಾವಿಯ ನ್ಯಾಯಾಲಯಗಳಿಗೆ ಅಧಿಕಾರ ವ್ಯಾಪ್ತಿ ಇರುತ್ತದೆ.
+    </p>
 
-  <h2>Contact</h2>
-  <p>Questions about these terms? Email <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.</p>
-</TextPage>
+    <h2>ಸಂಪರ್ಕ</h2>
+    <p>ಈ ನಿಯಮಗಳ ಬಗ್ಗೆ ಪ್ರಶ್ನೆಗಳಿವೆಯೇ? <a href={`mailto:${email}`}>{email}</a> ಗೆ ಇಮೇಲ್ ಮಾಡಿ.</p>
+    <p class="text-[15px] text-muted">
+      ಇದು <a href="/terms/" hreflang="en-IN">ಇಂಗ್ಲಿಷ್ ಬಳಕೆಯ ನಿಯಮಗಳ</a> ಅನುವಾದ. ಎರಡರ ನಡುವೆ ವ್ಯತ್ಯಾಸವಿದ್ದರೆ ಇಂಗ್ಲಿಷ್ ಆವೃತ್ತಿಯೇ ಅನ್ವಯಿಸುತ್ತದೆ.
+    </p>
+  </TextPage>
+) : (
+  <TextPage
+    title="Terms of Use"
+    description={`The terms for using ${SITE.domain} and for listing a business on it.`}
+    path="/terms/"
+    updated="15 October 2026"
+    {lang}
+  >
+    <p>
+      By using {SITE.domain} ("the site", "we", "us") you agree to these terms. If you don't agree, please don't use the site.
+    </p>
+
+    <h2>What the site is</h2>
+    <p>
+      {SITE.domain} is a directory of local businesses in Belagavi (Belgaum), Karnataka. We help you find and contact
+      businesses. We are not a party to any arrangement you make with them: we don't provide the services listed, take
+      bookings, handle payments or charge commission.
+    </p>
+
+    <h2>Listings and accuracy</h2>
+    <ul>
+      <li>We try to keep listings accurate, but details such as phone numbers, hours and services can change. Listings are provided "as is", without any guarantee.</li>
+      <li>A "Verified" badge means we confirmed the business's details with them at the time. It is not an endorsement of the quality of their work.</li>
+      <li>Prices shown on category pages are rough local guides, not quotes. Always confirm the price with the business before work starts.</li>
+      <li>"Featured" listings are paid placements and are always labelled.</li>
+    </ul>
+
+    <h2>Dealing with businesses</h2>
+    <p>
+      Any work, purchase or appointment is between you and the business. Check credentials, agree on the price and scope in
+      advance, and keep receipts. We are not responsible for the services, products, conduct or pricing of any business
+      listed on the site.
+    </p>
+
+    <h2>Listing your business</h2>
+    <ul>
+      <li>Information you send us must be accurate, and you must be the owner of the business or authorised to list it.</li>
+      <li>You give us permission to publish the details you send, including your business name, phone numbers, address and description.</li>
+      <li>We may edit listings for clarity and consistency, and may refuse or remove any listing, for example if it is misleading, unlawful or the number no longer works.</li>
+      <li>Basic listings are free. Featured listings are offered on terms we agree with you separately.</li>
+      <li>You can ask us to update or remove your listing at any time through our <a href="/contact/">contact page</a>.</li>
+    </ul>
+
+    <h2>Acceptable use</h2>
+    <p>Please don't:</p>
+    <ul>
+      <li>copy the directory in bulk, or scrape listings to send spam or unsolicited calls;</li>
+      <li>submit false listings or impersonate a business;</li>
+      <li>try to disrupt the site or get around its security.</li>
+    </ul>
+
+    <h2>Content and trademarks</h2>
+    <p>
+      The design, text and arrangement of the site belong to us. Business names, logos and descriptions belong to their
+      owners. Photos credited to Wikimedia Commons are used under their own licences.
+    </p>
+
+    <h2>Limitation of liability</h2>
+    <p>
+      To the extent permitted by law, we are not liable for any loss or damage arising from your use of the site or from
+      dealings with any business you find on it.
+    </p>
+
+    <h2>Changes and governing law</h2>
+    <p>
+      We may update these terms; the date at the top shows when they last changed. These terms are governed by the laws of
+      India, and the courts at Belagavi, Karnataka have jurisdiction over any dispute.
+    </p>
+
+    <h2>Contact</h2>
+    <p>Questions about these terms? Email <a href={`mailto:${email}`}>{email}</a>.</p>
+  </TextPage>
+)}

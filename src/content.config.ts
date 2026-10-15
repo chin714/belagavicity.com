@@ -8,12 +8,19 @@ const areas = defineCollection({
   schema: z.object({
     id: z.string(),
     name: z.string(),
-    nameKn: z.string().optional(),
     description: z.string(),
     // Adjacent localities. Category+area pages link to the same category in these areas.
     nearby: z.array(reference('areas')).default([]),
     // Well-known places in the area, e.g. "Gogte Circle". Mentioned on category+area pages.
     landmarks: z.array(z.string()).default([]),
+    // Kannada text for the /kn/ pages. `nameIn` is the name with "in" attached ("ತಿಲಕವಾಡಿಯಲ್ಲಿ"),
+    // since the suffix depends on how the name ends.
+    kn: z.object({
+      name: z.string(),
+      nameIn: z.string(),
+      description: z.string().optional(),
+      landmarks: z.array(z.string()).optional(),
+    }),
   }),
 });
 
@@ -34,6 +41,15 @@ const categories = defineCollection({
       .array(z.object({ job: z.string(), range: z.string() }))
       .default([]),
     faqs: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
+    // Kannada text for the /kn/ pages. Missing fields fall back to English.
+    kn: z.object({
+      name: z.string(),
+      singular: z.string(),
+      intro: z.string().optional(),
+      services: z.array(z.string()).optional(),
+      pricing: z.array(z.object({ job: z.string(), range: z.string() })).optional(),
+      faqs: z.array(z.object({ q: z.string(), a: z.string() })).optional(),
+    }),
   }),
 });
 
@@ -62,6 +78,14 @@ const businesses = defineCollection({
     // Placeholder data for development. Sample listings are labelled on the page,
     // kept out of the sitemap and marked noindex. Delete them before launch.
     sample: z.boolean().default(false),
+    // Kannada text for the /kn/ pages. Missing fields fall back to English.
+    kn: z
+      .object({
+        description: z.string().optional(),
+        services: z.array(z.string()).optional(),
+        hours: z.string().optional(),
+      })
+      .default({}),
   }),
 });
 

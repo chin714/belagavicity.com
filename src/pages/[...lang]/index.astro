@@ -1,14 +1,22 @@
 ---
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
-import Layout from '../layouts/Layout.astro';
-import BusinessCard from '../components/BusinessCard.astro';
-import Icon from '../components/Icon.astro';
-import { SITE, CITY, getBusinesses, areaIdsOf, categoryIdsOf } from '../lib/site';
+import Layout from '../../layouts/Layout.astro';
+import BusinessCard from '../../components/BusinessCard.astro';
+import Icon from '../../components/Icon.astro';
+import { SITE, CITY, getBusinesses, areaIdsOf, categoryIdsOf } from '../../lib/site';
+import { LOCALES, areaText, categoryText, getLang, href, ui, withLangs } from '../../lib/i18n';
 
-import soudha from '../assets/hero/suvarna-vidhana-soudha.jpg';
-import kamalBasadi from '../assets/hero/kamal-basadi.jpg';
-import chennamma from '../assets/hero/chennamma-circle.jpg';
+import soudha from '../../assets/hero/suvarna-vidhana-soudha.jpg';
+import kamalBasadi from '../../assets/hero/kamal-basadi.jpg';
+import chennamma from '../../assets/hero/chennamma-circle.jpg';
+
+export function getStaticPaths() {
+  return withLangs([{ params: {} }]);
+}
+
+const lang = getLang(Astro.params.lang);
+const t = ui(lang);
 
 type Credit = { author: string; source: string; license: string; licenseUrl: string };
 
@@ -16,7 +24,7 @@ type Credit = { author: string; source: string; license: string; licenseUrl: str
 const slides: { src: ImageMetadata; alt: string; position: string; origin?: string; originSmall?: string; credit?: Credit }[] = [
   {
     src: soudha,
-    alt: 'Suvarna Vidhana Soudha, Belagavi',
+    alt: t.slideAlts.soudha,
     // Wide screens show the full width anyway. Narrower ones crop the sides: lean right
     // so the entrance porch on the right stays in frame, and zoom from that edge.
     position: '80% 65%',
@@ -30,7 +38,7 @@ const slides: { src: ImageMetadata; alt: string; position: string; origin?: stri
   },
   {
     src: kamalBasadi,
-    alt: 'Kamal Basadi, Belagavi',
+    alt: t.slideAlts.kamalBasadi,
     position: 'center 40%',
     credit: {
       author: 'Nagaraj Sinhasan',
@@ -41,7 +49,7 @@ const slides: { src: ImageMetadata; alt: string; position: string; origin?: stri
   },
   {
     src: chennamma,
-    alt: 'Chennamma Circle, Belagavi',
+    alt: t.slideAlts.chennamma,
     // The file is cut just below the hooves, so the slab never shows. The head is near the
     // top: anchor and zoom from the top on wide screens. On phones the whole height fits,
     // so zoom from the bottom to keep the hooves in frame.
@@ -72,7 +80,7 @@ const popular = live.flatMap((c) =>
   areas
     .filter((a) => combos.includes(`${c.id}/${a.id}`))
     .slice(0, 5)
-    .map((a) => ({ label: `${c.data.name} in ${a.data.name}`, href: `/${c.id}/${a.id}/` })),
+    .map((a) => ({ label: t.inArea(categoryText(c, lang).name, areaText(a, lang)), href: href(lang, `/${c.id}/${a.id}/`) })),
 );
 
 const organization = {
@@ -90,8 +98,8 @@ const jsonLd = [
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: SITE.name,
-    url: SITE.url,
-    inLanguage: 'en-IN',
+    url: new URL(href(lang, '/'), SITE.url).href,
+    inLanguage: LOCALES[lang],
     publisher: { '@id': organization['@id'] },
   },
 ];
@@ -99,8 +107,9 @@ const jsonLd = [
 
 <Layout
   title={SITE.name}
-  description="Find trusted electricians, dentists and other local services in Belagavi (Belgaum), Karnataka. Browse by area, then call or WhatsApp directly."
+  description={t.homeDescription}
   jsonLd={jsonLd}
+  {lang}
   overlayHeader
 >
   <!-- Hero -->
@@ -126,10 +135,10 @@ const jsonLd = [
       </div>
 
       <div class="container-page relative pt-5 pb-36 sm:absolute sm:inset-x-0 sm:bottom-0 sm:pt-0 sm:pb-28">
-        <p class="eyebrow text-white/85">Belagavi, Karnataka · <span lang="kn">ಬೆಳಗಾವಿ</span></p>
-        <h1 class="mt-2.5 max-w-[640px] text-[40px] text-white sm:text-[58px]">Find who you need in Belagavi.</h1>
+        <p class="eyebrow text-white/85">{t.heroEyebrow} · <span lang={LOCALES[lang === 'en' ? 'kn' : 'en']}>{t.heroEyebrowAlt}</span></p>
+        <h1 class="mt-2.5 max-w-[640px] text-[40px] text-white sm:text-[58px]">{t.heroTitle}</h1>
         <p class="mt-4 max-w-[480px] text-[17px] leading-normal text-white/90">
-          Local services in every area, from Camp to Vadgaon. Call or WhatsApp them directly: no middleman, no booking fee.
+          {t.heroText}
         </p>
       </div>
     </div>
@@ -137,25 +146,25 @@ const jsonLd = [
     <!-- Floating search card -->
     <div class="container-page relative z-[4] -mt-32 sm:-mt-14">
       <div class="rounded-[20px] bg-paper/[0.97] p-5 shadow-[0_24px_48px_rgb(18_24_27/0.2)] sm:px-8 sm:py-7">
-        <form id="finder" data-combos={JSON.stringify(combos)} class="flex flex-col gap-3 sm:flex-row">
-          <label class="sr-only" for="what">What are you looking for</label>
+        <form id="finder" data-combos={JSON.stringify(combos)} data-base={href(lang, '/')} class="flex flex-col gap-3 sm:flex-row">
+          <label class="sr-only" for="what">{t.whatLabel}</label>
           <select id="what" name="category" class="field sm:flex-[1.4]" required>
-            {live.map((c) => <option value={c.id}>{c.data.name}</option>)}
+            {live.map((c) => <option value={c.id}>{categoryText(c, lang).name}</option>)}
           </select>
-          <label class="sr-only" for="where">Area</label>
+          <label class="sr-only" for="where">{t.areaLabel}</label>
           <select id="where" name="area" class="field sm:flex-1">
-            <option value="">All areas of Belagavi</option>
-            {areas.map((a) => <option value={a.id}>{a.data.name}</option>)}
+            <option value="">{t.allAreas}</option>
+            {areas.map((a) => <option value={a.id}>{areaText(a, lang).name}</option>)}
           </select>
           <button type="submit" class="flex h-[52px] items-center justify-center gap-2 rounded-xl bg-brand px-8 text-[15px] font-semibold text-white hover:bg-brand-dark sm:flex-[0_0_140px]">
-            <Icon name="search" size={18} /> Search
+            <Icon name="search" size={18} /> {t.search}
           </button>
         </form>
         {popular.length > 0 && (
           <>
             <div class="my-4 border-t border-dashed border-line"></div>
             <div class="flex flex-wrap items-center gap-2.5">
-              <span class="text-[13px] text-muted">Popular:</span>
+              <span class="text-[13px] text-muted">{t.popular}</span>
               {popular.map((p) => <a href={p.href} class="pill">{p.label}</a>)}
             </div>
           </>
@@ -167,22 +176,22 @@ const jsonLd = [
   <!-- Categories -->
   <section class="-mt-24 bg-mist pt-40 pb-[72px]">
     <div class="container-page">
-      <h2 class="text-[28px]">Browse by category</h2>
-      <p class="mt-2 text-[15px] text-muted">New categories are added every week.</p>
+      <h2 class="text-[28px]">{t.browseByCategory}</h2>
+      <p class="mt-2 text-[15px] text-muted">{t.newCategories}</p>
       <ul class="mt-7 grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
         {categories.map((c) => (
           <li>
             {c.data.live ? (
-              <a href={`/${c.id}/`} class="group block h-full rounded-[14px] border border-line bg-card p-5 no-underline transition hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgb(18_24_27/0.08)] sm:p-[22px]">
+              <a href={href(lang, `/${c.id}/`)} class="group block h-full rounded-[14px] border border-line bg-card p-5 no-underline transition hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgb(18_24_27/0.08)] sm:p-[22px]">
                 <Icon name={c.data.icon} size={28} class="text-brand" />
-                <span class="mt-3.5 block text-[15px] font-bold text-ink">{c.data.name}</span>
-                <span class="mt-1.5 inline-block text-[13px] text-ink underline group-hover:text-brand">Browse listings</span>
+                <span class="mt-3.5 block text-[15px] font-bold text-ink">{categoryText(c, lang).name}</span>
+                <span class="mt-1.5 inline-block text-[13px] text-ink underline group-hover:text-brand">{t.browseListings}</span>
               </a>
             ) : (
               <div class="h-full rounded-[14px] border border-dashed border-line bg-card/50 p-5 sm:p-[22px]">
                 <Icon name={c.data.icon} size={28} class="text-ink/30" />
-                <span class="mt-3.5 block text-[15px] font-bold text-ink/55">{c.data.name}</span>
-                <span class="mt-1.5 inline-block text-[13px] text-muted">Coming soon</span>
+                <span class="mt-3.5 block text-[15px] font-bold text-ink/55">{categoryText(c, lang).name}</span>
+                <span class="mt-1.5 inline-block text-[13px] text-muted">{t.comingSoon}</span>
               </div>
             )}
           </li>
@@ -196,15 +205,15 @@ const jsonLd = [
     <section class="py-[72px]">
       <div class="container-page flex items-end justify-between gap-4">
         <div>
-          <h2 class="text-[28px]">Featured in Belagavi</h2>
-          <p class="mt-2 text-[15px] text-muted">Local businesses you can call today.</p>
+          <h2 class="text-[28px]">{t.featuredInBelagavi}</h2>
+          <p class="mt-2 text-[15px] text-muted">{t.callToday}</p>
         </div>
-        <a href={`/${live[0]?.id}/`} class="hidden items-center gap-1.5 text-sm font-semibold text-ink no-underline hover:text-brand sm:inline-flex">
-          See all <Icon name="arrow" size={16} />
+        <a href={href(lang, `/${live[0]?.id}/`)} class="hidden items-center gap-1.5 text-sm font-semibold text-ink no-underline hover:text-brand sm:inline-flex">
+          {t.seeAll} <Icon name="arrow" size={16} />
         </a>
       </div>
       <div class="no-scrollbar mt-7 flex snap-x gap-5 overflow-x-auto scroll-px-4 px-4 pb-3 sm:scroll-px-8 sm:px-8 lg:scroll-px-[max(3rem,calc((100vw_-_76rem)/2_+_3rem))] lg:px-[max(3rem,calc((100vw_-_76rem)/2_+_3rem))]">
-        {showcase.map((b, i) => <BusinessCard business={b} variant="tile" index={i} />)}
+        {showcase.map((b, i) => <BusinessCard business={b} variant="tile" index={i} {lang} />)}
       </div>
     </section>
   )}
@@ -213,25 +222,28 @@ const jsonLd = [
   <section class="container-page">
     <div class="flex flex-col items-start gap-5 rounded-[20px] bg-brand-deep p-8 text-white sm:flex-row sm:items-center sm:justify-between sm:p-10">
       <div>
-        <h2 class="text-[26px] text-white">Run a business in Belagavi?</h2>
-        <p class="mt-1.5 text-white/80">Get found by customers in your area. Basic listings are free.</p>
+        <h2 class="text-[26px] text-white">{t.ctaTitle}</h2>
+        <p class="mt-1.5 text-white/80">{t.ctaText}</p>
       </div>
-      <a href="/list-your-business/" class="btn bg-white px-6 text-brand-deep hover:bg-white/90">List your business</a>
+      <a href={href(lang, '/list-your-business/')} class="btn bg-white px-6 text-brand-deep hover:bg-white/90">{t.listYourBusiness}</a>
     </div>
   </section>
 
   {credited.length > 0 && (
     <section class="container-page mt-10" aria-label="Photo credits">
       <p class="text-xs text-muted">
-        Photos:{' '}
-        {credited.map((s, i) => (
-          <>
-            {i > 0 && '; '}
-            <a href={s.credit!.source} class="text-muted underline" rel="noopener">{s.alt}</a> by {s.credit!.author},{' '}
-            <a href={s.credit!.licenseUrl} class="text-muted underline" rel="license noopener">{s.credit!.license}</a>
-          </>
-        ))}
-        . Cropped and resized.
+        {t.photos}{' '}
+        {credited.map((s, i) => {
+          const [place, by] = t.photoCredit(s.alt, s.credit!.author);
+          return (
+            <>
+              {i > 0 && '; '}
+              <a href={s.credit!.source} class="text-muted underline" rel="noopener">{place}</a>{by}
+              <a href={s.credit!.licenseUrl} class="text-muted underline" rel="license noopener">{s.credit!.license}</a>
+            </>
+          );
+        })}
+        . {t.cropped}
       </p>
     </section>
   )}
@@ -240,13 +252,14 @@ const jsonLd = [
 <script>
   const form = document.getElementById('finder') as HTMLFormElement;
   const combos: string[] = JSON.parse(form.dataset.combos ?? '[]');
+  const base = form.dataset.base ?? '/';
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const data = new FormData(form);
     const category = String(data.get('category'));
     const area = String(data.get('area') ?? '');
-    if (area && combos.includes(`${category}/${area}`)) location.href = `/${category}/${area}/`;
-    else if (area) location.href = `/${category}/?area=${area}#listings`;
-    else location.href = `/${category}/`;
+    if (area && combos.includes(`${category}/${area}`)) location.href = `${base}${category}/${area}/`;
+    else if (area) location.href = `${base}${category}/?area=${area}#listings`;
+    else location.href = `${base}${category}/`;
   });
 </script>
