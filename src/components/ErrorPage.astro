@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+interface Props {
+  code: number;
+  title: string;
+  message: string;
+}
+
+const { code, title, message } = Astro.props;
+---
+
+<Layout {title} description={message} noindex>
+  <div class="container-page py-16 text-center sm:py-24">
+    <p class="font-display text-[96px] font-extrabold leading-none text-brand sm:text-[132px]" aria-hidden="true">{code}</p>
+    <h1 class="mt-4 text-4xl font-bold sm:text-5xl">{title}</h1>
+    <p class="mx-auto mt-3 max-w-xl text-lg text-muted">{message}</p>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <slot name="actions" />
+    </div>
+    <slot />
+  </div>
+</Layout>

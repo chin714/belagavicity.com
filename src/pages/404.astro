@@ -1,11 +1,29 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import ErrorPage from '../components/ErrorPage.astro';
+import Icon from '../components/Icon.astro';
+import { getLiveCategories } from '../lib/site';
+
+const categories = await getLiveCategories();
 ---
 
-<Layout title="Page not found" description="This page doesn't exist." noindex>
-  <div class="container-page py-24 text-center">
-    <h1 class="text-5xl font-bold">Page not found</h1>
-    <p class="mt-3 text-muted">This page may have moved, or the business is no longer listed.</p>
-    <a href="/" class="btn btn-call mt-6">Back to home</a>
-  </div>
-</Layout>
+<ErrorPage
+  code={404}
+  title="Page not found"
+  message="This page may have moved, or the business is no longer listed. Try one of these instead."
+>
+  <Fragment slot="actions">
+    <a href="/" class="btn btn-call">Back to home</a>
+    <a href="/areas/" class="btn btn-ghost"><Icon name="map" size={18} /> Browse by area</a>
+  </Fragment>
+
+  <ul class="mx-auto mt-12 grid max-w-3xl gap-3 text-left sm:grid-cols-2">
+    {categories.map((c) => (
+      <li>
+        <a href={`/${c.id}/`} class="flex items-center gap-3 rounded-xl border border-line bg-card p-4 font-semibold text-ink no-underline hover:border-brand">
+          <span class="grid size-10 shrink-0 place-items-center rounded-lg bg-brand-soft text-brand"><Icon name={c.data.icon} size={20} /></span>
+          {c.data.name} in Belagavi
+        </a>
+      </li>
+    ))}
+  </ul>
+</ErrorPage>

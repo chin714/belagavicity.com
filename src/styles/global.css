@@ -79,6 +79,8 @@
   .btn-wa:hover { filter: brightness(0.92); }
   .btn-ghost { border: 1.5px solid var(--color-line); background: var(--color-card); color: var(--color-ink); }
   .btn-ghost:hover { border-color: var(--color-ink); }
+  .btn-soft { border: 1.5px solid rgb(232 83 31 / 0.3); background: var(--color-brand-soft); color: var(--color-brand-ink); }
+  .btn-soft:hover { border-color: var(--color-brand); }
   .chip {
     display: inline-flex;
     align-items: center;
