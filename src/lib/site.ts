@@ -64,6 +64,25 @@ export async function getBusinesses(filter?: { category?: string; area?: string 
   return sortBusinesses(all);
 }
 
+/**
+ * Every "service in area" page: one per live category and area with at least one
+ * listing. Empty pages would be thin content and hurt the whole site in search.
+ */
+export async function getCategoryAreaPaths() {
+  const paths = [];
+  for (const category of await getLiveCategories()) {
+    const businesses = await getBusinesses({ category: category.id });
+    const areaIds = [...new Set(businesses.flatMap(areaIdsOf))];
+    for (const areaId of areaIds) {
+      paths.push({
+        params: { category: category.id, area: areaId },
+        props: { category, area: await getArea(areaId), businesses: businesses.filter((b) => servesArea(b, areaId)) },
+      });
+    }
+  }
+  return paths;
+}
+
 export async function getArea(id: string) {
   const area = await getEntry('areas', id);
   if (!area) throw new Error(`Unknown area: ${id}`);

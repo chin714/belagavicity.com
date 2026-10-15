@@ -2,25 +2,9 @@
 import Layout from '../../layouts/Layout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import BusinessCard from '../../components/BusinessCard.astro';
-import { getArea, getBusinesses, getLiveCategories, breadcrumbJsonLd, servesArea, areaIdsOf } from '../../lib/site';
+import { getBusinesses, getCategoryAreaPaths, breadcrumbJsonLd, servesArea } from '../../lib/site';
 
-// Only build "service in area" pages that have at least one listing. Empty
-// pages would be thin content and hurt the whole site in search.
-export async function getStaticPaths() {
-  const categories = await getLiveCategories();
-  const paths = [];
-  for (const category of categories) {
-    const businesses = await getBusinesses({ category: category.id });
-    const areaIds = [...new Set(businesses.flatMap(areaIdsOf))];
-    for (const areaId of areaIds) {
-      paths.push({
-        params: { category: category.id, area: areaId },
-        props: { category, area: await getArea(areaId), businesses: businesses.filter((b) => servesArea(b, areaId)) },
-      });
-    }
-  }
-  return paths;
-}
+export const getStaticPaths = getCategoryAreaPaths;
 
 const { category, area, businesses } = Astro.props;
 const c = category.data;
@@ -36,6 +20,7 @@ const crumbs = [
 <Layout
   title={`${c.name} in ${area.data.name}, Belagavi`}
   description={`${businesses.length} ${c.name.toLowerCase()} in ${area.data.name}, Belagavi. See services, languages spoken and call or WhatsApp directly.`}
+  image={`/og/${category.id}/${area.id}.jpg`}
   noindex={onlySamples}
   jsonLd={[breadcrumbJsonLd(crumbs)]}
 >

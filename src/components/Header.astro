@@ -1,5 +1,7 @@
 ---
 import { getLiveCategories } from '../lib/site';
+import Logo from '../assets/brand/logo.svg';
+import LogoWhite from '../assets/brand/logo-white.svg';
 
 interface Props {
   /** Transparent header laid over a full-bleed hero photo. */
@@ -23,8 +25,8 @@ const link = overlay
   ]}
 >
   <div class="container-page flex h-[72px] items-center justify-between gap-4 sm:h-[88px]">
-    <a href="/" class:list={['font-display text-[22px] font-bold no-underline', overlay ? 'text-white' : 'text-ink']}>
-      Belagavi City
+    <a href="/" class="shrink-0 no-underline">
+      {overlay ? <LogoWhite class="h-9 w-auto sm:h-11" /> : <Logo class="h-9 w-auto sm:h-11" />}
     </a>
     <nav class="flex items-center gap-6 text-sm font-medium sm:gap-8" aria-label="Main">
       {live.map((c) => (

@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { SITE, getLiveCategories } from '../lib/site';
+import LogoWhite from '../assets/brand/logo-white.svg';
 
 const live = await getLiveCategories();
 const areas = await getCollection('areas');
@@ -21,7 +22,7 @@ const year = new Date().getFullYear();
   </div>
   <div class="border-t border-white/10">
     <div class="container-page flex flex-wrap items-center justify-between gap-4 py-8">
-      <span class="font-display text-base font-bold text-white">Belagavi City</span>
+      <a href="/" class="no-underline"><LogoWhite class="h-8 w-auto" /></a>
       <nav class="flex flex-wrap items-center gap-x-6 gap-y-2 text-[13px]" aria-label="Footer">
         {live.map((c) => <a href={`/${c.id}/`} class="text-white/75 no-underline hover:text-white">{c.data.name}</a>)}
         <a href="/areas/" class="text-white/75 no-underline hover:text-white">Areas</a>
