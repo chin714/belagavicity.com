@@ -127,9 +127,19 @@ function placeSize(place: string) {
   return place.length <= 16 ? 52 : 40;
 }
 
+/** Rough line count for display text in the 640px column (average glyph ≈ half the font size). */
+function lines(text: string, fontSize: number) {
+  return Math.ceil(text.length / Math.floor(640 / (fontSize * 0.5)));
+}
+
 export async function renderOgImage(page: OgImage) {
   const { fonts, logo, photos } = await (assets ??= loadAssets());
   const photo = pickPhoto(photos, page.key);
+  // The icon is dropped when a long name and place would crowd the column.
+  const icon =
+    page.icon && lines(page.title, titleSize(page.title)) + lines(page.place, placeSize(page.place)) <= 3
+      ? page.icon
+      : undefined;
 
   const tree = h(
     'div',
@@ -176,12 +186,12 @@ export async function renderOgImage(page: OgImage) {
         display: 'flex',
         flexDirection: 'column',
       },
-      img(logo, { width: 239, height: 56 }),
+      img(logo, { width: 239, height: 56, flexShrink: 0 }),
       h(
         'div',
         // Fills the space between logo and domain, with the text centred in it.
         { display: 'flex', flexDirection: 'column', justifyContent: 'center', flexGrow: 1, paddingBottom: 16 },
-        ...(page.icon
+        ...(icon
           ? [
               h(
                 'div',
@@ -194,8 +204,9 @@ export async function renderOgImage(page: OgImage) {
                   borderRadius: 16,
                   backgroundColor: BRAND,
                   marginBottom: 24,
+                  flexShrink: 0,
                 },
-                img(iconSvg(page.icon, '#fff'), { width: 36, height: 36 }),
+                img(iconSvg(icon, '#fff'), { width: 36, height: 36 }),
               ),
             ]
           : []),
