@@ -118,7 +118,7 @@ const jsonLd = [
             loading={i === 0 ? 'eager' : 'lazy'}
             fetchpriority={i === 0 ? 'high' : 'auto'}
             class="hero-slide absolute inset-0 size-full object-cover"
-            style={`object-position:${s.position};--origin:${s.origin ?? 'center'};--origin-small:${s.originSmall ?? s.origin ?? 'center'};animation-delay:${-1 - 6 * i}s`}
+            style={`object-position:${s.position};--origin:${s.origin ?? 'center'};--origin-small:${s.originSmall ?? s.origin ?? 'center'};--i:${i}`}
           />
         ))}
         <!-- Phones: darken only behind the header and a thin strip at the bottom, so the photo shows in full. -->

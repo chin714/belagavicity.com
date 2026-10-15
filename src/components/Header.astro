@@ -25,30 +25,43 @@ const link = overlay
       : 'sticky top-0 border-b border-line bg-paper/95 backdrop-blur',
   ]}
 >
-  <div class="container-page flex h-[72px] items-center justify-between gap-3 sm:h-[88px] sm:gap-4">
+  <div class="container-page flex h-[58px] items-center justify-between gap-3 sm:h-[88px] sm:gap-4">
     <a href="/" class="shrink-0 no-underline">
-      {overlay ? <LogoWhite class="h-9 w-auto sm:h-11" /> : <Logo class="h-9 w-auto sm:h-11" />}
+      {overlay ? <LogoWhite class="h-[29px] w-auto sm:h-[37px]" /> : <Logo class="h-[29px] w-auto sm:h-[37px]" />}
     </a>
-    <nav class="flex items-center gap-2 text-sm font-medium sm:gap-4 xl:gap-8" aria-label="Main">
-      {live.map((c) => (
-        <a href={`/${c.id}/`} class:list={['hidden whitespace-nowrap no-underline xl:inline', link]}>{c.data.name}</a>
-      ))}
-      <a href="/areas/" class:list={['hidden whitespace-nowrap no-underline xl:inline', link]}>Areas</a>
-      <a href="/list-your-business/" class="btn btn-call !min-h-0 hidden whitespace-nowrap px-3.5 py-2.5 text-[13px] min-[360px]:inline-flex sm:px-5">
-        <span class="sm:hidden">Add business</span><span class="hidden sm:inline">List your business</span>
-      </a>
+    <!-- Desktop: a short nav at the right, so the hero photo stays clear. Every category is in the dropdown. -->
+    <nav class="flex items-center gap-2 text-sm font-medium sm:gap-4 lg:gap-7" aria-label="Main">
+      {live.length > 0 && (
+        <details class="group relative hidden lg:block" data-menu>
+          <summary class:list={['flex cursor-pointer list-none items-center gap-1 whitespace-nowrap [&::-webkit-details-marker]:hidden', link]}>
+            Explore businesses <Icon name="chevron" size={16} class="transition group-open:rotate-180" />
+          </summary>
+          <ul class="absolute top-full left-1/2 mt-4 w-64 -translate-x-1/2 rounded-[14px] border border-line bg-paper p-2 shadow-[0_24px_48px_rgb(18_24_27/0.14)]">
+            {live.map((c) => (
+              <li>
+                <a href={`/${c.id}/`} class="flex items-center gap-2.5 rounded-lg px-3 py-2.5 font-semibold text-ink no-underline hover:bg-brand-soft hover:text-brand-ink">
+                  <Icon name={c.data.icon} size={18} class="shrink-0 text-brand" /> {c.data.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
+      <a href="/areas/" class:list={['hidden whitespace-nowrap no-underline lg:inline', link]}>Areas</a>
+      <!-- Hidden on phones to keep the hero clear; it's in the menu, the homepage and the footer. -->
+      <a href="/list-your-business/" class="btn btn-call !min-h-0 hidden whitespace-nowrap px-5 py-2.5 text-[13px] sm:inline-flex">List your business</a>
 
-      <!-- Phones, tablets and small laptops: the links above are hidden, so they live in this menu. -->
-      <details class="group xl:hidden" data-menu>
+      <!-- Phones and tablets: the links above are hidden, so they live in this menu. -->
+      <details class="group lg:hidden" data-menu>
         <summary
           class:list={[
-            'grid size-10 cursor-pointer list-none place-items-center rounded-full border [&::-webkit-details-marker]:hidden',
+            'grid size-8 cursor-pointer list-none place-items-center rounded-full border sm:size-10 [&::-webkit-details-marker]:hidden',
             overlay ? 'border-white/40 text-white' : 'border-line text-ink',
           ]}
           aria-label="Menu"
         >
-          <Icon name="menu" size={22} class="group-open:hidden" />
-          <Icon name="close" size={22} class="hidden group-open:block" />
+          <Icon name="menu" size={22} class="size-[18px] group-open:hidden sm:size-[22px]" />
+          <Icon name="close" size={22} class="hidden size-[18px] group-open:block sm:size-[22px]" />
         </summary>
         <div class="absolute inset-x-0 top-full border-y border-line bg-paper shadow-[0_24px_48px_rgb(18_24_27/0.12)]">
           <div class="container-page py-4">
@@ -76,17 +89,17 @@ const link = overlay
 </header>
 
 <script>
-  // Close the mobile menu on a tap outside it or on Escape.
-  const menu = document.querySelector<HTMLDetailsElement>('[data-menu]');
-  if (menu) {
-    document.addEventListener('click', (e) => {
-      if (menu.open && !menu.contains(e.target as Node)) menu.open = false;
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && menu.open) {
-        menu.open = false;
-        menu.querySelector('summary')?.focus();
-      }
-    });
-  }
+  // Close the menus on a click outside them or on Escape.
+  const menus = [...document.querySelectorAll<HTMLDetailsElement>('[data-menu]')];
+  document.addEventListener('click', (e) => {
+    for (const m of menus) if (m.open && !m.contains(e.target as Node)) m.open = false;
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    for (const m of menus) {
+      if (!m.open) continue;
+      m.open = false;
+      m.querySelector('summary')?.focus();
+    }
+  });
 </script>

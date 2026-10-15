@@ -126,9 +126,11 @@
   }
 
   /* Homepage hero: three photos crossfade with a slow zoom. Each holds for a third of
-     the cycle; slides are offset by 6s (18s / 3) via animation-delay in index.astro. */
+     the cycle; slide --i (set in index.astro) starts a third of a cycle after the last. */
   .hero-slide {
-    animation: heroFade 18s ease-in-out infinite;
+    --cycle: 18s;
+    animation: heroFade var(--cycle) ease-in-out infinite;
+    animation-delay: calc(-1s - var(--i, 0) * var(--cycle) / 3);
     transform-origin: var(--origin, center);
     opacity: 0;
   }
@@ -139,16 +141,16 @@
     38% { opacity: 0; transform: scale(1.13); }
     100% { opacity: 0; transform: scale(1.13); }
   }
-  /* Phones: the photo band is already tightly framed, so zoom less and crop less. */
+  /* Phones: a shorter cycle (5s per photo) with a 6% zoom from the full frame. */
   @media (max-width: 639px) {
-    .hero-slide { animation-name: heroFadeSmall; transform-origin: var(--origin-small, center); }
+    .hero-slide { --cycle: 15s; animation-name: heroFadeSmall; transform-origin: var(--origin-small, center); }
   }
   @keyframes heroFadeSmall {
     0% { opacity: 0; transform: scale(1); }
     4% { opacity: 1; }
-    33.3% { opacity: 1; transform: scale(1.04); }
-    38% { opacity: 0; transform: scale(1.045); }
-    100% { opacity: 0; transform: scale(1.045); }
+    33.3% { opacity: 1; transform: scale(1.06); }
+    38% { opacity: 0; transform: scale(1.065); }
+    100% { opacity: 0; transform: scale(1.065); }
   }
   /* Devices set to reduce motion (often via battery saver) still rotate the photos,
      but with a plain crossfade and no zoom. */
