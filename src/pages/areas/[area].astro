@@ -26,14 +26,15 @@ const crumbs = [
 ---
 
 <Layout
-  title={`${area.data.name}, Belagavi – Local Services & Businesses`}
-  description={`Local services in ${area.data.name}, Belagavi. ${area.data.description}`}
+  title={`${area.data.name}${area.data.nameKn ? ` (${area.data.nameKn})` : ''}, Belagavi – Local Services`}
+  description={`Local services in ${area.data.name}, Belagavi (Belgaum). ${area.data.description}`}
   noindex={onlySamples}
   jsonLd={[breadcrumbJsonLd(crumbs)]}
 >
   <div class="container-page py-10">
     <Breadcrumbs items={crumbs} />
     <h1 class="mt-6 text-4xl font-bold sm:text-5xl">{area.data.name}</h1>
+    {area.data.nameKn && <p lang="kn" class="mt-1 text-xl font-semibold text-muted">{area.data.nameKn}</p>}
     <p class="mt-3 max-w-2xl text-lg text-muted">{area.data.description}</p>
 
     {sections.length === 0 ? (

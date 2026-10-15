@@ -4,7 +4,7 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import BusinessCard from '../components/BusinessCard.astro';
 import Icon from '../components/Icon.astro';
-import { SITE, getBusinesses, areaIdsOf, categoryIdsOf } from '../lib/site';
+import { SITE, CITY, getBusinesses, areaIdsOf, categoryIdsOf } from '../lib/site';
 
 import soudha from '../assets/hero/suvarna-vidhana-soudha.jpg';
 import kamalBasadi from '../assets/hero/kamal-basadi.jpg';
@@ -69,14 +69,31 @@ const popular = live.flatMap((c) =>
     .map((a) => ({ label: `${c.data.name} in ${a.data.name}`, href: `/${c.id}/${a.id}/` })),
 );
 
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${SITE.url}/#organization`,
+  name: SITE.name,
+  url: SITE.url,
+  logo: new URL('/logo.png', SITE.url).href,
+  areaServed: CITY,
+};
 const jsonLd = [
-  { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: SITE.url, inLanguage: 'en-IN' },
+  organization,
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE.name,
+    url: SITE.url,
+    inLanguage: 'en-IN',
+    publisher: { '@id': organization['@id'] },
+  },
 ];
 ---
 
 <Layout
   title={SITE.name}
-  description="Find trusted electricians, plumbers, doctors and other local services in Belagavi, Karnataka. Browse by area, then call or WhatsApp directly."
+  description="Find trusted electricians, dentists and other local services in Belagavi (Belgaum), Karnataka. Browse by area, then call or WhatsApp directly."
   jsonLd={jsonLd}
   overlayHeader
 >
@@ -86,7 +103,7 @@ const jsonLd = [
       {slides.map((s, i) => (
         <Image
           src={s.src}
-          alt={i === 0 ? s.alt : ''}
+          alt={s.alt}
           widths={[640, 1024, 1600, 1920, 2560]}
           sizes="100vw"
           loading={i === 0 ? 'eager' : 'lazy'}
@@ -98,7 +115,7 @@ const jsonLd = [
       <div class="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-ink/35"></div>
 
       <div class="container-page absolute inset-x-0 bottom-0 pb-40 sm:pb-28">
-        <p class="eyebrow text-white/85">Belagavi, Karnataka</p>
+        <p class="eyebrow text-white/85">Belagavi, Karnataka · <span lang="kn">ಬೆಳಗಾವಿ</span></p>
         <h1 class="mt-2.5 max-w-[640px] text-[40px] text-white sm:text-[58px]">Find who you need in Belagavi.</h1>
         <p class="mt-4 max-w-[480px] text-[17px] leading-normal text-white/90">
           Local services in every area, from Camp to Vadgaon. Call or WhatsApp them directly: no middleman, no booking fee.

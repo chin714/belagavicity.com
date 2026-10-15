@@ -4,7 +4,7 @@ export const SITE = {
   name: 'Belagavi City',
   domain: 'belagavicity.com',
   url: 'https://belagavicity.com',
-  tagline: 'Local businesses and services in Belagavi',
+  tagline: 'Local businesses in Belagavi (Belgaum)',
   // TODO: replace with a working inbox before launch.
   contactEmail: 'hello@belagavicity.com',
 };
@@ -130,5 +130,51 @@ export function faqJsonLd(faqs: { q: string; a: string }[]) {
       name: f.q,
       acceptedAnswer: { '@type': 'Answer', text: f.a },
     })),
+  };
+}
+
+/** Lowercases a category name for use mid-sentence, keeping acronyms: "AC & Appliance Repair" -> "AC & appliance repair". */
+export function lower(name: string) {
+  return name
+    .split(' ')
+    .map((w) => (/^[A-Z]{2,}/.test(w) ? w : w.toLowerCase()))
+    .join(' ');
+}
+
+/** Schema.org `areaServed` for the whole city, with its old name so "Belgaum" searches match. */
+export const CITY = { '@type': 'City', name: 'Belagavi', alternateName: 'Belgaum' };
+
+/** Lowercases only the first word, keeping acronyms: "Dental check-ups" -> "dental check-ups", "AC servicing" stays. */
+export function lowerFirst(text: string) {
+  return /^[A-Z]{2,}/.test(text) ? text : text.charAt(0).toLowerCase() + text.slice(1);
+}
+
+/**
+ * "3 electricians", "1 dentist". Categories without a plural noun name
+ * ("AC & Appliance Repair") fall back to "1 business" / "3 businesses".
+ */
+export function countLabel(category: CollectionEntry<'categories'>['data'], n: number) {
+  if (category.singular === category.name) return `${n} ${n === 1 ? 'business' : 'businesses'}`;
+  return `${n} ${lower(n === 1 ? category.singular : category.name)}`;
+}
+
+/** ["Camp", "Vadgaon", "Angol"] -> "Camp, Vadgaon and Angol". */
+export function listNames(names: string[]) {
+  return names.length > 1 ? `${names.slice(0, -1).join(', ')} and ${names.at(-1)}` : (names[0] ?? '');
+}
+
+/** Lists the businesses shown on a page. Sample listings are left out. */
+export function itemListJsonLd(businesses: Business[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: businesses
+      .filter((b) => !b.data.sample)
+      .map((b, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: b.data.name,
+        url: new URL(`/business/${b.id}/`, SITE.url).href,
+      })),
   };
 }

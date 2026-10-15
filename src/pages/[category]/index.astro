@@ -4,7 +4,7 @@ import Icon from '../../components/Icon.astro';
 import Layout from '../../layouts/Layout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import BusinessCard from '../../components/BusinessCard.astro';
-import { getBusinesses, getLiveCategories, breadcrumbJsonLd, faqJsonLd, servesArea } from '../../lib/site';
+import { getBusinesses, getLiveCategories, breadcrumbJsonLd, faqJsonLd, itemListJsonLd, listNames, servesArea } from '../../lib/site';
 
 export async function getStaticPaths() {
   const categories = await getLiveCategories();
@@ -19,12 +19,15 @@ const areasWithListings = areas.filter((a) => businesses.some((b) => servesArea(
 const missingAreas = areas.filter((a) => !areasWithListings.includes(a));
 
 const crumbs = [{ name: `${c.name} in Belagavi`, href: `/${category.id}/` }];
-const jsonLd = [breadcrumbJsonLd(crumbs), ...(c.faqs.length ? [faqJsonLd(c.faqs)] : [])];
+const jsonLd = [breadcrumbJsonLd(crumbs), itemListJsonLd(businesses), ...(c.faqs.length ? [faqJsonLd(c.faqs)] : [])];
+
+const areaNames = areasWithListings.map((a) => a.data.name);
+const where = areaNames.length > 3 ? `${areaNames.slice(0, 3).join(', ')} and more` : listNames(areaNames);
 ---
 
 <Layout
-  title={`${c.name} in Belagavi – Call or WhatsApp Directly`}
-  description={`Find ${c.name.toLowerCase()} in Belagavi by area: Tilakwadi, Camp, Shahapur and more. See typical prices, services and call local ${c.name.toLowerCase()} directly.`}
+  title={`${c.name} in Belagavi – Call or WhatsApp`}
+  description={`${c.name} in Belagavi (Belgaum)${where ? `, listed by area: ${where}` : ''}. See typical prices and services, then call or WhatsApp directly.`}
   image={`/og/${category.id}.jpg`}
   jsonLd={jsonLd}
 >
@@ -37,6 +40,7 @@ const jsonLd = [breadcrumbJsonLd(crumbs), ...(c.faqs.length ? [faqJsonLd(c.faqs)
           <h1 class="text-4xl font-bold sm:text-5xl">{c.name} in Belagavi</h1>
           {c.intro && <p class="mt-3 max-w-2xl text-lg text-muted">{c.intro}</p>}
           <p class="mt-3 text-sm font-semibold">{businesses.length} listed · {areasWithListings.length} areas covered</p>
+          <p class="mt-1 text-sm text-muted">Serving all of Belagavi (Belgaum), from Camp to Vadgaon.</p>
         </div>
       </div>
 

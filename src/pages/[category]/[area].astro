@@ -2,14 +2,42 @@
 import Layout from '../../layouts/Layout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import BusinessCard from '../../components/BusinessCard.astro';
-import { getBusinesses, getCategoryAreaPaths, breadcrumbJsonLd, servesArea } from '../../lib/site';
+import {
+  getArea,
+  getBusinesses,
+  getCategoryAreaPaths,
+  breadcrumbJsonLd,
+  itemListJsonLd,
+  countLabel,
+  listNames,
+  lowerFirst,
+  servesArea,
+  areaIdsOf,
+} from '../../lib/site';
 
 export const getStaticPaths = getCategoryAreaPaths;
 
 const { category, area, businesses } = Astro.props;
 const c = category.data;
-const others = (await getBusinesses({ category: category.id })).filter((b) => !servesArea(b, area.id)).slice(0, 3);
+const all = await getBusinesses({ category: category.id });
+const others = all.filter((b) => !servesArea(b, area.id)).slice(0, 3);
 const onlySamples = businesses.every((b) => b.data.sample);
+
+// Page-specific intro built from the area and category data.
+const nearby = await Promise.all(area.data.nearby.map((a) => getArea(a.id)));
+const withPages = new Set(all.flatMap(areaIdsOf));
+const nearbyLinks = nearby.filter((a) => withPages.has(a.id));
+const landmarks = area.data.landmarks.length ? `, near ${listNames(area.data.landmarks)}` : '';
+const intro = [
+  `${countLabel(c, businesses.length)} listed in ${area.data.name}${landmarks}.`,
+  nearby.length ? `${area.data.name} is close to ${listNames(nearby.map((a) => a.data.name))}.` : '',
+  c.services.length
+    ? `Services commonly offered in Belagavi (Belgaum) include ${c.services.slice(0, 3).map(lowerFirst).join('; ')}.`
+    : '',
+  'Call or WhatsApp to confirm timings and charges.',
+]
+  .filter(Boolean)
+  .join(' ');
 
 const crumbs = [
   { name: `${c.name} in Belagavi`, href: `/${category.id}/` },
@@ -19,17 +47,28 @@ const crumbs = [
 
 <Layout
   title={`${c.name} in ${area.data.name}, Belagavi`}
-  description={`${businesses.length} ${c.name.toLowerCase()} in ${area.data.name}, Belagavi. See services, languages spoken and call or WhatsApp directly.`}
+  description={`${c.name} in ${area.data.name}, Belagavi: ${countLabel(c, businesses.length)} listed. See services and languages spoken, then call or WhatsApp directly.`}
   image={`/og/${category.id}/${area.id}.jpg`}
   noindex={onlySamples}
-  jsonLd={[breadcrumbJsonLd(crumbs)]}
+  jsonLd={[breadcrumbJsonLd(crumbs), itemListJsonLd(businesses)]}
 >
   <section class="page-head">
     <div class="container-page py-10 sm:py-14">
       <Breadcrumbs items={crumbs} />
       <h1 class="mt-6 text-4xl font-bold sm:text-5xl">{c.name} in {area.data.name}</h1>
       <p class="mt-3 max-w-2xl text-lg text-muted">{area.data.description}</p>
-      <p class="mt-3 text-sm font-semibold">{businesses.length} {businesses.length === 1 ? c.singular.toLowerCase() : c.name.toLowerCase()} listed in {area.data.name}</p>
+      <p class="mt-4 max-w-2xl">{intro}</p>
+      {nearbyLinks.length > 0 && (
+        <p class="mt-3 text-sm">
+          <span class="text-muted">Also see:</span>{' '}
+          {nearbyLinks.map((a, i) => (
+            <>
+              {i > 0 && <span class="text-muted" aria-hidden="true"> · </span>}
+              <a href={`/${category.id}/${a.id}/`} class="font-semibold text-brand">{c.name} in {a.data.name}</a>
+            </>
+          ))}
+        </p>
+      )}
     </div>
   </section>
 

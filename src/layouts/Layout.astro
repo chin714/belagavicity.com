@@ -25,7 +25,18 @@ const {
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
 const ogImage = new URL(image, SITE.url).href;
-const fullTitle = title === SITE.name ? `${SITE.name} – ${SITE.tagline}` : `${title} | ${SITE.name}`;
+// Google shows about 60 characters of a title and 160 of a description.
+const branded = `${title} | ${SITE.name}`;
+const fullTitle =
+  title === SITE.name ? `${SITE.name} – ${SITE.tagline}` : branded.length <= 60 ? branded : title;
+const metaDescription = clip(description, 160);
+
+/** Cuts at the last whole word that fits and adds an ellipsis. */
+function clip(text: string, max: number) {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max - 1);
+  return `${cut.slice(0, cut.lastIndexOf(' ')).replace(/[\s,.;:–-]+$/, '')}…`;
+}
 ---
 
 <!doctype html>
@@ -34,7 +45,7 @@ const fullTitle = title === SITE.name ? `${SITE.name} – ${SITE.tagline}` : `${
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content={metaDescription} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -44,7 +55,7 @@ const fullTitle = title === SITE.name ? `${SITE.name} – ${SITE.tagline}` : `${
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={metaDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="en_IN" />
     <meta property="og:image" content={ogImage} />
@@ -54,7 +65,7 @@ const fullTitle = title === SITE.name ? `${SITE.name} – ${SITE.tagline}` : `${
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={metaDescription} />
     <meta name="twitter:image" content={ogImage} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
-import { getBusinesses, getLiveCategories, servesArea } from '../../lib/site';
+import { getBusinesses, getLiveCategories, listNames, servesArea } from '../../lib/site';
 import { ogResponse, renderOgImage } from '../../lib/og';
 
 export async function getStaticPaths() {
@@ -26,7 +26,3 @@ export const GET: APIRoute = async ({ props }) => {
     await renderOgImage({ key: category.id, title: c.name, place: 'in Belagavi', subtitle, icon: c.icon }),
   );
 };
-
-function listNames(names: string[]) {
-  return names.length > 1 ? `${names.slice(0, -1).join(', ')} and ${names.at(-1)}` : names[0];
-}

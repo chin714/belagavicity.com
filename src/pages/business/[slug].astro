@@ -4,7 +4,7 @@ import Icon from '../../components/Icon.astro';
 import Layout from '../../layouts/Layout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import BusinessCard from '../../components/BusinessCard.astro';
-import { SITE, getArea, getBusinesses, getCategory, intlPhone, formatPhone, breadcrumbJsonLd } from '../../lib/site';
+import { SITE, getArea, getBusinesses, getCategory, intlPhone, formatPhone, breadcrumbJsonLd, lower, CITY } from '../../lib/site';
 
 export async function getStaticPaths() {
   const businesses = await getCollection('businesses');
@@ -28,6 +28,24 @@ const crumbs = [
   { name: b.name, href: `/business/${business.id}/` },
 ];
 
+// Keep the title within ~60 characters: drop the area, then the category, if needed.
+const singular = category.data.singular;
+const title = [
+  `${b.name} – ${singular} in ${area.data.name}, Belagavi`,
+  `${b.name} – ${singular}, Belagavi`,
+].find((t) => t.length <= 60) ?? `${b.name}, Belagavi`;
+
+// Add services while the description stays within 160 characters.
+const intro = `${b.name}, ${lower(singular)} in ${area.data.name}, Belagavi.`;
+const outro = ' Call or WhatsApp directly.';
+let services = '';
+for (const s of b.services.slice(0, 3)) {
+  const next = services ? `${services}, ${s}` : ` ${s}`;
+  if ((intro + next + '.' + outro).length > 160) break;
+  services = next;
+}
+const description = intro + (services && `${services}.`) + outro;
+
 const jsonLd: object[] = [breadcrumbJsonLd(crumbs)];
 // Never publish structured data for placeholder listings.
 if (!b.sample) {
@@ -45,7 +63,7 @@ if (!b.sample) {
       addressRegion: 'Karnataka',
       addressCountry: 'IN',
     },
-    areaServed: { '@type': 'City', name: 'Belagavi' },
+    areaServed: CITY,
     ...(b.hours && { openingHours: b.hours }),
     ...(b.mapUrl && { hasMap: b.mapUrl }),
   });
@@ -53,8 +71,8 @@ if (!b.sample) {
 ---
 
 <Layout
-  title={`${b.name} – ${category.data.singular} in ${area.data.name}, Belagavi`}
-  description={`${b.name}, ${category.data.singular.toLowerCase()} in ${area.data.name}, Belagavi. ${b.services.slice(0, 3).join(', ')}. Call or WhatsApp directly.`}
+  {title}
+  {description}
   noindex={b.sample}
   jsonLd={jsonLd}
 >

@@ -10,6 +10,10 @@ const areas = defineCollection({
     name: z.string(),
     nameKn: z.string().optional(),
     description: z.string(),
+    // Adjacent localities. Category+area pages link to the same category in these areas.
+    nearby: z.array(reference('areas')).default([]),
+    // Well-known places in the area, e.g. "Gogte Circle". Mentioned on category+area pages.
+    landmarks: z.array(z.string()).default([]),
   }),
 });
 
