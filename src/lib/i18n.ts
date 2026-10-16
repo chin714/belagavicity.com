@@ -145,7 +145,7 @@ const en = {
   },
 
   // Category pages
-  categoryTitle: (name: string) => `${name} in Belagavi – Call or WhatsApp`,
+  categoryTitle: (name: string) => `${name} in Belagavi: Call or WhatsApp`,
   categoryDescription: (name: string, where: string) =>
     `${name} in Belagavi (Belgaum)${where ? `, listed by area: ${where}` : ''}. See typical prices and services, then call or WhatsApp directly.`,
   andMore: (names: string[]) => `${names.join(', ')} and more`,
@@ -174,14 +174,14 @@ const en = {
   seeAllIn: (c: CategoryText) => `See all ${c.name.toLowerCase()} in Belagavi →`,
 
   // Areas
-  areasTitle: 'Areas of Belagavi – Local Services by Locality',
+  areasTitle: 'Areas of Belagavi: Local Services by Locality',
   areasDescription:
     'Browse local businesses and services in every area of Belagavi: Tilakwadi, Camp, Shahapur, Vadgaon, Udyambag and more.',
   areasHeading: 'Areas of Belagavi',
   areasLede: 'Pick your locality to see services near you.',
   listingsCount: (n: number) => `${n} listings →`,
   listingsSoon: 'Listings coming soon',
-  areaTitle: (area: AreaText, other: string) => `${area.name} (${other}), Belagavi – Local Services`,
+  areaTitle: (area: AreaText, other: string) => `Local Services in ${area.name} (${other}), Belagavi`,
   areaDescription: (area: AreaText) => `Local services in ${area.name}, Belagavi (Belgaum). ${area.description}`,
   noneYet: (area: AreaText) => `No businesses are listed in ${area.name} yet.`,
   beFirst: "Run a business here? Be the first to get listed. It's free.",
@@ -189,8 +189,8 @@ const en = {
 
   // Business pages
   businessTitles: (name: string, singular: string, area: AreaText) => [
-    `${name} – ${singular} in ${area.name}, Belagavi`,
-    `${name} – ${singular}, Belagavi`,
+    `${name}, ${singular} in ${area.name}, Belagavi`,
+    `${name}, ${singular}, Belagavi`,
     `${name}, Belagavi`,
   ],
   /** `singular` arrives lowercased (keeping acronyms), for mid-sentence use. */
@@ -297,7 +297,7 @@ const kn: UI = {
     chennamma: 'ಚನ್ನಮ್ಮ ವೃತ್ತ, ಬೆಳಗಾವಿ',
   },
 
-  categoryTitle: (name) => `ಬೆಳಗಾವಿಯಲ್ಲಿ ${name} – ಕರೆ ಅಥವಾ ವಾಟ್ಸಾಪ್ ಮಾಡಿ`,
+  categoryTitle: (name) => `ಬೆಳಗಾವಿಯಲ್ಲಿ ${name}: ಕರೆ ಅಥವಾ ವಾಟ್ಸಾಪ್ ಮಾಡಿ`,
   categoryDescription: (name, where) =>
     `ಬೆಳಗಾವಿಯಲ್ಲಿ (ಬೆಳಗಾಂ) ${name}${where ? `, ಪ್ರದೇಶವಾರು: ${where}` : ''}. ಸಾಮಾನ್ಯ ದರಗಳು ಮತ್ತು ಸೇವೆಗಳನ್ನು ನೋಡಿ, ನಂತರ ನೇರವಾಗಿ ಕರೆ ಅಥವಾ ವಾಟ್ಸಾಪ್ ಮಾಡಿ.`,
   andMore: (names) => `${names.join(', ')} ಮತ್ತು ಇತರೆ`,
@@ -322,22 +322,22 @@ const kn: UI = {
   nearbyInBelagavi: 'ಬೆಳಗಾವಿಯಲ್ಲಿ ಹತ್ತಿರದ ಇತರರು',
   seeAllIn: (c) => `ಬೆಳಗಾವಿಯ ಎಲ್ಲ ${c.name} ನೋಡಿ →`,
 
-  areasTitle: 'ಬೆಳಗಾವಿಯ ಪ್ರದೇಶಗಳು – ಪ್ರದೇಶವಾರು ಸ್ಥಳೀಯ ಸೇವೆಗಳು',
+  areasTitle: 'ಬೆಳಗಾವಿಯ ಪ್ರದೇಶಗಳು: ಪ್ರದೇಶವಾರು ಸ್ಥಳೀಯ ಸೇವೆಗಳು',
   areasDescription:
     'ಬೆಳಗಾವಿಯ ಪ್ರತಿ ಪ್ರದೇಶದ ಸ್ಥಳೀಯ ವ್ಯವಹಾರಗಳು ಮತ್ತು ಸೇವೆಗಳು: ತಿಲಕವಾಡಿ, ಕ್ಯಾಂಪ್, ಶಹಾಪುರ, ವಡಗಾಂವ, ಉದ್ಯಮಬಾಗ ಮತ್ತು ಇನ್ನಷ್ಟು.',
   areasHeading: 'ಬೆಳಗಾವಿಯ ಪ್ರದೇಶಗಳು',
   areasLede: 'ನಿಮ್ಮ ಹತ್ತಿರದ ಸೇವೆಗಳನ್ನು ನೋಡಲು ನಿಮ್ಮ ಪ್ರದೇಶವನ್ನು ಆಯ್ಕೆಮಾಡಿ.',
   listingsCount: (n) => `${n} ಪಟ್ಟಿಗಳು →`,
   listingsSoon: 'ಪಟ್ಟಿಗಳು ಶೀಘ್ರದಲ್ಲೇ',
-  areaTitle: (area, other) => `${area.name} (${other}), ಬೆಳಗಾವಿ – ಸ್ಥಳೀಯ ಸೇವೆಗಳು`,
+  areaTitle: (area, other) => `${area.name} (${other}), ಬೆಳಗಾವಿ: ಸ್ಥಳೀಯ ಸೇವೆಗಳು`,
   areaDescription: (area) => `${area.nameIn} (ಬೆಳಗಾವಿ) ಸ್ಥಳೀಯ ಸೇವೆಗಳು. ${area.description}`,
   noneYet: (area) => `${area.nameIn} ಇನ್ನೂ ಯಾವುದೇ ವ್ಯವಹಾರ ಪಟ್ಟಿಯಲ್ಲಿಲ್ಲ.`,
   beFirst: 'ಇಲ್ಲಿ ವ್ಯವಹಾರ ನಡೆಸುತ್ತೀರಾ? ಮೊದಲಿಗರಾಗಿ ಪಟ್ಟಿಗೆ ಸೇರಿ. ಇದು ಉಚಿತ.',
   viewAll: 'ಎಲ್ಲವನ್ನೂ ನೋಡಿ →',
 
   businessTitles: (name, singular, area) => [
-    `${name} – ${area.nameIn} ${singular}, ಬೆಳಗಾವಿ`,
-    `${name} – ${singular}, ಬೆಳಗಾವಿ`,
+    `${name}, ${area.nameIn} ${singular}, ಬೆಳಗಾವಿ`,
+    `${name}, ${singular}, ಬೆಳಗಾವಿ`,
     `${name}, ಬೆಳಗಾವಿ`,
   ],
   businessIntro: (name, singular, area) => `${name}, ${area.nameIn} ${singular}, ಬೆಳಗಾವಿ.`,

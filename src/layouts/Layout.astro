@@ -37,7 +37,7 @@ const ogImage = new URL(image, SITE.url).href;
 // Google shows about 60 characters of a title and 160 of a description.
 const branded = `${title} | ${SITE.name}`;
 const fullTitle =
-  title === SITE.name ? `${SITE.name} – ${ui(lang).tagline}` : branded.length <= 60 ? branded : title;
+  title === SITE.name ? `${SITE.name}: ${ui(lang).tagline}` : branded.length <= 60 ? branded : title;
 const metaDescription = clip(description, 160);
 // Tell search engines about each language version, but only once the Kannada one is reviewed.
 const alternates = noindex || !knIsReviewed

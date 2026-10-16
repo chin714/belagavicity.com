@@ -13,37 +13,37 @@
       "Fan, light and geyser installation",
       "Switchboard and MCB repair",
       "Inverter and UPS installation",
-      "Earthing and short-circuit fixes",
+      "Earthing and short circuit fixes",
       "Shop and office electrical work"
     ],
     "pricing": [
       {
         "job": "Visit / inspection charge",
-        "range": "₹100 – ₹200"
+        "range": "₹100 to ₹200"
       },
       {
         "job": "Ceiling fan installation",
-        "range": "₹150 – ₹300"
+        "range": "₹150 to ₹300"
       },
       {
         "job": "Switchboard repair or replacement",
-        "range": "₹150 – ₹400"
+        "range": "₹150 to ₹400"
       },
       {
         "job": "MCB / DB installation",
-        "range": "₹300 – ₹800"
+        "range": "₹300 to ₹800"
       },
       {
         "job": "Geyser installation",
-        "range": "₹300 – ₹600"
+        "range": "₹300 to ₹600"
       },
       {
         "job": "Inverter installation (wiring only)",
-        "range": "₹500 – ₹1,500"
+        "range": "₹500 to ₹1,500"
       },
       {
         "job": "Full house wiring (2BHK, labour only)",
-        "range": "₹15,000 – ₹35,000"
+        "range": "₹15,000 to ₹35,000"
       }
     ],
     "faqs": [
@@ -73,41 +73,41 @@
       "singular": "ಎಲೆಕ್ಟ್ರಿಷಿಯನ್",
       "intro": "ಬೆಳಗಾವಿಯಲ್ಲಿ ಮನೆ ವೈರಿಂಗ್, ಫ್ಯಾನ್ ಮತ್ತು ಲೈಟ್ ಅಳವಡಿಕೆ, ಸ್ವಿಚ್‌ಬೋರ್ಡ್ ದುರಸ್ತಿ, ಇನ್ವರ್ಟರ್ ಅಳವಡಿಕೆ ಮತ್ತು ತುರ್ತು ಕೆಲಸಗಳಿಗೆ ಸ್ಥಳೀಯ ಎಲೆಕ್ಟ್ರಿಷಿಯನ್‌ಗಳನ್ನು ಹುಡುಕಿ. ಅವರಿಗೆ ನೇರವಾಗಿ ಕರೆ ಅಥವಾ ವಾಟ್ಸಾಪ್ ಮಾಡಿ; ಮಧ್ಯವರ್ತಿ ಇಲ್ಲ, ಬುಕಿಂಗ್ ಶುಲ್ಕ ಇಲ್ಲ.",
       "services": [
-        "ಮನೆ ವೈರಿಂಗ್ ಮತ್ತು ಮರು-ವೈರಿಂಗ್",
+        "ಮನೆ ವೈರಿಂಗ್ ಮತ್ತು ಮರುವೈರಿಂಗ್",
         "ಫ್ಯಾನ್, ಲೈಟ್ ಮತ್ತು ಗೀಸರ್ ಅಳವಡಿಕೆ",
         "ಸ್ವಿಚ್‌ಬೋರ್ಡ್ ಮತ್ತು MCB ದುರಸ್ತಿ",
         "ಇನ್ವರ್ಟರ್ ಮತ್ತು UPS ಅಳವಡಿಕೆ",
-        "ಅರ್ಥಿಂಗ್ ಮತ್ತು ಶಾರ್ಟ್-ಸರ್ಕ್ಯೂಟ್ ದುರಸ್ತಿ",
+        "ಅರ್ಥಿಂಗ್ ಮತ್ತು ಶಾರ್ಟ್ ಸರ್ಕ್ಯೂಟ್ ದುರಸ್ತಿ",
         "ಅಂಗಡಿ ಮತ್ತು ಕಚೇರಿ ವಿದ್ಯುತ್ ಕೆಲಸ"
       ],
       "pricing": [
         {
           "job": "ಭೇಟಿ / ಪರಿಶೀಲನೆ ಶುಲ್ಕ",
-          "range": "₹100 – ₹200"
+          "range": "₹100 ರಿಂದ ₹200"
         },
         {
           "job": "ಸೀಲಿಂಗ್ ಫ್ಯಾನ್ ಅಳವಡಿಕೆ",
-          "range": "₹150 – ₹300"
+          "range": "₹150 ರಿಂದ ₹300"
         },
         {
           "job": "ಸ್ವಿಚ್‌ಬೋರ್ಡ್ ದುರಸ್ತಿ ಅಥವಾ ಬದಲಾವಣೆ",
-          "range": "₹150 – ₹400"
+          "range": "₹150 ರಿಂದ ₹400"
         },
         {
           "job": "MCB / DB ಅಳವಡಿಕೆ",
-          "range": "₹300 – ₹800"
+          "range": "₹300 ರಿಂದ ₹800"
         },
         {
           "job": "ಗೀಸರ್ ಅಳವಡಿಕೆ",
-          "range": "₹300 – ₹600"
+          "range": "₹300 ರಿಂದ ₹600"
         },
         {
           "job": "ಇನ್ವರ್ಟರ್ ಅಳವಡಿಕೆ (ವೈರಿಂಗ್ ಮಾತ್ರ)",
-          "range": "₹500 – ₹1,500"
+          "range": "₹500 ರಿಂದ ₹1,500"
         },
         {
           "job": "ಪೂರ್ಣ ಮನೆ ವೈರಿಂಗ್ (2BHK, ಕೂಲಿ ಮಾತ್ರ)",
-          "range": "₹15,000 – ₹35,000"
+          "range": "₹15,000 ರಿಂದ ₹35,000"
         }
       ],
       "faqs": [
@@ -117,7 +117,7 @@
         },
         {
           "q": "ಅದೇ ದಿನ ಎಲೆಕ್ಟ್ರಿಷಿಯನ್ ಸಿಗುತ್ತಾರೆಯೇ?",
-          "a": "ಹೌದು, ಫ್ಯಾನ್, ಸ್ವಿಚ್ ಅಥವಾ MCB ಸಮಸ್ಯೆಯಂತಹ ಸಣ್ಣ ಕೆಲಸಗಳಿಗೆ ಹೆಚ್ಚಿನ ಸ್ಥಳೀಯ ಎಲೆಕ್ಟ್ರಿಷಿಯನ್‌ಗಳು ಅದೇ ದಿನ ಬರುತ್ತಾರೆ, ವಿಶೇಷವಾಗಿ ಬೆಳಿಗ್ಗೆ ಕರೆ ಮಾಡಿದರೆ. ಮರು-ವೈರಿಂಗ್‌ನಂತಹ ದೊಡ್ಡ ಕೆಲಸಗಳನ್ನು ಸಾಮಾನ್ಯವಾಗಿ ಕೆಲವು ದಿನ ಮುಂಚಿತವಾಗಿ ನಿಗದಿಪಡಿಸಲಾಗುತ್ತದೆ."
+          "a": "ಹೌದು, ಫ್ಯಾನ್, ಸ್ವಿಚ್ ಅಥವಾ MCB ಸಮಸ್ಯೆಯಂತಹ ಸಣ್ಣ ಕೆಲಸಗಳಿಗೆ ಹೆಚ್ಚಿನ ಸ್ಥಳೀಯ ಎಲೆಕ್ಟ್ರಿಷಿಯನ್‌ಗಳು ಅದೇ ದಿನ ಬರುತ್ತಾರೆ, ವಿಶೇಷವಾಗಿ ಬೆಳಿಗ್ಗೆ ಕರೆ ಮಾಡಿದರೆ. ಮರುವೈರಿಂಗ್‌ನಂತಹ ದೊಡ್ಡ ಕೆಲಸಗಳನ್ನು ಸಾಮಾನ್ಯವಾಗಿ ಕೆಲವು ದಿನ ಮುಂಚಿತವಾಗಿ ನಿಗದಿಪಡಿಸಲಾಗುತ್ತದೆ."
         },
         {
           "q": "ಸಾಮಗ್ರಿಗಳನ್ನು ಎಲೆಕ್ಟ್ರಿಷಿಯನ್ ತರುತ್ತಾರೆಯೇ ಅಥವಾ ನಾನು ಖರೀದಿಸಬೇಕೇ?",
@@ -156,31 +156,31 @@
     "pricing": [
       {
         "job": "Visit / inspection charge",
-        "range": "₹200 – ₹400"
+        "range": "₹200 to ₹400"
       },
       {
         "job": "Split AC service (wet cleaning)",
-        "range": "₹500 – ₹800"
+        "range": "₹500 to ₹800"
       },
       {
-        "job": "AC gas refilling (top-up to full)",
-        "range": "₹1,500 – ₹3,500"
+        "job": "AC gas refilling (topped up to full)",
+        "range": "₹1,500 to ₹3,500"
       },
       {
         "job": "Split AC installation",
-        "range": "₹1,500 – ₹2,500"
+        "range": "₹1,500 to ₹2,500"
       },
       {
         "job": "AC uninstallation",
-        "range": "₹500 – ₹1,000"
+        "range": "₹500 to ₹1,000"
       },
       {
         "job": "Fridge gas refilling",
-        "range": "₹1,200 – ₹2,500"
+        "range": "₹1,200 to ₹2,500"
       },
       {
         "job": "Washing machine repair (labour)",
-        "range": "₹300 – ₹800"
+        "range": "₹300 to ₹800"
       }
     ],
     "faqs": [
@@ -221,31 +221,31 @@
       "pricing": [
         {
           "job": "ಭೇಟಿ / ಪರಿಶೀಲನೆ ಶುಲ್ಕ",
-          "range": "₹200 – ₹400"
+          "range": "₹200 ರಿಂದ ₹400"
         },
         {
           "job": "ಸ್ಪ್ಲಿಟ್ ಎಸಿ ಸರ್ವೀಸ್ (ವೆಟ್ ಕ್ಲೀನಿಂಗ್)",
-          "range": "₹500 – ₹800"
+          "range": "₹500 ರಿಂದ ₹800"
         },
         {
-          "job": "ಎಸಿ ಗ್ಯಾಸ್ ರೀಫಿಲ್ಲಿಂಗ್ (ಪೂರ್ಣ ಟಾಪ್-ಅಪ್)",
-          "range": "₹1,500 – ₹3,500"
+          "job": "ಎಸಿ ಗ್ಯಾಸ್ ರೀಫಿಲ್ಲಿಂಗ್ (ಪೂರ್ಣ ಟಾಪ್ ಅಪ್)",
+          "range": "₹1,500 ರಿಂದ ₹3,500"
         },
         {
           "job": "ಸ್ಪ್ಲಿಟ್ ಎಸಿ ಅಳವಡಿಕೆ",
-          "range": "₹1,500 – ₹2,500"
+          "range": "₹1,500 ರಿಂದ ₹2,500"
         },
         {
           "job": "ಎಸಿ ತೆಗೆಯುವಿಕೆ",
-          "range": "₹500 – ₹1,000"
+          "range": "₹500 ರಿಂದ ₹1,000"
         },
         {
           "job": "ಫ್ರಿಜ್ ಗ್ಯಾಸ್ ರೀಫಿಲ್ಲಿಂಗ್",
-          "range": "₹1,200 – ₹2,500"
+          "range": "₹1,200 ರಿಂದ ₹2,500"
         },
         {
           "job": "ವಾಷಿಂಗ್ ಮಷೀನ್ ದುರಸ್ತಿ (ಕೂಲಿ)",
-          "range": "₹300 – ₹800"
+          "range": "₹300 ರಿಂದ ₹800"
         }
       ],
       "faqs": [
@@ -255,7 +255,7 @@
         },
         {
           "q": "ನನ್ನ ಎಸಿಗೆ ಗ್ಯಾಸ್ ರೀಫಿಲ್ ಬೇಕೇ ಎಂದು ಹೇಗೆ ತಿಳಿಯುವುದು?",
-          "a": "ಎಸಿ ಓಡುತ್ತಿದ್ದರೂ ಸ್ವಲ್ಪ ಮಾತ್ರ ತಂಪು ಗಾಳಿ ಬರುತ್ತಿದ್ದರೆ ಅಥವಾ ಒಳಗಿನ ಪೈಪ್‌ಗಳ ಮೇಲೆ ಮಂಜುಗಡ್ಡೆ ಕಟ್ಟುತ್ತಿದ್ದರೆ, ಗ್ಯಾಸ್ ಕಡಿಮೆ ಇರಬಹುದು. ಸರಿಯಾಗಿರುವ ಎಸಿಗೆ ಪ್ರತಿ ವರ್ಷ ರೀಫಿಲ್ ಬೇಕಾಗಬಾರದು. ಬೇಕಾಗುತ್ತಿದ್ದರೆ, ಕೇವಲ ಟಾಪ್-ಅಪ್ ಮಾಡುವ ಬದಲು ಮೊದಲು ಸೋರಿಕೆಯನ್ನು ಪತ್ತೆಹಚ್ಚಿ ಸರಿಪಡಿಸಲು ತಂತ್ರಜ್ಞರಿಗೆ ಹೇಳಿ."
+          "a": "ಎಸಿ ಓಡುತ್ತಿದ್ದರೂ ಸ್ವಲ್ಪ ಮಾತ್ರ ತಂಪು ಗಾಳಿ ಬರುತ್ತಿದ್ದರೆ ಅಥವಾ ಒಳಗಿನ ಪೈಪ್‌ಗಳ ಮೇಲೆ ಮಂಜುಗಡ್ಡೆ ಕಟ್ಟುತ್ತಿದ್ದರೆ, ಗ್ಯಾಸ್ ಕಡಿಮೆ ಇರಬಹುದು. ಸರಿಯಾಗಿರುವ ಎಸಿಗೆ ಪ್ರತಿ ವರ್ಷ ರೀಫಿಲ್ ಬೇಕಾಗಬಾರದು. ಬೇಕಾಗುತ್ತಿದ್ದರೆ, ಕೇವಲ ಟಾಪ್ ಅಪ್ ಮಾಡುವ ಬದಲು ಮೊದಲು ಸೋರಿಕೆಯನ್ನು ಪತ್ತೆಹಚ್ಚಿ ಸರಿಪಡಿಸಲು ತಂತ್ರಜ್ಞರಿಗೆ ಹೇಳಿ."
         },
         {
           "q": "ತಂತ್ರಜ್ಞರು ಎಲ್ಲ ಬ್ರ್ಯಾಂಡ್‌ಗಳನ್ನು ದುರಸ್ತಿ ಮಾಡುತ್ತಾರೆಯೇ?",
@@ -287,7 +287,7 @@
       "Brick and block compound walls",
       "Plot boundary fencing",
       "Gate pillars and gate fitting",
-      "Barbed wire and chain-link toppings",
+      "Barbed wire and chain link toppings",
       "Repair and height extension of old walls"
     ],
     "faqs": [
@@ -305,7 +305,7 @@
       },
       {
         "q": "Do I need permission to build a compound wall?",
-        "a": "Within Belagavi city limits, check with the Belagavi City Corporation before building, especially on a road-facing side, and make sure the wall stays inside your plot boundary. A survey of the boundary first avoids disputes with neighbours."
+        "a": "Within Belagavi city limits, check with the Belagavi City Corporation before building, especially on a side facing the road, and make sure the wall stays inside your plot boundary. A survey of the boundary first avoids disputes with neighbours."
       },
       {
         "q": "How do I list my compound wall business on belagavicity.com?",
@@ -321,7 +321,7 @@
         "ಇಟ್ಟಿಗೆ ಮತ್ತು ಬ್ಲಾಕ್ ಕಾಂಪೌಂಡ್ ಗೋಡೆಗಳು",
         "ನಿವೇಶನದ ಗಡಿ ಬೇಲಿ",
         "ಗೇಟ್ ಕಂಬಗಳು ಮತ್ತು ಗೇಟ್ ಅಳವಡಿಕೆ",
-        "ಮುಳ್ಳುತಂತಿ ಮತ್ತು ಚೈನ್-ಲಿಂಕ್ ಬೇಲಿ",
+        "ಮುಳ್ಳುತಂತಿ ಮತ್ತು ಚೈನ್ ಲಿಂಕ್ ಬೇಲಿ",
         "ಹಳೆಯ ಗೋಡೆಗಳ ದುರಸ್ತಿ ಮತ್ತು ಎತ್ತರ ಹೆಚ್ಚಿಸುವಿಕೆ"
       ],
       "faqs": [
@@ -414,7 +414,7 @@
         },
         {
           "q": "ದುರಸ್ತಿಯ ವೇಳೆ ನನ್ನ ಡೇಟಾ ಕಳೆದುಹೋಗುತ್ತದೆಯೇ?",
-          "a": "ಹೆಚ್ಚಿನ ದುರಸ್ತಿಗಳು ನಿಮ್ಮ ಫೈಲ್‌ಗಳನ್ನು ಮುಟ್ಟುವುದಿಲ್ಲ, ಆದರೆ ಸಾಫ್ಟ್‌ವೇರ್ ಮರು-ಅಳವಡಿಕೆ ಅಥವಾ ಡಿಸ್ಕ್ ಬದಲಾವಣೆಯಿಂದ ಅವು ಹೋಗಬಹುದು. ಯಂತ್ರವನ್ನು ಕೊಡುವ ಮೊದಲು ಮುಖ್ಯ ಫೈಲ್‌ಗಳ ಬ್ಯಾಕಪ್ ತೆಗೆದುಕೊಳ್ಳಿ, ಅಥವಾ ಅಂಗಡಿಯವರಿಗೇ ಬ್ಯಾಕಪ್ ತೆಗೆಯಲು ಹೇಳಿ."
+          "a": "ಹೆಚ್ಚಿನ ದುರಸ್ತಿಗಳು ನಿಮ್ಮ ಫೈಲ್‌ಗಳನ್ನು ಮುಟ್ಟುವುದಿಲ್ಲ, ಆದರೆ ಸಾಫ್ಟ್‌ವೇರ್ ಮರು ಅಳವಡಿಕೆ ಅಥವಾ ಡಿಸ್ಕ್ ಬದಲಾವಣೆಯಿಂದ ಅವು ಹೋಗಬಹುದು. ಯಂತ್ರವನ್ನು ಕೊಡುವ ಮೊದಲು ಮುಖ್ಯ ಫೈಲ್‌ಗಳ ಬ್ಯಾಕಪ್ ತೆಗೆದುಕೊಳ್ಳಿ, ಅಥವಾ ಅಂಗಡಿಯವರಿಗೇ ಬ್ಯಾಕಪ್ ತೆಗೆಯಲು ಹೇಳಿ."
         },
         {
           "q": "ನನ್ನ ಲ್ಯಾಪ್‌ಟಾಪ್ ಇನ್ನೂ ವಾರಂಟಿಯಲ್ಲಿದೆಯೇ?",
@@ -435,9 +435,9 @@
     "group": "health",
     "live": true,
     "schemaType": "Dentist",
-    "intro": "Find dentists and dental clinics in Belagavi for check-ups, cleaning, fillings, root canals, extractions and other dental care. Call or WhatsApp the clinic directly to book; there's no middleman and no booking fee.",
+    "intro": "Find dentists and dental clinics in Belagavi for checkups, cleaning, fillings, root canals, extractions and other dental care. Call or WhatsApp the clinic directly to book; there's no middleman and no booking fee.",
     "services": [
-      "Dental check-ups and consultation",
+      "Dental checkups and consultation",
       "Teeth cleaning and scaling",
       "Fillings",
       "Root canal treatment",
@@ -448,15 +448,15 @@
     "faqs": [
       {
         "q": "Do I need an appointment to see a dentist in Belagavi?",
-        "a": "Many clinics take walk-ins, but timings vary and some dentists only sit in the evenings. Call the clinic before you go to check the dentist is in and to avoid a long wait."
+        "a": "Many clinics see patients without an appointment, but timings vary and some dentists only sit in the evenings. Call the clinic before you go to check the dentist is in and to avoid a long wait."
       },
       {
-        "q": "How often should I get a dental check-up?",
-        "a": "Once every six months to a year is a good rule for most adults and children. Regular check-ups catch cavities and gum problems early, when treatment is quicker and cheaper."
+        "q": "How often should I get a dental checkup?",
+        "a": "Once every six months to a year is a good rule for most adults and children. Regular checkups catch cavities and gum problems early, when treatment is quicker and cheaper."
       },
       {
         "q": "What should I do in a dental emergency?",
-        "a": "For severe tooth pain, swelling, a broken tooth or a knocked-out tooth, call a clinic straight away and explain the problem. If a tooth is knocked out, keep it in milk and see a dentist within the hour if you can."
+        "a": "For severe tooth pain, swelling, or a tooth that is broken or knocked out, call a clinic straight away and explain the problem. If a tooth is knocked out, keep it in milk and see a dentist within the hour if you can."
       },
       {
         "q": "Is a root canal painful?",

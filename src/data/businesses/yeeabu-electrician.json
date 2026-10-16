@@ -8,9 +8,9 @@
   "phone": "7022617892",
   "whatsapp": "9448866892",
   "address": "Near Park, Doordarshan Nagar, Sadashiv Nagar, Belagavi, Karnataka 590019",
-  "hours": "Mon–Sat, 9:00 AM – 8:00 PM",
+  "hours": "Mon to Sat, 9:00 AM to 8:00 PM",
   "mapUrl": "https://maps.app.goo.gl/YBbnnA45DtroVh5V7",
-  "description": "Family-run electrical shop doing home wiring and repairs across south Belagavi.",
+  "description": "A family electrical shop doing home wiring and repairs across south Belagavi.",
   "services": [
     "House wiring and rewiring",
     "Inverter and UPS installation"
@@ -26,9 +26,9 @@
   "kn": {
     "description": "ದಕ್ಷಿಣ ಬೆಳಗಾವಿಯಾದ್ಯಂತ ಮನೆ ವೈರಿಂಗ್ ಮತ್ತು ದುರಸ್ತಿ ಮಾಡುವ, ಕುಟುಂಬ ನಡೆಸುವ ವಿದ್ಯುತ್ ಅಂಗಡಿ.",
     "services": [
-      "ಮನೆ ವೈರಿಂಗ್ ಮತ್ತು ಮರು-ವೈರಿಂಗ್",
+      "ಮನೆ ವೈರಿಂಗ್ ಮತ್ತು ಮರುವೈರಿಂಗ್",
       "ಇನ್ವರ್ಟರ್ ಮತ್ತು UPS ಅಳವಡಿಕೆ"
     ],
-    "hours": "ಸೋಮ–ಶನಿ, ಬೆಳಿಗ್ಗೆ 9:00 – ರಾತ್ರಿ 8:00"
+    "hours": "ಸೋಮವಾರದಿಂದ ಶನಿವಾರ, ಬೆಳಿಗ್ಗೆ 9:00 ರಿಂದ ರಾತ್ರಿ 8:00"
   }
 }

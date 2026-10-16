@@ -20,3 +20,13 @@ Consult these guides before working on related tasks:
 - [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
 - [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
 - [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
+
+## Writing style (all locales)
+
+Applies to every piece of visible text in English and Kannada: UI strings in `src/lib/i18n.ts`, page copy, `src/data/*.json`, titles, meta descriptions and alt text.
+
+- Keep the text natural. Don't use dashes (`–`, `—`) as punctuation or title separators. Use a comma, a colon, "to" or a new sentence instead. Price and time ranges use "to" in English (`₹100 to ₹200`, `Mon to Sat, 9:00 AM to 8:00 PM`) and "ರಿಂದ" in Kannada (`₹100 ರಿಂದ ₹200`).
+- Avoid hyphenated words. Rephrase ("roads lined with trees", not "tree-lined roads"), or use the closed or open form ("checkups", "southwest", "short circuit", "ಮರುವೈರಿಂಗ್").
+- Exactly one space between words and after punctuation. No double spaces and no space before punctuation.
+- Astro drops a line break that sits right next to an inline tag. If a source line ends with `</a>` or the next line starts with `<a ...>`, the words get glued together ("SeeCloudflare's"). Break long lines between two plain words, never next to a tag.
+- Kannada drafts are reviewed by the site owner. Flag new or changed Kannada text for review.

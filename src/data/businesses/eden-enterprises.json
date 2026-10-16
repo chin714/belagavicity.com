@@ -8,7 +8,7 @@
   "phone": "7833024547",
   "whatsapp": "7760356510",
   "address": "T. V. Centre, Bauxite Road, Doordarshan Nagar, Sadashiv Nagar, Belagavi, Karnataka 590001",
-  "hours": "Mon–Sat, open 24 hours; Sun, 1:00 PM – 8:00 PM",
+  "hours": "Mon to Sat, open 24 hours; Sun, 1:00 PM to 8:00 PM",
   "mapUrl": "https://maps.app.goo.gl/97dX8yBQGXpyevuF7",
   "description": "Electrical contractor near TV Centre on Bauxite Road with 9 years in the trade. Handles home, shop and industrial wiring, and also services ACs, fridges and CCTV cameras.",
   "services": [
@@ -26,7 +26,7 @@
   "kn": {
     "description": "ಬಾಕ್ಸೈಟ್ ರಸ್ತೆಯ ಟಿವಿ ಸೆಂಟರ್ ಬಳಿ ಇರುವ ವಿದ್ಯುತ್ ಗುತ್ತಿಗೆದಾರರು; ಈ ಕ್ಷೇತ್ರದಲ್ಲಿ 9 ವರ್ಷಗಳ ಅನುಭವ. ಮನೆ, ಅಂಗಡಿ ಮತ್ತು ಕೈಗಾರಿಕಾ ವೈರಿಂಗ್ ಮಾಡುತ್ತಾರೆ; ಜೊತೆಗೆ ಎಸಿ, ಫ್ರಿಜ್ ಮತ್ತು CCTV ಕ್ಯಾಮೆರಾಗಳ ಸರ್ವೀಸ್ ಕೂಡ ಮಾಡುತ್ತಾರೆ.",
     "services": [
-      "ಮನೆ ವೈರಿಂಗ್ ಮತ್ತು ಮರು-ವೈರಿಂಗ್",
+      "ಮನೆ ವೈರಿಂಗ್ ಮತ್ತು ಮರುವೈರಿಂಗ್",
       "ಅಂಗಡಿ ಮತ್ತು ಕಚೇರಿ ವಿದ್ಯುತ್ ಕೆಲಸ",
       "ಕೈಗಾರಿಕಾ ವೈರಿಂಗ್",
       "ಸ್ವಿಚ್‌ಬೋರ್ಡ್, MCB ಮತ್ತು ಪ್ಯಾನೆಲ್ ದುರಸ್ತಿ",
@@ -34,6 +34,6 @@
       "ಫ್ರಿಜ್ ದುರಸ್ತಿ",
       "CCTV ಕ್ಯಾಮೆರಾ ಅಳವಡಿಕೆ"
     ],
-    "hours": "ಸೋಮ–ಶನಿ, 24 ಗಂಟೆ ತೆರೆದಿರುತ್ತದೆ; ಭಾನು, ಮಧ್ಯಾಹ್ನ 1:00 – ರಾತ್ರಿ 8:00"
+    "hours": "ಸೋಮವಾರದಿಂದ ಶನಿವಾರ, 24 ಗಂಟೆ ತೆರೆದಿರುತ್ತದೆ; ಭಾನುವಾರ, ಮಧ್ಯಾಹ್ನ 1:00 ರಿಂದ ರಾತ್ರಿ 8:00"
   }
 }

@@ -4,7 +4,7 @@
   "area": "hindwadi",
   "phone": "9448634116",
   "address": "Hindwadi, Belagavi, Karnataka 590003",
-  "hours": "Mon–Sat, 10:00 AM – 2:00 PM and 5:00 PM – 8:00 PM",
+  "hours": "Mon to Sat, 10:00 AM to 2:00 PM and 5:00 PM to 8:00 PM",
   "mapUrl": "https://maps.app.goo.gl/st4F9DtLq1BshpzW6",
   "description": "Dental clinic in Hindwadi run by Dr Manoj Sutar, with 15 years of practice.",
   "services": [
@@ -23,6 +23,6 @@
     "services": [
       "ಸಾಮಾನ್ಯ ದಂತ ಚಿಕಿತ್ಸೆ"
     ],
-    "hours": "ಸೋಮ–ಶನಿ, ಬೆಳಿಗ್ಗೆ 10:00 – ಮಧ್ಯಾಹ್ನ 2:00 ಮತ್ತು ಸಂಜೆ 5:00 – ರಾತ್ರಿ 8:00"
+    "hours": "ಸೋಮವಾರದಿಂದ ಶನಿವಾರ, ಬೆಳಿಗ್ಗೆ 10:00 ರಿಂದ ಮಧ್ಯಾಹ್ನ 2:00 ಮತ್ತು ಸಂಜೆ 5:00 ರಿಂದ ರಾತ್ರಿ 8:00"
   }
 }
