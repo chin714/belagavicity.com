@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE } from '../lib/site';
 import { LANGS, LOCALES, swapLang, ui, type Lang } from '../lib/i18n';
+import knReviewed from '../data/kn-reviewed.json';
 
 interface Props {
   title: string;
@@ -21,11 +22,16 @@ const {
   title,
   description,
   image = '/og-default.jpg',
-  noindex = false,
+  noindex: noindexProp = false,
   jsonLd = [],
   overlayHeader = false,
   lang = 'en',
 } = Astro.props;
+// Kannada pages stay out of search until a person has checked the translation.
+// List each reviewed page's path in src/data/kn-reviewed.json, e.g. "/kn/about/".
+const knPath = swapLang(Astro.url.pathname, 'kn');
+const knIsReviewed = (knReviewed as string[]).includes(knPath);
+const noindex = noindexProp || (lang === 'kn' && !knIsReviewed);
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
 const ogImage = new URL(image, SITE.url).href;
 // Google shows about 60 characters of a title and 160 of a description.
@@ -33,8 +39,8 @@ const branded = `${title} | ${SITE.name}`;
 const fullTitle =
   title === SITE.name ? `${SITE.name} – ${ui(lang).tagline}` : branded.length <= 60 ? branded : title;
 const metaDescription = clip(description, 160);
-// Every indexable page exists in both languages; tell search engines about each version.
-const alternates = noindex
+// Tell search engines about each language version, but only once the Kannada one is reviewed.
+const alternates = noindex || !knIsReviewed
   ? []
   : [
       ...LANGS.map((l) => ({ hreflang: LOCALES[l], url: new URL(swapLang(Astro.url.pathname, l), SITE.url).href })),

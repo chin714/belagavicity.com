@@ -31,6 +31,13 @@ function noindexPaths() {
   return paths;
 }
 
+// Kannada pages a person has checked. Mirrors the review gate in src/layouts/Layout.astro.
+const knReviewed = new Set(JSON.parse(fs.readFileSync('./src/data/kn-reviewed.json', 'utf8')));
+function isExcluded(pathname) {
+  if (excluded.has(pathname)) return true;
+  return /^\/kn(\/|$)/.test(pathname) && !knReviewed.has(pathname);
+}
+
 const excluded = noindexPaths();
 
 // https://astro.build/config
@@ -42,7 +49,7 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      filter: (page) => !excluded.has(new URL(page).pathname),
+      filter: (page) => !isExcluded(new URL(page).pathname),
       // Lists each page's English and Kannada versions as alternates of each other.
       i18n: { defaultLocale: 'en', locales: { en: 'en-IN', kn: 'kn-IN' } },
     }),
