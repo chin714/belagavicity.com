@@ -56,7 +56,7 @@ const categories = defineCollection({
 // One JSON file per business in src/data/businesses/. The file name becomes the URL slug.
 const businesses = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/data/businesses' }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     name: z.string(),
     category: reference('categories'),
     area: reference('areas'),
@@ -75,6 +75,12 @@ const businesses = defineCollection({
     yearsInBusiness: z.number().int().optional(),
     verified: z.boolean().default(false),
     featured: z.boolean().default(false),
+    // Up to two photos, kept next to the JSON file: "./eden-enterprises/1.jpg".
+    // Only use photos the business sent or agreed to, never ones copied from Google Maps.
+    photos: z
+      .array(z.object({ src: image(), alt: z.string() }))
+      .max(2)
+      .default([]),
     // Placeholder data for development. Sample listings are labelled on the page,
     // kept out of the sitemap and marked noindex. Delete them before launch.
     sample: z.boolean().default(false),
@@ -84,6 +90,8 @@ const businesses = defineCollection({
         description: z.string().optional(),
         services: z.array(z.string()).optional(),
         hours: z.string().optional(),
+        // Kannada alt text for `photos`, in the same order.
+        photoAlts: z.array(z.string()).optional(),
       })
       .default({}),
   }),

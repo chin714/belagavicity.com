@@ -65,8 +65,13 @@ export type AreaText = ReturnType<typeof areaText>;
 
 export function businessText(b: CollectionEntry<'businesses'>, lang: Lang) {
   const d = b.data;
-  if (lang === 'en') return { description: d.description, services: d.services, hours: d.hours };
-  return { description: d.kn.description ?? d.description, services: d.kn.services ?? d.services, hours: d.kn.hours ?? d.hours };
+  if (lang === 'en') return { description: d.description, services: d.services, hours: d.hours, photos: d.photos };
+  return {
+    description: d.kn.description ?? d.description,
+    services: d.kn.services ?? d.services,
+    hours: d.kn.hours ?? d.hours,
+    photos: d.photos.map((p, i) => ({ ...p, alt: d.kn.photoAlts?.[i] ?? p.alt })),
+  };
 }
 
 // ---------- Interface text ----------

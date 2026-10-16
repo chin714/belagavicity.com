@@ -1,5 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { getImage, Picture } from 'astro:assets';
 import Icon from '../../../components/Icon.astro';
 import Layout from '../../../layouts/Layout.astro';
 import Breadcrumbs from '../../../components/Breadcrumbs.astro';
@@ -68,6 +69,11 @@ if (!b.sample) {
     areaServed: CITY,
     ...(b.hours && { openingHours: b.hours }),
     ...(b.mapUrl && { hasMap: b.mapUrl }),
+    ...(b.photos.length > 0 && {
+      image: await Promise.all(
+        b.photos.map(async (p) => new URL((await getImage({ src: p.src, width: 1200, format: 'jpg' })).src, SITE.url).href),
+      ),
+    }),
   });
 }
 ---
@@ -99,6 +105,22 @@ if (!b.sample) {
         <h1 class="mt-3 text-4xl font-bold sm:text-5xl">{b.name}</h1>
         <p class="mt-2 text-muted"><Icon name="pin" size={16} class="inline -mt-0.5" /> {at.name}, {t.belagavi}{b.yearsInBusiness && <> · {t.yearsInBusiness(b.yearsInBusiness)}</>}</p>
         <p class="mt-6 max-w-2xl text-lg">{bt.description}</p>
+
+        {bt.photos.length > 0 && (
+          <div class:list={['mt-8 grid max-w-2xl gap-3', bt.photos.length > 1 && 'sm:grid-cols-2']}>
+            {bt.photos.map((p, i) => (
+              <Picture
+                src={p.src}
+                alt={p.alt}
+                formats={['avif', 'webp']}
+                widths={[480, 720, 1080]}
+                sizes={bt.photos.length > 1 ? '(min-width: 640px) 336px, 100vw' : '(min-width: 672px) 672px, 100vw'}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                class="aspect-[4/3] w-full rounded-[14px] border border-line object-cover"
+              />
+            ))}
+          </div>
+        )}
 
         {bt.services.length > 0 && (
           <section class="mt-10">

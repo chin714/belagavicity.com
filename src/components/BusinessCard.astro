@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
 import type { Business } from '../lib/site';
 import { getArea, getCategory, intlPhone } from '../lib/site';
@@ -19,7 +20,9 @@ const area = await getArea(b.area.id);
 const category = await getCategory(b.category.id);
 const areaName = areaText(area, lang).name;
 const singular = categoryText(category, lang).singular;
-const services = businessText(business, lang).services;
+const { services, photos } = businessText(business, lang);
+// Cards show the first photo when there is one, otherwise the category icon.
+const photo = photos[0];
 const link = href(lang, `/business/${business.id}/`);
 const tel = `tel:+${intlPhone(b.phone)}`;
 
@@ -36,7 +39,9 @@ const tileBgs = [
 {variant === 'tile' ? (
   <article class="flex w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-[14px] border border-line bg-card">
     <a href={link} class:list={['relative flex h-[150px] items-center justify-center bg-gradient-to-br text-white', tileBgs[index % tileBgs.length]]} tabindex="-1" aria-hidden="true">
-      <Icon name={category.data.icon} size={44} strokeWidth={1.6} />
+      {photo
+        ? <Image src={photo.src} alt="" widths={[280, 560]} sizes="280px" class="absolute inset-0 size-full object-cover" />
+        : <Icon name={category.data.icon} size={44} strokeWidth={1.6} />}
       {b.verified && (
         <span class="absolute top-2.5 right-2.5 inline-flex items-center gap-1 rounded-full bg-white px-2.5 py-1 text-xs font-bold text-night shadow-sm">
           <Icon name="badge" size={14} class="text-[#2f6b4f]" /> {t.verified}
@@ -56,9 +61,13 @@ const tileBgs = [
   </article>
 ) : (
   <article class="flex flex-col gap-4 rounded-[14px] border border-line bg-card p-5 transition hover:shadow-[0_8px_24px_rgb(18_24_27/0.08)] sm:flex-row sm:items-center">
-    <div class="hidden size-14 shrink-0 place-items-center rounded-xl bg-brand-soft text-brand sm:grid">
-      <Icon name={category.data.icon} size={26} />
-    </div>
+    {photo ? (
+      <Image src={photo.src} alt="" widths={[56, 112]} sizes="56px" class="hidden size-14 shrink-0 rounded-xl object-cover sm:block" />
+    ) : (
+      <div class="hidden size-14 shrink-0 place-items-center rounded-xl bg-brand-soft text-brand sm:grid">
+        <Icon name={category.data.icon} size={26} />
+      </div>
+    )}
     <div class="min-w-0 flex-1">
       <div class="flex flex-wrap items-center gap-2">
         <h3 class="text-lg leading-snug">
