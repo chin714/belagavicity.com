@@ -26,6 +26,16 @@ function noindexPaths() {
   for (const a of areas) {
     if (!hasReal((r) => r.area === a.id)) paths.add(`/areas/${a.id}/`);
   }
+  // Draft blog posts.
+  for (const lang of ['en', 'kn']) {
+    const dir = `./src/data/blog/${lang}`;
+    if (!fs.existsSync(dir)) continue;
+    for (const f of fs.readdirSync(dir).filter((f) => f.endsWith('.md'))) {
+      if (/^draft:\s*true\s*$/m.test(fs.readFileSync(path.join(dir, f), 'utf8'))) {
+        paths.add(`${lang === 'en' ? '' : `/${lang}`}/blog/${path.basename(f, '.md')}/`);
+      }
+    }
+  }
   // Kannada copies of the same pages, under /kn/.
   for (const p of [...paths]) paths.add(`/kn${p}`);
   return paths;

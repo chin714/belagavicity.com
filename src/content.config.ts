@@ -97,4 +97,18 @@ const businesses = defineCollection({
   }),
 });
 
-export const collections = { areas, categories, businesses };
+// Blog posts in src/data/blog/<lang>/<slug>.md. The same file name in en/ and kn/
+// makes the two language versions of one post: "/blog/<slug>/" and "/kn/blog/<slug>/".
+const blog = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/data/blog' }),
+  schema: z.object({
+    title: z.string(), // <title>, about 50 characters
+    heading: z.string().optional(), // H1, when it differs from the title
+    description: z.string(),
+    published: z.coerce.date(),
+    // Drafts are built so they can be reviewed, but marked noindex and kept out of the sitemap.
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { areas, categories, businesses, blog };

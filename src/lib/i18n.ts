@@ -100,6 +100,7 @@ const en = {
   privacy: 'Privacy',
   terms: 'Terms',
   lastUpdated: 'Last updated:',
+  published: 'Published:',
 
   // Listings
   verified: 'Verified',
@@ -145,7 +146,7 @@ const en = {
   },
 
   // Category pages
-  categoryTitle: (name: string) => `${name} in Belagavi: Call or WhatsApp`,
+  categoryTitle: (name: string) => `${name} in Belagavi (Belgaum): Call or WhatsApp`,
   categoryDescription: (name: string, where: string) =>
     `${name} in Belagavi (Belgaum)${where ? `, listed by area: ${where}` : ''}. See typical prices and services, then call or WhatsApp directly.`,
   andMore: (names: string[]) => `${names.join(', ')} and more`,
@@ -161,9 +162,9 @@ const en = {
     `No ${c.name.toLowerCase()} are listed in ${area.name} yet. Here are ${c.name.toLowerCase()} from across Belagavi.`,
 
   // Category + area pages
-  categoryAreaTitle: (c: CategoryText, area: AreaText) => `${c.name} in ${area.name}, Belagavi`,
+  categoryAreaTitle: (c: CategoryText, area: AreaText) => `${c.name} in ${area.name}, Belagavi (Belgaum)`,
   categoryAreaDescription: (c: CategoryText, area: AreaText, count: string) =>
-    `${c.name} in ${area.name}, Belagavi: ${count} listed. See services and languages spoken, then call or WhatsApp directly.`,
+    `${c.name} in ${area.name}, Belagavi (Belgaum): ${count} listed. See services and languages spoken, then call or WhatsApp directly.`,
   areaIntroCount: (count: string, area: AreaText, landmarks: string) =>
     `${count} listed in ${area.name}${landmarks ? `, near ${landmarks}` : ''}.`,
   areaIntroNearby: (area: AreaText, nearby: string) => `${area.name} is close to ${nearby}.`,
@@ -174,9 +175,9 @@ const en = {
   seeAllIn: (c: CategoryText) => `See all ${c.name.toLowerCase()} in Belagavi →`,
 
   // Areas
-  areasTitle: 'Areas of Belagavi: Local Services by Locality',
+  areasTitle: 'Areas of Belagavi (Belgaum): Local Services by Locality',
   areasDescription:
-    'Browse local businesses and services in every area of Belagavi: Tilakwadi, Camp, Shahapur, Vadgaon, Udyambag and more.',
+    'Browse local businesses and services in every area of Belagavi (Belgaum): Tilakwadi, Camp, Shahapur, Vadgaon, Udyambag and more.',
   areasHeading: 'Areas of Belagavi',
   areasLede: 'Pick your locality to see services near you.',
   listingsCount: (n: number) => `${n} listings →`,
@@ -194,7 +195,7 @@ const en = {
     `${name}, Belagavi`,
   ],
   /** `singular` arrives lowercased (keeping acronyms), for mid-sentence use. */
-  businessIntro: (name: string, singular: string, area: AreaText) => `${name}, ${singular} in ${area.name}, Belagavi.`,
+  businessIntro: (name: string, singular: string, area: AreaText) => `${name}, ${singular} in ${area.name}, Belagavi (Belgaum).`,
   businessOutro: ' Call or WhatsApp directly.',
   sampleNotice: 'This is placeholder data used while the site is being built. It is not a real business.',
   callNumber: (phone: string) => `Call ${phone}`,
@@ -211,7 +212,7 @@ const en = {
 
   // List your business
   listTitle: 'List Your Business for Free',
-  listDescription: 'Add your Belagavi business to belagavicity.com for free and get calls from customers in your area.',
+  listDescription: 'Add your Belagavi (Belgaum) business to belagavicity.com for free and get calls from customers in your area.',
   listLede:
     "Customers in Belagavi search here for local services. Send us your details and we'll add your listing, usually within 2 working days.",
   businessName: 'Business name',
@@ -233,7 +234,7 @@ const en = {
 type UI = typeof en;
 
 const kn: UI = {
-  tagline: 'ಬೆಳಗಾವಿಯ ಸ್ಥಳೀಯ ವ್ಯವಹಾರಗಳು',
+  tagline: 'ಬೆಳಗಾವಿಯ (ಬೆಳಗಾಂ) ಸ್ಥಳೀಯ ವ್ಯವಹಾರಗಳು',
   belagavi: 'ಬೆಳಗಾವಿ',
   and: 'ಮತ್ತು',
   home: 'ಮುಖಪುಟ',
@@ -255,6 +256,7 @@ const kn: UI = {
   privacy: 'ಗೌಪ್ಯತೆ',
   terms: 'ನಿಯಮಗಳು',
   lastUpdated: 'ಕೊನೆಯ ಪರಿಷ್ಕರಣೆ:',
+  published: 'ಪ್ರಕಟಣೆ:',
 
   verified: 'ಪರಿಶೀಲಿತ',
   featured: 'ವಿಶೇಷ',
@@ -297,7 +299,7 @@ const kn: UI = {
     chennamma: 'ಚನ್ನಮ್ಮ ವೃತ್ತ, ಬೆಳಗಾವಿ',
   },
 
-  categoryTitle: (name) => `ಬೆಳಗಾವಿಯಲ್ಲಿ ${name}: ಕರೆ ಅಥವಾ ವಾಟ್ಸಾಪ್ ಮಾಡಿ`,
+  categoryTitle: (name) => `ಬೆಳಗಾವಿಯಲ್ಲಿ (ಬೆಳಗಾಂ) ${name}: ಕರೆ ಅಥವಾ ವಾಟ್ಸಾಪ್ ಮಾಡಿ`,
   categoryDescription: (name, where) =>
     `ಬೆಳಗಾವಿಯಲ್ಲಿ (ಬೆಳಗಾಂ) ${name}${where ? `, ಪ್ರದೇಶವಾರು: ${where}` : ''}. ಸಾಮಾನ್ಯ ದರಗಳು ಮತ್ತು ಸೇವೆಗಳನ್ನು ನೋಡಿ, ನಂತರ ನೇರವಾಗಿ ಕರೆ ಅಥವಾ ವಾಟ್ಸಾಪ್ ಮಾಡಿ.`,
   andMore: (names) => `${names.join(', ')} ಮತ್ತು ಇತರೆ`,
@@ -311,7 +313,7 @@ const kn: UI = {
   faqs: 'ಪದೇ ಪದೇ ಕೇಳುವ ಪ್ರಶ್ನೆಗಳು',
   noneInArea: (c, area) => `${area.nameIn} ಇನ್ನೂ ಯಾವುದೇ ${c.name} ಪಟ್ಟಿಯಲ್ಲಿಲ್ಲ. ಬೆಳಗಾವಿಯಾದ್ಯಂತದ ${c.name} ಪಟ್ಟಿ ಕೆಳಗಿದೆ.`,
 
-  categoryAreaTitle: (c, area) => `${area.nameIn} ${c.name}, ಬೆಳಗಾವಿ`,
+  categoryAreaTitle: (c, area) => `${area.nameIn} ${c.name}, ಬೆಳಗಾವಿ (ಬೆಳಗಾಂ)`,
   categoryAreaDescription: (c, area, count) =>
     `${area.nameIn} (ಬೆಳಗಾವಿ) ${count} ಲಭ್ಯ. ಸೇವೆಗಳು ಮತ್ತು ಮಾತನಾಡುವ ಭಾಷೆಗಳನ್ನು ನೋಡಿ, ನಂತರ ನೇರವಾಗಿ ಕರೆ ಅಥವಾ ವಾಟ್ಸಾಪ್ ಮಾಡಿ.`,
   areaIntroCount: (count, area, landmarks) => `${area.nameIn}${landmarks ? ` (ಹತ್ತಿರ: ${landmarks})` : ''} ${count} ಲಭ್ಯ.`,
@@ -322,9 +324,9 @@ const kn: UI = {
   nearbyInBelagavi: 'ಬೆಳಗಾವಿಯಲ್ಲಿ ಹತ್ತಿರದ ಇತರರು',
   seeAllIn: (c) => `ಬೆಳಗಾವಿಯ ಎಲ್ಲ ${c.name} ನೋಡಿ →`,
 
-  areasTitle: 'ಬೆಳಗಾವಿಯ ಪ್ರದೇಶಗಳು: ಪ್ರದೇಶವಾರು ಸ್ಥಳೀಯ ಸೇವೆಗಳು',
+  areasTitle: 'ಬೆಳಗಾವಿಯ (ಬೆಳಗಾಂ) ಪ್ರದೇಶಗಳು: ಪ್ರದೇಶವಾರು ಸ್ಥಳೀಯ ಸೇವೆಗಳು',
   areasDescription:
-    'ಬೆಳಗಾವಿಯ ಪ್ರತಿ ಪ್ರದೇಶದ ಸ್ಥಳೀಯ ವ್ಯವಹಾರಗಳು ಮತ್ತು ಸೇವೆಗಳು: ತಿಲಕವಾಡಿ, ಕ್ಯಾಂಪ್, ಶಹಾಪುರ, ವಡಗಾಂವ, ಉದ್ಯಮಬಾಗ ಮತ್ತು ಇನ್ನಷ್ಟು.',
+    'ಬೆಳಗಾವಿಯ (ಬೆಳಗಾಂ) ಪ್ರತಿ ಪ್ರದೇಶದ ಸ್ಥಳೀಯ ವ್ಯವಹಾರಗಳು ಮತ್ತು ಸೇವೆಗಳು: ತಿಲಕವಾಡಿ, ಕ್ಯಾಂಪ್, ಶಹಾಪುರ, ವಡಗಾಂವ, ಉದ್ಯಮಬಾಗ ಮತ್ತು ಇನ್ನಷ್ಟು.',
   areasHeading: 'ಬೆಳಗಾವಿಯ ಪ್ರದೇಶಗಳು',
   areasLede: 'ನಿಮ್ಮ ಹತ್ತಿರದ ಸೇವೆಗಳನ್ನು ನೋಡಲು ನಿಮ್ಮ ಪ್ರದೇಶವನ್ನು ಆಯ್ಕೆಮಾಡಿ.',
   listingsCount: (n) => `${n} ಪಟ್ಟಿಗಳು →`,
@@ -340,7 +342,7 @@ const kn: UI = {
     `${name}, ${singular}, ಬೆಳಗಾವಿ`,
     `${name}, ಬೆಳಗಾವಿ`,
   ],
-  businessIntro: (name, singular, area) => `${name}, ${area.nameIn} ${singular}, ಬೆಳಗಾವಿ.`,
+  businessIntro: (name, singular, area) => `${name}, ${area.nameIn} ${singular}, ಬೆಳಗಾವಿ (ಬೆಳಗಾಂ).`,
   businessOutro: ' ನೇರವಾಗಿ ಕರೆ ಅಥವಾ ವಾಟ್ಸಾಪ್ ಮಾಡಿ.',
   sampleNotice: 'ಇದು ಸೈಟ್ ನಿರ್ಮಾಣದ ಸಮಯದಲ್ಲಿ ಬಳಸಿದ ತಾತ್ಕಾಲಿಕ ಮಾಹಿತಿ. ಇದು ನಿಜವಾದ ವ್ಯವಹಾರವಲ್ಲ.',
   callNumber: (phone) => `ಕರೆ ಮಾಡಿ ${phone}`,
@@ -356,7 +358,7 @@ const kn: UI = {
   otherInArea: (c, area) => `${area.nameIn} ಇತರ ${c.name}`,
 
   listTitle: 'ನಿಮ್ಮ ವ್ಯವಹಾರವನ್ನು ಉಚಿತವಾಗಿ ಸೇರಿಸಿ',
-  listDescription: 'ನಿಮ್ಮ ಬೆಳಗಾವಿಯ ವ್ಯವಹಾರವನ್ನು belagavicity.com ಗೆ ಉಚಿತವಾಗಿ ಸೇರಿಸಿ ಮತ್ತು ನಿಮ್ಮ ಪ್ರದೇಶದ ಗ್ರಾಹಕರಿಂದ ಕರೆಗಳನ್ನು ಪಡೆಯಿರಿ.',
+  listDescription: 'ನಿಮ್ಮ ಬೆಳಗಾವಿಯ (ಬೆಳಗಾಂ) ವ್ಯವಹಾರವನ್ನು belagavicity.com ಗೆ ಉಚಿತವಾಗಿ ಸೇರಿಸಿ ಮತ್ತು ನಿಮ್ಮ ಪ್ರದೇಶದ ಗ್ರಾಹಕರಿಂದ ಕರೆಗಳನ್ನು ಪಡೆಯಿರಿ.',
   listLede:
     'ಬೆಳಗಾವಿಯ ಗ್ರಾಹಕರು ಸ್ಥಳೀಯ ಸೇವೆಗಳಿಗಾಗಿ ಇಲ್ಲಿ ಹುಡುಕುತ್ತಾರೆ. ನಿಮ್ಮ ವಿವರಗಳನ್ನು ಕಳುಹಿಸಿ; ಸಾಮಾನ್ಯವಾಗಿ 2 ಕೆಲಸದ ದಿನಗಳಲ್ಲಿ ನಿಮ್ಮ ಪಟ್ಟಿಯನ್ನು ಸೇರಿಸುತ್ತೇವೆ.',
   businessName: 'ವ್ಯವಹಾರದ ಹೆಸರು',

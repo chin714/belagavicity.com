@@ -1,0 +1,48 @@
+---
+import { getCollection, render } from 'astro:content';
+import TextPage from '../../../components/TextPage.astro';
+import { CITY, SITE } from '../../../lib/site';
+import { LOCALES, getLang, href, ui } from '../../../lib/i18n';
+
+// One page per file in src/data/blog/<lang>/. A post can exist in one language only.
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => {
+    const [lang, slug] = post.id.split('/');
+    return { params: { lang: lang === 'en' ? undefined : lang, slug }, props: { post } };
+  });
+}
+
+const { post } = Astro.props;
+const lang = getLang(Astro.params.lang);
+const { title, heading, description, published, draft } = post.data;
+const { Content } = await render(post);
+const path = `/blog/${Astro.params.slug}/`;
+
+const article = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: heading ?? title,
+  description,
+  datePublished: published.toISOString().slice(0, 10),
+  inLanguage: LOCALES[lang],
+  about: CITY,
+  author: { '@id': `${SITE.url}/#organization` },
+  publisher: { '@id': `${SITE.url}/#organization` },
+  mainEntityOfPage: new URL(href(lang, path), SITE.url).href,
+};
+---
+
+<TextPage
+  {title}
+  {heading}
+  {description}
+  {path}
+  updated={published.toLocaleDateString(LOCALES[lang], { day: 'numeric', month: 'long', year: 'numeric' })}
+  dateLabel={ui(lang).published}
+  noindex={draft}
+  jsonLd={[article]}
+  {lang}
+>
+  <Content />
+</TextPage>

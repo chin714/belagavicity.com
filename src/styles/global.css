@@ -235,6 +235,10 @@
   .text-page li + li { margin-top: 0.4rem; }
   .text-page a { color: var(--color-link); font-weight: 600; }
   .text-page a:hover { color: var(--color-brand); }
+  .text-page table { margin-top: 1.25rem; width: 100%; border-collapse: collapse; font-size: 1rem; }
+  .text-page th, .text-page td { border-bottom: 1px solid var(--color-line); padding: 0.6rem 0.75rem 0.6rem 0; text-align: left; vertical-align: top; }
+  .text-page th { font-weight: 700; }
+  @media (max-width: 640px) { .text-page table { display: block; overflow-x: auto; } }
 
   .no-scrollbar { scrollbar-width: none; }
   .no-scrollbar::-webkit-scrollbar { display: none; }
