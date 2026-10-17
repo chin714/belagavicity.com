@@ -209,9 +209,12 @@ const jsonLd = [
           <h2 class="text-[28px]">{t.featuredInBelagavi}</h2>
           <p class="mt-2 text-[15px] text-muted">{t.callToday}</p>
         </div>
-        <a href={href(lang, `/${live[0]?.id}/`)} class="hidden items-center gap-1.5 text-sm font-semibold text-ink no-underline hover:text-brand sm:inline-flex">
-          {t.seeAll} <Icon name="arrow" size={16} />
-        </a>
+        <!-- The carousel already shows every listing until there are more than it holds. -->
+        {businesses.length > showcase.length && (
+          <a href={href(lang, '/areas/')} class="hidden items-center gap-1.5 text-sm font-semibold text-ink no-underline hover:text-brand sm:inline-flex">
+            {t.seeAll} <Icon name="arrow" size={16} />
+          </a>
+        )}
       </div>
       <div class="no-scrollbar mt-7 flex snap-x gap-5 overflow-x-auto scroll-px-4 px-4 pb-3 sm:scroll-px-8 sm:px-8 lg:scroll-px-[max(3rem,calc((100vw_-_76rem)/2_+_3rem))] lg:px-[max(3rem,calc((100vw_-_76rem)/2_+_3rem))]">
         {showcase.map((b, i) => <BusinessCard business={b} variant="tile" index={i} {lang} />)}
