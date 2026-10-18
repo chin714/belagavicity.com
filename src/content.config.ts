@@ -13,6 +13,9 @@ const areas = defineCollection({
     nearby: z.array(reference('areas')).default([]),
     // Well-known places in the area, e.g. "Gogte Circle". Mentioned on category+area pages.
     landmarks: z.array(z.string()).default([]),
+    // HESCOM subdivision serving the area, a key of `hescomSubdivisions` in helplines.json.
+    // Its AEE number is shown on the area page. Leave it out until confirmed.
+    hescomSubdivision: z.enum(['csd-1', 'csd-2', 'csd-3', 'rsd-1', 'rsd-2']).optional(),
     // Kannada text for the /kn/ pages. `nameIn` is the name with "in" attached ("ತಿಲಕವಾಡಿಯಲ್ಲಿ"),
     // since the suffix depends on how the name ends.
     kn: z.object({

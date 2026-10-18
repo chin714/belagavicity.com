@@ -187,6 +187,11 @@ const en = {
   noneYet: (area: AreaText) => `No businesses are listed in ${area.name} yet.`,
   beFirst: "Run a business here? Be the first to get listed. It's free.",
   viewAll: 'View all →',
+  helplinesHeading: (area: AreaText) => `Power and water helplines ${area.nameIn}`,
+  helplinesPower: 'Electricity (HESCOM)',
+  helplinesWater: 'Water supply',
+  helplinesSubdivision: (name: string) => `HESCOM ${name}, Assistant Executive Engineer`,
+  helplinesChecked: (date: string) => `Numbers taken from official sources and checked on ${date}. In an emergency, call 112.`,
 
   // Business pages
   businessTitles: (name: string, singular: string, area: AreaText) => [
@@ -336,6 +341,11 @@ const kn: UI = {
   noneYet: (area) => `${area.nameIn} ಇನ್ನೂ ಯಾವುದೇ ವ್ಯವಹಾರ ಪಟ್ಟಿಯಲ್ಲಿಲ್ಲ.`,
   beFirst: 'ಇಲ್ಲಿ ವ್ಯವಹಾರ ನಡೆಸುತ್ತೀರಾ? ಮೊದಲಿಗರಾಗಿ ಪಟ್ಟಿಗೆ ಸೇರಿ. ಇದು ಉಚಿತ.',
   viewAll: 'ಎಲ್ಲವನ್ನೂ ನೋಡಿ →',
+  helplinesHeading: (area) => `${area.nameIn} ವಿದ್ಯುತ್ ಮತ್ತು ನೀರು ಸಹಾಯವಾಣಿಗಳು`,
+  helplinesPower: 'ವಿದ್ಯುತ್ (ಹೆಸ್ಕಾಂ)',
+  helplinesWater: 'ನೀರು ಸರಬರಾಜು',
+  helplinesSubdivision: (name) => `ಹೆಸ್ಕಾಂ ${name}, ಸಹಾಯಕ ಕಾರ್ಯನಿರ್ವಾಹಕ ಎಂಜಿನಿಯರ್`,
+  helplinesChecked: (date) => `ಅಧಿಕೃತ ಮೂಲಗಳಿಂದ ಪಡೆದ ಸಂಖ್ಯೆಗಳು, ${date} ರಂದು ಪರಿಶೀಲಿಸಲಾಗಿದೆ. ತುರ್ತು ಸಂದರ್ಭದಲ್ಲಿ 112 ಗೆ ಕರೆ ಮಾಡಿ.`,
 
   businessTitles: (name, singular, area) => [
     `${name}, ${area.nameIn} ${singular}, ಬೆಳಗಾವಿ`,

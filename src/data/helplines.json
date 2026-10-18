@@ -1,0 +1,52 @@
+{
+  "verifiedOn": "2026-10-18",
+  "city": [
+    {
+      "id": "hescom-1912",
+      "service": "power",
+      "name": "HESCOM electricity complaints",
+      "note": "Power cuts, line faults and other electricity complaints",
+      "phone": "1912",
+      "tel": "1912",
+      "source": "https://hescom.karnataka.gov.in",
+      "kn": { "name": "ಹೆಸ್ಕಾಂ ವಿದ್ಯುತ್ ದೂರುಗಳು", "note": "ವಿದ್ಯುತ್ ಕಡಿತ, ಲೈನ್ ದೋಷ ಮತ್ತು ಇತರ ವಿದ್ಯುತ್ ದೂರುಗಳು" }
+    },
+    {
+      "id": "hescom-transformer",
+      "service": "power",
+      "name": "HESCOM transformer failure",
+      "note": "Toll free",
+      "phone": "1800 425 4754",
+      "tel": "18004254754",
+      "source": "https://hescom.karnataka.gov.in",
+      "kn": { "name": "ಹೆಸ್ಕಾಂ ಟ್ರಾನ್ಸ್‌ಫಾರ್ಮರ್ ವೈಫಲ್ಯ", "note": "ಉಚಿತ ಕರೆ" }
+    },
+    {
+      "id": "water-lt",
+      "service": "water",
+      "name": "Water supply complaints (L&T, 24x7 water project)",
+      "note": "Toll free, 8:00 AM to 8:00 PM",
+      "phone": "1800 425 5656",
+      "tel": "18004255656",
+      "source": "https://allaboutbelgaum.com/news/new-toll-free-number-for-complaints-about-lt-water-supply-in-belagavi/",
+      "kn": { "name": "ನೀರು ಸರಬರಾಜು ದೂರುಗಳು (ಎಲ್ ಆಂಡ್ ಟಿ, 24x7 ನೀರು ಯೋಜನೆ)", "note": "ಉಚಿತ ಕರೆ, ಬೆಳಿಗ್ಗೆ 8:00 ರಿಂದ ರಾತ್ರಿ 8:00" }
+    },
+    {
+      "id": "bcc-office",
+      "service": "water",
+      "name": "Belagavi City Corporation office",
+      "note": "Subhash Nagar",
+      "phone": "0831 240 5300",
+      "tel": "+918312405300",
+      "source": "https://belagaviwatersupply.org/website/ContactUs.aspx",
+      "kn": { "name": "ಬೆಳಗಾವಿ ಮಹಾನಗರ ಪಾಲಿಕೆ ಕಚೇರಿ", "note": "ಸುಭಾಷ ನಗರ" }
+    }
+  ],
+  "hescomSubdivisions": {
+    "csd-1": { "name": "City Subdivision 1", "phone": "9448370243", "kn": { "name": "ನಗರ ಉಪವಿಭಾಗ 1" } },
+    "csd-2": { "name": "City Subdivision 2", "phone": "9448370244", "kn": { "name": "ನಗರ ಉಪವಿಭಾಗ 2" } },
+    "csd-3": { "name": "City Subdivision 3", "phone": "9448094489", "kn": { "name": "ನಗರ ಉಪವಿಭಾಗ 3" } },
+    "rsd-1": { "name": "Rural Subdivision 1", "phone": "9448370242", "kn": { "name": "ಗ್ರಾಮೀಣ ಉಪವಿಭಾಗ 1" } },
+    "rsd-2": { "name": "Rural Subdivision 2", "phone": "9480882087", "kn": { "name": "ಗ್ರಾಮೀಣ ಉಪವಿಭಾಗ 2" } }
+  }
+}

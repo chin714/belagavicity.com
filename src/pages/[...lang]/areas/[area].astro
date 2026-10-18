@@ -4,6 +4,7 @@ import Icon from '../../../components/Icon.astro';
 import Layout from '../../../layouts/Layout.astro';
 import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import BusinessCard from '../../../components/BusinessCard.astro';
+import Helplines from '../../../components/Helplines.astro';
 import { getBusinesses, getLiveCategories, breadcrumbJsonLd, inCategory } from '../../../lib/site';
 import { LOCALES, areaText, categoryText, href, ui, withLangs, type Lang } from '../../../lib/i18n';
 
@@ -63,5 +64,7 @@ const crumbs = [
         </section>
       ))
     )}
+
+    <Helplines {area} {lang} />
   </div>
 </Layout>

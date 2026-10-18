@@ -1,0 +1,60 @@
+---
+// Power and water helplines for an area page. City lines come from helplines.json;
+// the area's own HESCOM subdivision is added when `hescomSubdivision` is set in areas.json.
+import type { CollectionEntry } from 'astro:content';
+import Icon from './Icon.astro';
+import helplines from '../data/helplines.json';
+import { formatPhone, intlPhone } from '../lib/site';
+import { LOCALES, areaText, ui, type Lang } from '../lib/i18n';
+
+interface Props {
+  area: CollectionEntry<'areas'>;
+  lang: Lang;
+}
+
+const { area, lang } = Astro.props;
+const t = ui(lang);
+const at = areaText(area, lang);
+
+type Line = { name: string; note?: string; phone: string; tel: string };
+const city = (service: string): Line[] =>
+  helplines.city
+    .filter((h) => h.service === service)
+    .map((h) => ({ name: lang === 'kn' ? h.kn.name : h.name, note: lang === 'kn' ? h.kn.note : h.note, phone: h.phone, tel: h.tel }));
+
+const power = city('power');
+const sub = area.data.hescomSubdivision && helplines.hescomSubdivisions[area.data.hescomSubdivision];
+if (sub) {
+  power.unshift({
+    name: t.helplinesSubdivision(lang === 'kn' ? sub.kn.name : sub.name),
+    phone: formatPhone(sub.phone),
+    tel: `+${intlPhone(sub.phone)}`,
+  });
+}
+const groups = [
+  { heading: t.helplinesPower, icon: 'bolt', lines: power },
+  { heading: t.helplinesWater, icon: 'drop', lines: city('water') },
+];
+const checked = new Date(helplines.verifiedOn).toLocaleDateString(LOCALES[lang], { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+---
+
+<section class="mt-12 max-w-3xl">
+  <h2 class="text-2xl font-bold">{t.helplinesHeading(at)}</h2>
+  <div class="mt-5 grid gap-4 sm:grid-cols-2">
+    {groups.map((g) => (
+      <div class="rounded-2xl border border-line bg-card p-5">
+        <h3 class="flex items-center gap-2 font-semibold"><Icon name={g.icon} size={20} class="text-brand" /> {g.heading}</h3>
+        <ul class="mt-3 space-y-3">
+          {g.lines.map((l) => (
+            <li>
+              <a href={`tel:${l.tel}`} class="inline-flex items-center gap-2 text-lg font-bold text-brand"><Icon name="phone" size={18} /> {l.phone}</a>
+              <p class="text-sm">{l.name}</p>
+              {l.note && <p class="text-sm text-muted">{l.note}</p>}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+  <p class="mt-3 text-sm text-muted">{t.helplinesChecked(checked)}</p>
+</section>
