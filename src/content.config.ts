@@ -13,6 +13,9 @@ const areas = defineCollection({
     nearby: z.array(reference('areas')).default([]),
     // Well-known places in the area, e.g. "Gogte Circle". Mentioned on category+area pages.
     landmarks: z.array(z.string()).default([]),
+    // India Post PIN code and the post office it is named after, e.g. "590006", "Tilakwadi".
+    pincode: z.string().regex(/^\d{6}$/).optional(),
+    postOffice: z.string().optional(),
     // HESCOM subdivision serving the area, a key of `hescomSubdivisions` in helplines.json.
     // Its AEE number is shown on the area page. Leave it out until confirmed.
     hescomSubdivision: z.enum(['csd-1', 'csd-2', 'csd-3', 'rsd-1', 'rsd-2']).optional(),
@@ -21,6 +24,7 @@ const areas = defineCollection({
     kn: z.object({
       name: z.string(),
       nameIn: z.string(),
+      postOffice: z.string().optional(),
       description: z.string().optional(),
       landmarks: z.array(z.string()).optional(),
     }),

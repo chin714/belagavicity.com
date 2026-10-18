@@ -57,9 +57,16 @@ export type CategoryText = ReturnType<typeof categoryText>;
 
 export function areaText(a: CollectionEntry<'areas'>, lang: Lang) {
   const d = a.data;
-  if (lang === 'en') return { name: d.name, nameIn: `in ${d.name}`, description: d.description, landmarks: d.landmarks };
+  if (lang === 'en') return { name: d.name, nameIn: `in ${d.name}`, description: d.description, landmarks: d.landmarks, postOffice: d.postOffice, pincode: d.pincode };
   const k = d.kn;
-  return { name: k.name, nameIn: k.nameIn, description: k.description ?? d.description, landmarks: k.landmarks ?? d.landmarks };
+  return {
+    name: k.name,
+    nameIn: k.nameIn,
+    description: k.description ?? d.description,
+    landmarks: k.landmarks ?? d.landmarks,
+    postOffice: k.postOffice ?? d.postOffice,
+    pincode: d.pincode,
+  };
 }
 export type AreaText = ReturnType<typeof areaText>;
 
@@ -183,7 +190,8 @@ const en = {
   listingsCount: (n: number) => `${n} listings →`,
   listingsSoon: 'Listings coming soon',
   areaTitle: (area: AreaText, other: string) => `Local Services in ${area.name} (${other}), Belagavi`,
-  areaDescription: (area: AreaText) => `Local services in ${area.name}, Belagavi (Belgaum). ${area.description}`,
+  areaDescription: (area: AreaText) =>
+    `Local services in ${area.name}, Belagavi (Belgaum)${area.pincode ? `, PIN ${area.pincode}` : ''}. ${area.description}`,
   noneYet: (area: AreaText) => `No businesses are listed in ${area.name} yet.`,
   beFirst: "Run a business here? Be the first to get listed. It's free.",
   viewAll: 'View all →',
@@ -192,6 +200,21 @@ const en = {
   helplinesWater: 'Water supply',
   helplinesSubdivision: (name: string) => `HESCOM ${name}, Assistant Executive Engineer`,
   helplinesChecked: (date: string) => `Numbers taken from official sources and checked on ${date}. In an emergency, call 112.`,
+  helplinesAll: 'Helplines for every area →',
+  pincode: (pin: string, postOffice?: string) => `PIN code ${pin}${postOffice ? `, ${postOffice} post office` : ''}`,
+
+  // Helplines hub
+  helplinesTitle: 'Power and Water Helplines in Belagavi (Belgaum)',
+  helplinesNav: 'Helplines',
+  helplinesDescription:
+    'HESCOM electricity and Belagavi water supply complaint numbers, with PIN codes and HESCOM offices for each area of Belagavi (Belgaum).',
+  helplinesHubHeading: 'Power and water helplines',
+  helplinesHubLede: 'Complaint numbers for electricity and water supply in Belagavi (Belgaum), and the PIN code of every area.',
+  helplinesByArea: 'By area',
+  helplinesArea: 'Area',
+  helplinesPin: 'PIN code',
+  helplinesHescomOffice: 'HESCOM office',
+  helplinesNotMapped: 'Use the city lines above',
 
   // Business pages
   businessTitles: (name: string, singular: string, area: AreaText) => [
@@ -337,7 +360,8 @@ const kn: UI = {
   listingsCount: (n) => `${n} ಪಟ್ಟಿಗಳು →`,
   listingsSoon: 'ಪಟ್ಟಿಗಳು ಶೀಘ್ರದಲ್ಲೇ',
   areaTitle: (area, other) => `${area.name} (${other}), ಬೆಳಗಾವಿ: ಸ್ಥಳೀಯ ಸೇವೆಗಳು`,
-  areaDescription: (area) => `${area.nameIn} (ಬೆಳಗಾವಿ) ಸ್ಥಳೀಯ ಸೇವೆಗಳು. ${area.description}`,
+  areaDescription: (area) =>
+    `${area.nameIn} (ಬೆಳಗಾವಿ${area.pincode ? `, ಪಿನ್ ${area.pincode}` : ''}) ಸ್ಥಳೀಯ ಸೇವೆಗಳು. ${area.description}`,
   noneYet: (area) => `${area.nameIn} ಇನ್ನೂ ಯಾವುದೇ ವ್ಯವಹಾರ ಪಟ್ಟಿಯಲ್ಲಿಲ್ಲ.`,
   beFirst: 'ಇಲ್ಲಿ ವ್ಯವಹಾರ ನಡೆಸುತ್ತೀರಾ? ಮೊದಲಿಗರಾಗಿ ಪಟ್ಟಿಗೆ ಸೇರಿ. ಇದು ಉಚಿತ.',
   viewAll: 'ಎಲ್ಲವನ್ನೂ ನೋಡಿ →',
@@ -346,6 +370,20 @@ const kn: UI = {
   helplinesWater: 'ನೀರು ಸರಬರಾಜು',
   helplinesSubdivision: (name) => `ಹೆಸ್ಕಾಂ ${name}, ಸಹಾಯಕ ಕಾರ್ಯನಿರ್ವಾಹಕ ಎಂಜಿನಿಯರ್`,
   helplinesChecked: (date) => `ಅಧಿಕೃತ ಮೂಲಗಳಿಂದ ಪಡೆದ ಸಂಖ್ಯೆಗಳು, ${date} ರಂದು ಪರಿಶೀಲಿಸಲಾಗಿದೆ. ತುರ್ತು ಸಂದರ್ಭದಲ್ಲಿ 112 ಗೆ ಕರೆ ಮಾಡಿ.`,
+  helplinesAll: 'ಎಲ್ಲ ಪ್ರದೇಶಗಳ ಸಹಾಯವಾಣಿಗಳು →',
+  pincode: (pin, postOffice) => `ಪಿನ್ ಕೋಡ್ ${pin}${postOffice ? `, ${postOffice} ಅಂಚೆ ಕಚೇರಿ` : ''}`,
+
+  helplinesTitle: 'ಬೆಳಗಾವಿ (ಬೆಳಗಾಂ): ವಿದ್ಯುತ್ ಮತ್ತು ನೀರು ಸಹಾಯವಾಣಿಗಳು',
+  helplinesNav: 'ಸಹಾಯವಾಣಿಗಳು',
+  helplinesDescription:
+    'ಬೆಳಗಾವಿಯ (ಬೆಳಗಾಂ) ಹೆಸ್ಕಾಂ ವಿದ್ಯುತ್ ಮತ್ತು ನೀರು ಸರಬರಾಜು ದೂರು ಸಂಖ್ಯೆಗಳು, ಪ್ರತಿ ಪ್ರದೇಶದ ಪಿನ್ ಕೋಡ್ ಮತ್ತು ಹೆಸ್ಕಾಂ ಕಚೇರಿಯೊಂದಿಗೆ.',
+  helplinesHubHeading: 'ವಿದ್ಯುತ್ ಮತ್ತು ನೀರು ಸಹಾಯವಾಣಿಗಳು',
+  helplinesHubLede: 'ಬೆಳಗಾವಿಯಲ್ಲಿ (ಬೆಳಗಾಂ) ವಿದ್ಯುತ್ ಮತ್ತು ನೀರು ಸರಬರಾಜು ದೂರು ಸಂಖ್ಯೆಗಳು, ಹಾಗೂ ಪ್ರತಿ ಪ್ರದೇಶದ ಪಿನ್ ಕೋಡ್.',
+  helplinesByArea: 'ಪ್ರದೇಶವಾರು',
+  helplinesArea: 'ಪ್ರದೇಶ',
+  helplinesPin: 'ಪಿನ್ ಕೋಡ್',
+  helplinesHescomOffice: 'ಹೆಸ್ಕಾಂ ಕಚೇರಿ',
+  helplinesNotMapped: 'ಮೇಲಿನ ನಗರ ಸಂಖ್ಯೆಗಳನ್ನು ಬಳಸಿ',
 
   businessTitles: (name, singular, area) => [
     `${name}, ${area.nameIn} ${singular}, ಬೆಳಗಾವಿ`,

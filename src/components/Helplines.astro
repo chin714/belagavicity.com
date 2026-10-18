@@ -1,20 +1,20 @@
 ---
-// Power and water helplines for an area page. City lines come from helplines.json;
-// the area's own HESCOM subdivision is added when `hescomSubdivision` is set in areas.json.
+// Power and water helplines. City lines come from helplines.json; on an area page the area's
+// own HESCOM subdivision is added when `hescomSubdivision` is set in areas.json.
+// Without `area` (the helplines hub) only the city lines are shown, with no heading.
 import type { CollectionEntry } from 'astro:content';
 import Icon from './Icon.astro';
 import helplines from '../data/helplines.json';
 import { formatPhone, intlPhone } from '../lib/site';
-import { LOCALES, areaText, ui, type Lang } from '../lib/i18n';
+import { LOCALES, areaText, href, ui, type Lang } from '../lib/i18n';
 
 interface Props {
-  area: CollectionEntry<'areas'>;
+  area?: CollectionEntry<'areas'>;
   lang: Lang;
 }
 
 const { area, lang } = Astro.props;
 const t = ui(lang);
-const at = areaText(area, lang);
 
 type Line = { name: string; note?: string; phone: string; tel: string };
 const city = (service: string): Line[] =>
@@ -23,7 +23,7 @@ const city = (service: string): Line[] =>
     .map((h) => ({ name: lang === 'kn' ? h.kn.name : h.name, note: lang === 'kn' ? h.kn.note : h.note, phone: h.phone, tel: h.tel }));
 
 const power = city('power');
-const sub = area.data.hescomSubdivision && helplines.hescomSubdivisions[area.data.hescomSubdivision];
+const sub = area?.data.hescomSubdivision && helplines.hescomSubdivisions[area.data.hescomSubdivision];
 if (sub) {
   power.unshift({
     name: t.helplinesSubdivision(lang === 'kn' ? sub.kn.name : sub.name),
@@ -38,9 +38,9 @@ const groups = [
 const checked = new Date(helplines.verifiedOn).toLocaleDateString(LOCALES[lang], { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 ---
 
-<section class="mt-12 max-w-3xl">
-  <h2 class="text-2xl font-bold">{t.helplinesHeading(at)}</h2>
-  <div class="mt-5 grid gap-4 sm:grid-cols-2">
+<section class:list={['max-w-3xl', area ? 'mt-12' : 'mt-8']}>
+  {area && <h2 class="text-2xl font-bold">{t.helplinesHeading(areaText(area, lang))}</h2>}
+  <div class:list={['grid gap-4 sm:grid-cols-2', area && 'mt-5']}>
     {groups.map((g) => (
       <div class="rounded-2xl border border-line bg-card p-5">
         <h3 class="flex items-center gap-2 font-semibold"><Icon name={g.icon} size={20} class="text-brand" /> {g.heading}</h3>
@@ -57,4 +57,5 @@ const checked = new Date(helplines.verifiedOn).toLocaleDateString(LOCALES[lang],
     ))}
   </div>
   <p class="mt-3 text-sm text-muted">{t.helplinesChecked(checked)}</p>
+  {area && <a href={href(lang, '/helplines/')} class="mt-2 inline-block text-sm font-semibold text-brand">{t.helplinesAll}</a>}
 </section>

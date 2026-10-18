@@ -44,6 +44,7 @@ const crumbs = [
     <h1 class="mt-6 text-4xl font-bold sm:text-5xl">{at.name}</h1>
     <p lang={LOCALES[otherLang]} class="mt-1 text-xl font-semibold text-muted">{otherName}</p>
     <p class="mt-3 max-w-2xl text-lg text-muted">{at.description}</p>
+    {area.data.pincode && <p class="mt-2 text-sm font-semibold text-muted">{t.pincode(area.data.pincode, at.postOffice)}</p>}
 
     {sections.length === 0 ? (
       <div class="mt-10 max-w-2xl rounded-2xl border border-dashed border-line p-8">

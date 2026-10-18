@@ -34,6 +34,7 @@ const year = new Date().getFullYear();
       <nav class="flex flex-wrap items-center gap-x-6 gap-y-2 text-[13px]" aria-label="Footer">
         {live.map((c) => <a href={href(lang, `/${c.id}/`)} class="text-white/75 no-underline hover:text-white">{lang === 'kn' ? c.data.kn.name : c.data.name}</a>)}
         <a href={href(lang, '/areas/')} class="text-white/75 no-underline hover:text-white">{t.areas}</a>
+        <a href={href(lang, '/helplines/')} class="text-white/75 no-underline hover:text-white">{t.helplinesNav}</a>
         <a href={href(lang, '/list-your-business/')} class="text-white/75 no-underline hover:text-white">{t.addYourBusiness}</a>
         <a href={href(lang, '/about/')} class="text-white/75 no-underline hover:text-white">{t.about}</a>
         <a href={href(lang, '/contact/')} class="text-white/75 no-underline hover:text-white">{t.contact}</a>
